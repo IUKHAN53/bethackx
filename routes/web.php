@@ -29,6 +29,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('save-games', [\App\Http\Controllers\Admin\AdminController::class, 'saveGames'])->name('admin.save-games');
         Route::post('save-external-links', [\App\Http\Controllers\Admin\AdminController::class, 'saveExternalLinks'])->name('admin.save-external-links');
         Route::post('save-banner', [\App\Http\Controllers\Admin\AdminController::class, 'saveBanner'])->name('admin.save-banner');
+        Route::post('add-user', [\App\Http\Controllers\Admin\AdminController::class, 'addUser'])->name('admin.add-user');
+        Route::post('search-user', [\App\Http\Controllers\Admin\AdminController::class, 'searchUser'])->name('admin.search-user');
     });
 });
 Route::group(['prefix' => 'user', 'as' => 'user.'], function () {

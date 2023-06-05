@@ -57,18 +57,22 @@
                                     <label for=""
                                            class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
                                         <span class="w-100">Solicitar acesso:</span>
-                                        <input type="text" name="settings['request_access_link']" id="" value="{{$g_settings['request_access_link']}}"
+                                        <input type="text" name="settings['request_access_link']" id=""
+                                               value="{{$g_settings['request_access_link']}}"
                                                class="form-control form-control-custom w-100">
                                     </label>
                                     <label for=""
                                            class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
                                         <span class="w-100">Preciso de Ajuda:</span>
-                                        <input type="text" name="settings['help_link']" id="" value="{{$g_settings['help_link']}}"
+                                        <input type="text" name="settings['help_link']" id=""
+                                               value="{{$g_settings['help_link']}}"
                                                class="form-control form-control-custom w-100">
                                     </label>
-                                    <label for="" class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
+                                    <label for=""
+                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
                                         <span class="w-100">Link do Tutorial:</span>
-                                        <input type="text" name="settings['admin_tutorial_link']" id="" value="{{$g_settings['admin_tutorial_link']}}"
+                                        <input type="text" name="settings['admin_tutorial_link']" id=""
+                                               value="{{$g_settings['admin_tutorial_link']}}"
                                                class="form-control form-control-custom w-100">
                                     </label>
                                 </div>
@@ -96,13 +100,17 @@
                                                class="form-control-custom w-100" readonly>
                                         <input type="file" name="settings['home_banner']" id="upload"
                                                class="custom-file-input form-control-custom w-100" hidden>
-                                        <button class="btn btn-primary btn-sm me-1" type="button" id="btnUpload">UPLOAD</button>
+                                        <button class="btn btn-primary btn-sm me-1" type="button" id="btnUpload">
+                                            UPLOAD
+                                        </button>
                                     </label>
-                                    @error('settings.home_banner')<span style="color: darkred">{{$message}}</span>@enderror
+                                    @error('settings.home_banner')<span
+                                        style="color: darkred">{{$message}}</span>@enderror
                                     <label for=""
                                            class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
                                         <span class="w-100">link da imagem:</span>
-                                        <input type="text" name="settings['home_banner_ref_link']" id="" class="form-control form-control-custom w-100">
+                                        <input type="text" name="settings['home_banner_ref_link']" id=""
+                                               class="form-control form-control-custom w-100">
                                     </label>
 
                                 </div>
@@ -139,37 +147,19 @@
                         <button class="btn btn-secondary btn-sm mb-2" data-bs-toggle="modal"
                                 data-bs-target="#create_edit_user_modal">Adicionar usuário
                         </button>
-                        @foreach($users as $user)
-                            <div class="p-2 d-flex flex-column gap-3" style="color: #b2b2b2">
-                                <div class="d-flex justify-content-between align-items-center gap-2">
-                                    <div style="line-height: 18px">
-                                        <span>{{$user->name}}</span><br>
-                                        <span>{{$user->email}}</span>
-                                    </div>
-                                    <div class="d-flex justify-content-center align-items-center gap-3">
-                                        <a href="">
-                                            <ion-icon name="person-sharp" role="img" class="md hydrated"
-                                                      style="color: #b2b2b2"
-                                                      aria-label="user"></ion-icon>
-                                        </a>
-                                        <a href="">
-                                            <ion-icon name="trash" role="img" class="md hydrated" style="color: #b2b2b2"
-                                                      aria-label="trash"></ion-icon>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                        <div id="users_div">
+                            @include('admin.partials.users-table')
+                        </div>
                     </div>
-                    <nav>
-                        <ul class="pagination pagination-rounded">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
+{{--                    <nav>--}}
+{{--                        <ul class="pagination pagination-rounded">--}}
+{{--                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>--}}
+{{--                            <li class="page-item"><a class="page-link" href="#">1</a></li>--}}
+{{--                            <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
+{{--                            <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
+{{--                            <li class="page-item"><a class="page-link" href="#">Next</a></li>--}}
+{{--                        </ul>--}}
+{{--                    </nav>--}}
                 </div>
             </div>
             <!-- Dialog Form -->
@@ -180,11 +170,21 @@
                         <div class="modal-header">
                             <h5 class="modal-title">Cadastrar / Editar usuário</h5>
                         </div>
-                        <form action="#">
+                        <form action="{{route('admin.add-user')}}" method="POST">
+                            @csrf
                             <div class="modal-body text-start mb-2">
                                 <div class="form-group boxed">
                                     <div class="input-wrapper">
-                                        <input type="email" class="form-control login-input-control" id="email1"
+                                        <input type="name" class="form-control login-input-control" id="name"
+                                               placeholder="Name">
+                                        <i class="clear-input">
+                                            <ion-icon name="close-circle"></ion-icon>
+                                        </i>
+                                    </div>
+                                </div>
+                                <div class="form-group boxed">
+                                    <div class="input-wrapper">
+                                        <input type="email" class="form-control login-input-control" id="email"
                                                placeholder="E-mail">
                                         <i class="clear-input">
                                             <ion-icon name="close-circle"></ion-icon>
@@ -194,8 +194,8 @@
 
                                 <div class="form-group boxed">
                                     <div class="input-wrapper">
-                                        <input type="email" class="form-control login-input-control" id="email1"
-                                               placeholder="E-mail">
+                                        <input type="password" class="form-control login-input-control" id="password"
+                                               placeholder="Password">
                                         <i class="clear-input">
                                             <ion-icon name="close-circle"></ion-icon>
                                         </i>
@@ -206,7 +206,8 @@
                                 <div class="btn-inline">
                                     <button type="button" class="btn btn-text-secondary" data-bs-dismiss="modal">CLOSE
                                     </button>
-                                    <button type="button" class="btn btn-text-primary" data-bs-dismiss="modal">Salvar
+                                    <button type="button" class="btn btn-text-primary" id="save-user"
+                                            data-bs-dismiss="modal">Salvar
                                     </button>
                                 </div>
                             </div>
@@ -214,8 +215,44 @@
                     </div>
                 </div>
             </div>
-            <!-- * Dialog Form -->
         </div>
     </div>
-
 @endsection
+@push('scripts')
+    <script type="module">
+        $("#keyword").keyup(function() {
+            let str = $("#keyword").val();
+            let _token = $('input[name=_token]').val();
+            $.ajax({
+                url: "{{route('admin.search-user')}}",
+                type: "POST",
+                data: {
+                    keyword: str,
+                    _token: _token
+                },
+                success: function (response) {
+                    $('#users_div').html(response.html)
+                }
+            })
+        });
+        $('#save-user').on('click', function (){
+            let name = $('#name').val();
+            let email = $('#email').val();
+            let password = $('#password').val();
+            let _token = $('input[name=_token]').val();
+            $.ajax({
+                url: "{{route('admin.add-user')}}",
+                type: "POST",
+                data: {
+                    name: name,
+                    email: email,
+                    password: password,
+                    _token: _token
+                },
+                success: function (response) {
+                    $('#users_div').html(response.html)
+                }
+            })
+        })
+    </script>
+@endpush

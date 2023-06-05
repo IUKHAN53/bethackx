@@ -74,4 +74,31 @@ class AdminController extends Controller
         }
         return redirect()->back();
     }
+
+    public function addUser(Request $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = strtolower($request->email);
+        $user->password = bcrypt($request->password);
+        $user->save();
+        $users = User::query()->where('id', '!=', auth()->id())->get();
+        $html = view('admin.partials.users-table', compact('users'))->render();
+        return response()->json([
+            'status' => true,
+            'html' => $html,
+            'message' => 'Added User.',
+        ]);
+    }
+
+    public function searchUser(Request $request)
+    {
+        $users = User::query()->where('id', '!=', auth()->id())->where('name', 'like', '%' . $request->keyword . '%')->get();
+        $html = view('admin.partials.users-table', compact('users'))->render();
+        return response()->json([
+            'status' => true,
+            'html' => $html,
+            'message' => 'searched Users.',
+        ]);
+    }
 }
