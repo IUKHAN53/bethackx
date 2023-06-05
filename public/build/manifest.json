@@ -1,6 +1,16 @@
 {
+  "resources/css/splide.min.css": {
+    "file": "assets/splide.min-a75702c1.css",
+    "isEntry": true,
+    "src": "resources/css/splide.min.css"
+  },
+  "resources/css/style.css": {
+    "file": "assets/style-71edbb4c.css",
+    "isEntry": true,
+    "src": "resources/css/style.css"
+  },
   "resources/js/app.js": {
-    "file": "assets/app-66e7f68a.js",
+    "file": "assets/app-0c4f0f79.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
