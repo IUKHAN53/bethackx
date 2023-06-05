@@ -8930,6 +8930,45 @@ body.dark-mode-active.rtl-mode .notification-dialog.android-style .notification-
     border: none !important;
     height: 60px !important;
 }
-::placeholder {
-    color:    #909;
+
+.custom-card {
+    background-color: #1b2226;
+    border-color: #2f3240 !important;
+    border-radius: 10px
+}
+
+.form-label-custom {
+    background-color: #282834;
+    height: 40px;
+}
+
+.form-control-custom {
+    background-color: #282834;
+    border: none !important;
+    line-height: 0 !important;
+    color: white !important;
+}
+
+.form-control-custom:focus {
+    background-color: #282834;
+    border: none !important;
+    line-height: 0 !important;
+    box-shadow: none !important;
+    color: white;
+}
+
+.form-control-custom:read-only {
+    background-color: #282834;
+    border: none !important;
+    line-height: 0 !important;
+    box-shadow: none !important;
+    color: white;
+}
+
+.form-control-custom:focus-visible {
+    background-color: #282834;
+    border: none !important;
+    line-height: 0 !important;
+    box-shadow: none !important;
+    color: white;
 }

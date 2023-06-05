@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.login-layout')
 
 @section('content')
     <div class="login-form mt-1 d-flex justify-content-center gap-5 flex-column" style="height: 90vh">

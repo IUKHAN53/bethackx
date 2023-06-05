@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [\App\Http\Controllers\User\HomeController::class, 'index'])->name('home');
 Route::group(['prefix' => 'admin'], function () {
     Route::view('login', 'admin.login');
     Route::group(['middleware' => ['admin']], function () {
