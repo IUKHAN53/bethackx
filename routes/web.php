@@ -33,9 +33,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('search-user', [\App\Http\Controllers\Admin\AdminController::class, 'searchUser'])->name('admin.search-user');
     });
 });
-Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
-    Route::group(['middleware' => ['user']], function () {
-        Route::get('user-view', [\App\Http\Controllers\User\UserController::class, 'index'])->name('view');
+Route::group(['prefix' => 'user'], function () {
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('user-view', [\App\Http\Controllers\User\UserController::class, 'index'])->name('user.view');
+        Route::get('game/{id}', [\App\Http\Controllers\User\HomeController::class, 'viewGame'])->name('user.view-game');
     });
 });
 

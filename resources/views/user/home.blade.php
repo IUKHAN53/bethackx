@@ -21,7 +21,7 @@
                     <div class="border p-2 custom-card">
                         <div class="row">
                             @foreach($games as $game)
-                                <div class="col-4 mb-2" onclick="location.href='{{route('game/'),['id' => $game->id]}}'">
+                                <div class="col-4 mb-2" onclick="location.href='{{route('user.view-game',['id' => $game->id])}}'">
                                     <img src="{{asset('img/sample_game.png')}}" class="rounded" alt="" width="130"
                                          height="130">
                                 </div>

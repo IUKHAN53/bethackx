@@ -4,8 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Games;
-use App\Models\GlobalSettings;
-use App\Models\User;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -26,5 +25,11 @@ class HomeController extends Controller
             'settings' => $settings,
         ];
         return view('user.home')->with($view_vars);
+    }
+
+    public function viewGame(Request $request, $id){
+        $game = Games::query()->find($id);
+        return view('user.game-view')->with(['game' => $game]);
+
     }
 }
