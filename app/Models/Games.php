@@ -17,4 +17,6 @@ class Games extends Model
         'banner',
         'status',
     ];
+
+    const GAME_TYPES = ['slots', 'cartas', 'roletas', 'dados'];
 }

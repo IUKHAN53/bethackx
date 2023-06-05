@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('game_text')->nullable();
-            $table->string('game_genre')->nullable();
+            $table->string('game_type')->default('slots');
             $table->string('description')->nullable();
             $table->string('iframe_link')->nullable();
             $table->string('image')->nullable();
