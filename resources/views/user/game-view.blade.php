@@ -9,7 +9,7 @@
             <div>
                 <div class="d-flex justify-content-start align-items-center mb-2">
                     <img src="{{asset('img/icon/'.$game->game_type.'.png')}}" class="bg-primary p-1 shadow rounded" alt="">
-                    <h4 class="fw-bold ms-1 text-uppercase mt-1">Slots</h4>
+                    <h4 class="fw-bold ms-1 text-uppercase mt-1">{{$game->game_type}}</h4>
                 </div>
                 <div class="text-center">
                     <img src="{{asset('img/sampe_game_detail.png')}}" alt="">
@@ -53,7 +53,7 @@
                     </a>
                 </div>
                 <div>
-                    <img src="{{asset('img/game_play.png')}}" style="width: 100%; border-radius: 10px" alt="">
+                    <iframe src="{{$game->iframe_link}}" style="background-color: white" width="100%" height="100%"></iframe>
                 </div>
             </div>
 

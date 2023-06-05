@@ -1,23 +1,22 @@
 <div class="appBottomMenu">
     <a href="index.html" class="item active">
         <div class="col">
-            <div class="d-flex justify-content-center align-items-center flex-column gap-1 bg-primary rounded py-1">
+            <div class="d-flex justify-content-center align-items-center flex-column gap-1 bg-primary rounded py-1" onclick="gotoSection('roletas')">
                 <img src="{{asset('img/icon/releta.png')}}" alt="">
                 <span class="text-white">Roleta</span>
             </div>
-
         </div>
     </a>
     <a href="app-components.html" class="item">
         <div class="col">
-            <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1">
+            <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1" onclick="gotoSection('dados')">
                 <img src="{{asset('img/icon/dados.png')}}" alt="">
                 <span class="text-white">Dados</span>
             </div>
         </div>
     </a>
     <a href="page-chat.html" class="item">
-        <div class="col d-flex justify-content-center align-items-center flex-column gap-1">
+        <div class="col d-flex justify-content-center align-items-center flex-column gap-1" onclick="gotoSection('slots')">
             <div style="position: relative">
                 <img src="{{asset('img/home_logo.png')}}" class="bg-primary p-1 shadow"
                      style="border: 1px solid white; border-radius: 100%; width: 70px; height: 65px; position: absolute; bottom: -1rem; left: -2.2rem; right: 2rem"
@@ -28,7 +27,7 @@
     </a>
     <a href="app-pages.html" class="item">
         <div class="col">
-            <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1">
+            <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1" onclick="gotoSection('cartas')">
                 <img src="{{asset('img/icon/cards.png')}}" alt="">
                 <span class="text-white">Cards</span>
             </div>
@@ -36,14 +35,18 @@
     </a>
     <a href="#sidebarPanel" class="item" data-bs-toggle="offcanvas">
         <div class="col">
-            <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1">
+            <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1" onclick="gotoSection('slots')">
                 <img src="{{asset('img/icon/slots.png')}}" alt="">
                 <span class="text-white">Slots</span>
             </div>
         </div>
     </a>
 </div>
-
+<script>
+    function gotoSection(id) {
+        // window.location.hash = id;
+    }
+</script>
 <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarPanel">
     <div class="offcanvas-body">
         <!-- profile box -->
