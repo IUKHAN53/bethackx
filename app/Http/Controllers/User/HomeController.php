@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function viewGame(Request $request, $id){
         $game = Games::query()->find($id);
-        return view('user.game-view')->with(['game' => $game]);
+        return view('user.game-view')->with(['game' => $game, 'settings' => (new \App\Models\GlobalSettings)->getSettings()]);
 
     }
 

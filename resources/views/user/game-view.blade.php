@@ -62,7 +62,7 @@
                             <span class="text-small">Está com dúvidas? Aprenda a operar o Bot!</span>
                         </div>
                         <div class="w-100">
-                            <button class="btn btn-primary text-uppercase fw-bolder">Assista Agora</button>
+                            <a class="btn btn-primary text-uppercase fw-bolder" href="{{$settigs['help_link']}}" target="_blank">Assista Agora</a>
                         </div>
                     </div>
                 </div>
