@@ -19,42 +19,42 @@ class GamesSeeder extends Seeder
                 'iframe_link' => 'https://bet7k.com/casino/vs20bet7kgate-gatesofbet7k',
                 'image' => 'img/games/GATES.png',
                 'game_type' => 'slots',
-                'game_text' =>  'test'
+                'game_text' =>  'Ate 3 Tentivas!'
             ],
             [
                 'name' => 'Mines',
                 'iframe_link' => 'https://bet7k.com/casino/mines-mines',
                 'image' => 'img/games/mines.png',
                 'game_type' => 'slots',
-                'game_text' =>  'test'
+                'game_text' =>  'Numero de Minas'
             ],
             [
                 'name' => 'Space Man',
                 'iframe_link' => 'https://bet7k.com/casino/1303-live-spaceman',
                 'image' => 'img/games/spaceman.png',
                 'game_type' => 'slots',
-                'game_text' =>  'test'
+                'game_text' =>  'Ate 3 Tentivas!'
             ],
             [
                 'name' => 'Hotline',
                 'iframe_link' => 'https://bet7k.com/casino/hotline-hotline',
                 'image' => 'img/games/hotline.png',
                 'game_type' => 'slots',
-                'game_text' =>  'test'
+                'game_text' =>  'Ate 3 Tentivas!'
             ],
             [
                 'name' => 'Penalty',
                 'iframe_link' => 'https://bet7k.com/casino/9550-penaltyshootout',
                 'image' => 'img/games/penalty.png',
                 'game_type' => 'slots',
-                'game_text' =>  'test'
+                'game_text' =>  'Escolha a Pais'
             ],
             [
                 'name' => 'Aviator',
                 'iframe_link' => 'https://bet7k.com/casino/aviator-aviator',
                 'image' => 'img/games/aviator.png',
                 'game_type' => 'slots',
-                'game_text' =>  'test'
+                'game_text' =>  'Ate 3 Tentivas!'
             ],
             [
                 'name' => 'Dragon Tiger',
@@ -68,42 +68,42 @@ class GamesSeeder extends Seeder
                 'iframe_link' => 'https://bet7k.com/casino/13697-footballstudio',
                 'image' => 'img/games/football.png',
                 'game_type' => 'cartas',
-                'game_text' =>  'test'
+                'game_text' =>  'Entrada recomendada'
             ],
             [
                 'name' => 'Crazy Time',
                 'iframe_link' => 'https://bet7k.com/casino/13509-crazytime',
                 'image' => 'img/games/crazytime.png',
                 'game_type' => '',
-                'game_text' =>  'test'
+                'game_text' =>  'Ate 3 Tentivas!'
             ],
             [
                 'name' => 'Roulette 2',
                 'iframe_link' => 'https://bet7k.com/casino/201-roulette2',
                 'image' => 'img/games/roulette.png',
                 'game_type' => 'roletas',
-                'game_text' =>  'test'
+                'game_text' =>  'Ate 3 Tentivas!'
             ],
             [
                 'name' => 'Fan Tan Live',
                 'iframe_link' => '',
                 'image' => 'img/games/fantanlive.png',
                 'game_type' => 'roletas',
-                'game_text' =>  'test'
+                'game_text' =>  'Entrada recomendada'
             ],
             [
                 'name' => 'Bac bo',
                 'iframe_link' => 'https://bet7k.com/casino/14529-bacbo',
                 'image' => 'img/games/bacbo.png',
                 'game_type' => 'dados',
-                'game_text' =>  'test'
+                'game_text' =>  'Entrada recomendada'
             ],
             [
                 'name' => 'Football Studio Dice',
                 'iframe_link' => 'https://bet7k.com/casino/29297-footballstudiodice',
                 'image' => 'img/games/dice.png',
                 'game_type' => 'dados',
-                'game_text' =>  'test'
+                'game_text' =>  'Entrada recomendada'
             ],
         ];
         foreach ($games as $game) {
