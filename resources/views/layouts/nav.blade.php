@@ -55,11 +55,7 @@
                 <img src="{{asset('img/sample/avatar/avatar1.jpg')}}" alt="image" class="imaged rounded">
             </div>
             <div class="in">
-                <strong>Julian Gruber</strong>
-                <div class="text-muted">
-                    <ion-icon name="location" role="img" class="md hydrated" aria-label="location"></ion-icon>
-                    California
-                </div>
+                <strong>{{auth()->user()->name}}</strong>
             </div>
             <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
                 <ion-icon name="close" role="img" class="md hydrated" aria-label="close"></ion-icon>
