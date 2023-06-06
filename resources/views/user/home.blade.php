@@ -18,10 +18,10 @@
                         <img src="{{asset('img/icon/'.$type)}}.png" class="bg-primary p-1 shadow rounded" alt="">
                         <h4 class="fw-bold ms-1 text-uppercase mt-1">{{$type}}</h4>
                     </div>
-                    <div class="border p-2 custom-card">
+                    <div class="border p-2 custom-card ">
                         <div class="row">
                             @foreach($games as $game)
-                                <div class="col-4 mb-2" onclick="location.href='{{route('user.view-game',['id' => $game->id])}}'">
+                                <div class="col-4 mb-2 d-flex justify-content-center" onclick="location.href='{{route('user.view-game',['id' => $game->id])}}'">
                                     <img src="{{asset($game->image)}}" class="rounded" alt="" style="max-width: 100px; max-height: 100px">
                                 </div>
                             @endforeach

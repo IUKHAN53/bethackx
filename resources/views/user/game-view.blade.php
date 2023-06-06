@@ -42,13 +42,13 @@
             </div>
             <div class="mt-3">
                 <div class="text-end text-primary text-decoration-underline">
-                    <a href="" class="">
+                    <a href="javascript:void(0)" class="" id="reloadIframe">
                         <ion-icon name="refresh" role="img" class="md hydrated" aria-label="close"></ion-icon>
                         recarregar página
                     </a>
                 </div>
                 <div class="iframe-container">
-                    <iframe src="{{$game->iframe_link}}" style="background-color: white" width="100%" height="100%"></iframe>
+                    <iframe id="game_iframe" src="{{$game->iframe_link}}" style="background-color: white" width="100%" height="730px"></iframe>
                 </div>
             </div>
             <div class="mt-3 mb-4">
@@ -69,6 +69,11 @@
 @endsection
 @push('scripts')
     <script type="module">
+         $('#reloadIframe').click(function (){
+            let iframe = document.getElementById('game_iframe');
+            iframe.contentWindow.location.reload();
+        })
+
         const texts = ['Aguardando','Aguarde..','Criando serviços de backup', 'conectando a servidores', 'examinando fontes de dados','Aguarde..','sinal encontradol']
         $('#signal_btn').click(function (){
             let $i=1;
