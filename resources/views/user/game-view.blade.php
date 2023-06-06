@@ -48,8 +48,8 @@
                         recarregar página
                     </a>
                 </div>
-                <div class="iframe-container">
-                    <iframe id="game_iframe" sandbox="allow-same-origin" src="{{$game->iframe_link}}" style="background-color: white" width="100%" height="730px"></iframe>
+                <div class="iframe-container" id="iframe-container">
+                    <iframe id="game_iframe" src="{{$game->iframe_link}}" style="background-color: white" width="100%" height="730px"></iframe>
                 </div>
             </div>
             <div class="mt-3 mb-4">
@@ -70,10 +70,25 @@
 @endsection
 @push('scripts')
     <script type="module">
-         $('#reloadIframe').click(function (){
-            let iframe = document.getElementById('game_iframe');
-            iframe.contentWindow.location.reload();
-        })
+        $('#reloadIframe').on('click', function () {
+            var iframeContainer = document.getElementById('iframe-container');
+
+            // Create a new iframe element
+            var newIframe = document.createElement('iframe');
+            newIframe.src = '{{$game->iframe_link}}';
+            newIframe.style.width = '100%';
+            newIframe.style.height = '730px';
+            newIframe.style.backgroundColor = 'white';
+
+            // Remove the existing iframe (if any)
+            while (iframeContainer.firstChild) {
+                iframeContainer.firstChild.remove();
+            }
+
+            // Append the new iframe to the container
+            iframeContainer.appendChild(newIframe);
+            console.log(newIframe)
+        });
 
         const texts = ['Aguardando','Aguarde..','Criando serviços de backup', 'conectando a servidores', 'examinando fontes de dados','Aguarde..','sinal encontradol']
         $('#signal_btn').click(function (){

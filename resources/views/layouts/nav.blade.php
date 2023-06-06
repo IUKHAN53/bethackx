@@ -1,5 +1,5 @@
 <div class="appBottomMenu">
-    <a href="#type_roletas" class="item active">
+    <a href="{{request()->routeIs('home')?'#type_roletas':route('home').'/#type_roletas'}}" class="item active">
         <div class="col">
             <div class="d-flex justify-content-center align-items-center flex-column gap-1 rounded py-1">
                 <img src="{{asset('img/icon/roletas.png')}}" alt="">
@@ -7,7 +7,7 @@
             </div>
         </div>
     </a>
-    <a href="#type_dados" class="item">
+    <a href="{{request()->routeIs('home')?'#type_dados':route('home').'/#type_dados'}}" class="item">
         <div class="col">
             <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1">
                 <img src="{{asset('img/icon/dados.png')}}" alt="">
@@ -25,7 +25,7 @@
             <span class="text-white mt-3">BetHack</span>
         </div>
     </a>
-    <a href="#type_cartas" class="item">
+    <a href="{{request()->routeIs('home')?'#type_cartas':route('home').'/#type_cartas'}}" class="item">
         <div class="col">
             <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1">
                 <img src="{{asset('img/icon/cartas.png')}}" alt="">
@@ -33,7 +33,7 @@
             </div>
         </div>
     </a>
-    <a href="#type_slots" class="item">
+    <a href="{{request()->routeIs('home')?'#type_slots':route('home').'/#type_slots'}}" class="item">
         <div class="col">
             <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1">
                 <img src="{{asset('img/icon/slots.png')}}" alt="">
@@ -67,7 +67,8 @@
             <li>
                 <a href="javascript:void(0)" class="item" onclick="$('#logout_form').submit()">
                     <div class="icon-box bg-primary">
-                        <ion-icon name="log-out-outline" role="img" class="md hydrated" aria-label="log out outline"></ion-icon>
+                        <ion-icon name="log-out-outline" role="img" class="md hydrated"
+                                  aria-label="log out outline"></ion-icon>
                     </div>
                     <div class="in">
                         Logout
