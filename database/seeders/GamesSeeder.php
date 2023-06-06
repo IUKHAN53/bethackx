@@ -112,6 +112,7 @@ class GamesSeeder extends Seeder
                 'iframe_link' => $game['iframe_link'],
                 'image' => $game['image'],
                 'game_type' => $game['game_type'],
+                'game_text' => $game['game_text'],
             ]);
         }
     }
