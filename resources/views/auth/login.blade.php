@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <p class="fw-bolder"><span class="text-white">Não tem acesso?</span> <a href="{{$settigs['request_access_link']}}">Clique aqui</a></p>
+                    <p class="fw-bolder"><span class="text-white">Não tem acesso?</span> <a href="{{$settings['request_access_link']}}">Clique aqui</a></p>
                 </div>
 
             </form>
