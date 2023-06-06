@@ -20,21 +20,22 @@
                     <div class="d-flex justify-content-between align-items-center gap-2">
                         <div class="d-flex flex-column justify-content-start">
                             <h5 class="text-start fw-bolder m-0">Hackear Mines</h5>
-                            <span class="text-small">Clique em no botão ao lado para gerar uma nova probabilidade de
+                            <span style="font-size: 10px">Clique em no botão ao lado para gerar uma nova probabilidade de
                                 entrada.</span>
                         </div>
                         <div>
-                            <button class="btn btn-primary text-uppercase fw-bolder" id="signal_btn">Hackear</button>
+                            <button class="btn btn-primary text-uppercase fw-bolder" id="signal_btn" style="min-width: 105px">Hackear</button>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between align-items-center mt-2 gap-2">
-                        <div class="d-flex flex-column justify-content-start p-2 text-center w-100"
+                    <div class="flex-container justify-content-between align-items-center mt-2 gap-2">
+                        <div class="flex-item flex-item-75  flex-row justify-content-start p-2 text-center"
                              style="background-color: #0c1624 !important; border-radius: 10px; font-size: 12px">
                             <span class="text-white">{{$game->game_text}}</span>
+                            <br>
                             <span class="text-small fw-bolder text-warning" style="font-size: 12px"><span
                                     id="text_signal">--:--</span></span>
                         </div>
-                        <div class="d-flex flex-column justify-content-start p-2 text-center w-100"
+                        <div class="flex-item flex-item-25  flex-row justify-content-start p-2 text-center"
                              style="background-color: #0c1624 !important; border-radius: 10px; font-size: 12px">
                             <span class="text-white" style="font-size: 12px">Válido até</span>
                             <span class="text-small fw-bolder text-success" id="timer" style="font-size: 12px">--:--</span>
@@ -73,6 +74,9 @@
 @endsection
 @push('scripts')
     <script type="module">
+        const button = document.getElementById('signal_btn');
+        let remainingTime = 5 * 60;
+
         $('#reloadIframe').on('click', function () {
             var iframeContainer = document.getElementById('iframe-container');
 
@@ -127,11 +131,27 @@
                     }
                 }
             })
-            setTimeout(function () {
-                document.getElementById('signal_btn').disabled = false;
-            }, 5 * 60 * 1000)
+            updateRemainingTime();
         }
-
+        function updateButtonText() {
+            const formattedTime = formatTime(remainingTime);
+            button.innerText = formattedTime;
+        }
+        function updateRemainingTime() {
+            remainingTime--;
+            if (remainingTime > 0) {
+                updateButtonText();
+                setTimeout(updateRemainingTime, 1000); // Update every second
+            } else {
+                button.disabled = false;
+                button.innerText = 'Hackear';
+            }
+        }
+        function formatTime(timeInSeconds) {
+            const minutes = Math.floor(timeInSeconds / 60);
+            const seconds = timeInSeconds % 60;
+            return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
         function changeText($i) {
             let server_text = $('#server_text');
             server_text.text(texts[$i])

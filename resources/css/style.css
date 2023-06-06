@@ -8999,3 +8999,18 @@ body.dark-mode-active.rtl-mode .notification-dialog.android-style .notification-
     height: 100%;
     border: none;
 }
+.flex-container {
+    display: flex;
+}
+
+.flex-item {
+    flex: 1;
+}
+
+.flex-item-75 {
+    flex-basis: 75%;
+}
+
+.flex-item-25 {
+    flex-basis: 25%;
+}
