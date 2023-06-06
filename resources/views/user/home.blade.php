@@ -5,8 +5,8 @@
         <img src="{{$settings['home_banner'] != '' ? storage_path($settings['home_banner']) : asset('img/banners/banner_topo.png')}}" alt="">
     </div>
 
-    <div class="header-large-title bg-primary text-center">
-        <h4 class="subtitle" style="font-size: 14px; background-color: #423ed4 !important;">clique abaixo no jogo preferido para abrir os sinais</h4>
+    <div class="header-large-title text-center" style="background-color: #423ed4">
+        <h4 class="subtitle" style="font-size: 14px;">clique abaixo no jogo preferido para abrir os sinais</h4>
     </div>
 
     <div class="section full mt-3">
