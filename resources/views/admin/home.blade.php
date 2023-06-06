@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="header-large-title bg-primary text-center">
-        <h4 class="subtitle">clique abaixo no jogo preferido para abrir os sinais</h4>
+        <h4 class="subtitle">altere as informações e depois clique em salvar!</h4>
     </div>
 
     <div class="section full mt-3">
