@@ -30,11 +30,12 @@
                         <div class="d-flex flex-column justify-content-start p-2 text-center w-100"
                              style="background-color: #0c1624 !important; border-radius: 10px">
                             <span class="text-white">{{$game->game_text}}</span>
-                            <span class="text-small fw-bolder text-warning"><span id="text_signal"></span></span>
+                            <span class="text-small fw-bolder text-warning" style="font-size: 12px"><span id="text_signal"></span></span>
                         </div>
                         <div class="d-flex flex-column justify-content-start p-2 text-center w-100"
                              style="background-color: #0c1624 !important; border-radius: 10px">
-                            <span class="text-white">Válido até</span>
+
+                            <span class="text-white text-sm">Válido até</span>
                             <span class="text-small fw-bolder text-success">{{\Carbon\Carbon::now()->addMinute(5)->format('H:i')}}</span>
                         </div>
                     </div>
@@ -48,7 +49,7 @@
                     </a>
                 </div>
                 <div class="iframe-container">
-                    <iframe id="game_iframe" src="{{$game->iframe_link}}" style="background-color: white" width="100%" height="730px"></iframe>
+                    <iframe id="game_iframe" sandbox="allow-same-origin" src="{{$game->iframe_link}}" style="background-color: white" width="100%" height="730px"></iframe>
                 </div>
             </div>
             <div class="mt-3 mb-4">
