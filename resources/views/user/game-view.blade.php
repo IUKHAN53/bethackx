@@ -29,15 +29,15 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center mt-2 gap-2">
                         <div class="d-flex flex-column justify-content-start p-2 text-center w-100"
-                             style="background-color: #0c1624 !important; border-radius: 10px">
+                             style="background-color: #0c1624 !important; border-radius: 10px; font-size: 12px">
                             <span class="text-white">{{$game->game_text}}</span>
                             <span class="text-small fw-bolder text-warning" style="font-size: 12px"><span
                                     id="text_signal">--:--</span></span>
                         </div>
                         <div class="d-flex flex-column justify-content-start p-2 text-center w-100"
-                             style="background-color: #0c1624 !important; border-radius: 10px">
-                            <span class="text-white text-sm">Válido até</span>
-                            <span class="text-small fw-bolder text-success" id="timer">--:--</span>
+                             style="background-color: #0c1624 !important; border-radius: 10px; font-size: 12px">
+                            <span class="text-white" style="font-size: 12px">Válido até</span>
+                            <span class="text-small fw-bolder text-success" id="timer" style="font-size: 12px">--:--</span>
                         </div>
                     </div>
                 </div>
