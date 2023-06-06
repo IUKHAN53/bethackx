@@ -12,9 +12,9 @@
                     <img src="{{asset('img/icon/'.$game->game_type.'.png')}}" class="bg-primary p-1 shadow rounded" alt="">
                     <h4 class="fw-bold ms-1 text-uppercase mt-1">{{$game->name}}</h4>
                 </div>
-                <div class="text-center">
-                    <img src="{{asset('img/sampe_game_detail.png')}}" alt="" id="image_signal">
-                    <span style="color: white;" id="server_text">Aguardando</span>
+                <div class="text-center d-flex justify-content-center game-banner align-items-center" id="image_signal"
+                     style="background-image: url('{{asset($game->banner)}}');">
+                    <span style="background-color: rgba(255,255,255,0.51);padding: 7px" id="server_text" class="text-center text-dark rounded fw-bolder">Aguardando</span>
                 </div>
             </div>
             <div class="mt-3">
@@ -85,7 +85,7 @@
         })
         function getSignal(){
             let id = $('#game_id').val()
-            $('#image_signal').attr('src','{{asset('img/sampe_game_detail.gif')}}')
+            $('#image_signal').css('background','url({{asset($game->banner)}})')
             $('#text_signal').text('Aguarde..')
             let url = '{{route('user.get-game-signal',':id')}}'
             url = url.replace(':id',id)
@@ -94,11 +94,10 @@
                 method: 'GET',
                 success: function (data){
                     if(data.type == 'image'){
-                        $('#image_signal').attr('src',data.signal)
+                        $('#image_signal').css('background',`url(${data.signal})`)
                         $('#text_signal').text('sinal encontradol')
                         $('#server_text').text('');
                     }else{
-                        $('#image_signal').attr('src','{{asset('img/sampe_game_detail.png')}}')
                         $('#text_signal').text(data.signal)
                     }
                 }
@@ -108,5 +107,14 @@
             let server_text = $('#server_text');
             server_text.text(texts[$i])
         }
+
+        window.addEventListener('load', function() {
+            var container = document.getElementById('image_signal');
+            var img = new Image();
+            img.src = getComputedStyle(container).backgroundImage.slice(4, -1).replace(/"/g, "");
+            img.addEventListener('load', function() {
+                container.style.height = img.height + 'px';
+            });
+        });
     </script>
 @endpush

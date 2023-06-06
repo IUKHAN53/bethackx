@@ -18,7 +18,7 @@ Route::get('/test', function () {
     return view('test');
 });
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('home');
 });
 
 Route::get('/home', [\App\Http\Controllers\User\HomeController::class, 'index'])->name('home');

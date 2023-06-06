@@ -20,7 +20,7 @@
     @laravelPWA
 </head>
 <body class="bg-white dark-mode-active">
-<div class="appHeader bg-primary scrolled">
+<div class="appHeader scrolled">
     <div class="left">
         <a href="#" class="headerButton toggle-searchbox gap-2">
             <img src="{{asset('img/home_logo.png')}}" alt="" style="max-width: 50px">
@@ -33,11 +33,23 @@
         </a>
     </div>
 </div>
-<div id="appCapsule" class="pt-0">
+<div id="appCapsule">
     @yield('content')
 </div>
 @include('layouts.nav')
+<!-- Ionicons -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 0) {
+            document.querySelector('.appHeader').style.backgroundColor = '#0F1C2F';
+        } else {
+            document.querySelector('.appHeader').style.backgroundColor = 'rgba(15,28,47,0)';
+        }
+    });
+</script>
 </body>
+
 @stack('scripts')
 
 </html>

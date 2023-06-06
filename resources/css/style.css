@@ -8919,10 +8919,15 @@ body.dark-mode-active .cookies-modal {
 body.dark-mode-active.rtl-mode .notification-dialog.android-style .notification-footer .notification-button {
     border-left-color: #1B283B
 }
+
 .login-input-control {
     background-color: #282834 !important;
     border: none !important;
     height: 60px !important;
+}
+
+.login-input-control::placeholder {
+    color: #fff !important;
 }
 
 .login-btn {
@@ -8971,4 +8976,10 @@ body.dark-mode-active.rtl-mode .notification-dialog.android-style .notification-
     line-height: 0 !important;
     box-shadow: none !important;
     color: white;
+}
+
+.game-banner {
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
 }

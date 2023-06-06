@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="text-center my-2">
-        <img src="{{$settings['home_banner'] != '' ? storage_path($settings['home_banner']) : asset('img/banners/banner_topo.png')}}" alt="" width="500px" height="200px">
+        <img src="{{$settings['home_banner'] != '' ? storage_path($settings['home_banner']) : asset('img/banners/banner_topo.png')}}" alt="">
     </div>
 
     <div class="header-large-title bg-primary text-center">
@@ -22,8 +22,7 @@
                         <div class="row">
                             @foreach($games as $game)
                                 <div class="col-4 mb-2" onclick="location.href='{{route('user.view-game',['id' => $game->id])}}'">
-                                    <img src="{{asset($game->image)}}" class="rounded" alt="" width="130"
-                                         height="130">
+                                    <img src="{{asset($game->image)}}" class="rounded" alt="" style="max-width: 100px; max-height: 100px">
                                 </div>
                             @endforeach
                         </div>

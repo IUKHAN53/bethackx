@@ -1,22 +1,22 @@
 <div class="appBottomMenu">
-    <a href="index.html" class="item active">
+    <a href="#type_roletas" class="item active">
         <div class="col">
-            <div class="d-flex justify-content-center align-items-center flex-column gap-1 bg-primary rounded py-1" onclick="gotoSection('roletas')">
-                <img src="{{asset('img/icon/releta.png')}}" alt="">
+            <div class="d-flex justify-content-center align-items-center flex-column gap-1 rounded py-1">
+                <img src="{{asset('img/icon/roletas.png')}}" alt="">
                 <span class="text-white">Roleta</span>
             </div>
         </div>
     </a>
-    <a href="app-components.html" class="item">
+    <a href="#type_dados" class="item">
         <div class="col">
-            <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1" onclick="gotoSection('dados')">
+            <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1">
                 <img src="{{asset('img/icon/dados.png')}}" alt="">
                 <span class="text-white">Dados</span>
             </div>
         </div>
     </a>
-    <a href="page-chat.html" class="item">
-        <div class="col d-flex justify-content-center align-items-center flex-column gap-1" onclick="gotoSection('slots')">
+    <a href="{{route('home')}}" class="item">
+        <div class="col d-flex justify-content-center align-items-center flex-column gap-1">
             <div style="position: relative">
                 <img src="{{asset('img/home_logo.png')}}" class="bg-primary p-1 shadow"
                      style="border: 1px solid white; border-radius: 100%; width: 70px; height: 65px; position: absolute; bottom: -1rem; left: -2.2rem; right: 2rem"
@@ -25,17 +25,17 @@
             <span class="text-white mt-3">BetHack</span>
         </div>
     </a>
-    <a href="app-pages.html" class="item">
+    <a href="#type_cartas" class="item">
         <div class="col">
-            <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1" onclick="gotoSection('cartas')">
-                <img src="{{asset('img/icon/cards.png')}}" alt="">
+            <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1">
+                <img src="{{asset('img/icon/cartas.png')}}" alt="">
                 <span class="text-white">Cards</span>
             </div>
         </div>
     </a>
-    <a href="#sidebarPanel" class="item" data-bs-toggle="offcanvas">
+    <a href="#type_slots" class="item">
         <div class="col">
-            <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1" onclick="gotoSection('slots')">
+            <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1">
                 <img src="{{asset('img/icon/slots.png')}}" alt="">
                 <span class="text-white">Slots</span>
             </div>
@@ -141,9 +141,13 @@
         <a href="#" class="button">
             <ion-icon name="settings-outline" role="img" class="md hydrated" aria-label="settings outline"></ion-icon>
         </a>
-        <a href="#" class="button">
+        <a href="javascript:void(0)" type="submit" class="button" onclick="$('#logout_form').submit()">
             <ion-icon name="log-out-outline" role="img" class="md hydrated" aria-label="log out outline"></ion-icon>
         </a>
+        <form action="{{route('logout')}}" method="POST" id="logout_form">
+            @csrf
+        </form>
+
     </div>
     <!-- * sidebar buttons -->
 </div>

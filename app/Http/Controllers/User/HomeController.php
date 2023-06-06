@@ -22,7 +22,6 @@ class HomeController extends Controller
         }
         $view_vars = [
             'types' => $types,
-            'settings' => $settings,
         ];
         return view('user.home')->with($view_vars);
     }
