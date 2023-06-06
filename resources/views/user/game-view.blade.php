@@ -6,7 +6,8 @@
             <div>
                 <input type="hidden" id="game_id" value="{{$game->id}}">
                 <div class="d-flex justify-content-start align-items-center mb-2">
-                    <img src="{{asset('img/icon/'.$game->game_type.'.png')}}" class="bg-primary p-1 shadow rounded" alt="">
+                    <img src="{{asset('img/icon/'.$game->game_type.'.png')}}" class="bg-primary p-1 shadow rounded"
+                         alt="">
                     <h4 class="fw-bold ms-1 text-uppercase mt-1">{{$game->name}}</h4>
                 </div>
                 <div class="text-center d-flex justify-content-center game-banner align-items-center" id="image_signal"
@@ -30,13 +31,13 @@
                         <div class="d-flex flex-column justify-content-start p-2 text-center w-100"
                              style="background-color: #0c1624 !important; border-radius: 10px">
                             <span class="text-white">{{$game->game_text}}</span>
-                            <span class="text-small fw-bolder text-warning" style="font-size: 12px"><span id="text_signal"></span></span>
+                            <span class="text-small fw-bolder text-warning" style="font-size: 12px"><span
+                                    id="text_signal">--:--</span></span>
                         </div>
                         <div class="d-flex flex-column justify-content-start p-2 text-center w-100"
                              style="background-color: #0c1624 !important; border-radius: 10px">
-
                             <span class="text-white text-sm">Válido até</span>
-                            <span class="text-small fw-bolder text-success">{{\Carbon\Carbon::now()->addMinute(5)->format('H:i')}}</span>
+                            <span class="text-small fw-bolder text-success" id="timer">--:--</span>
                         </div>
                     </div>
                 </div>
@@ -49,7 +50,8 @@
                     </a>
                 </div>
                 <div class="iframe-container" id="iframe-container">
-                    <iframe id="game_iframe" src="{{$game->iframe_link}}" style="background-color: white" width="100%" height="730px"></iframe>
+                    <iframe id="game_iframe" src="{{$game->iframe_link}}" style="background-color: white" width="100%"
+                            height="730px"></iframe>
                 </div>
             </div>
             <div class="mt-3 mb-4">
@@ -60,7 +62,8 @@
                             <span class="text-small">Está com dúvidas? Aprenda a operar o Bot!</span>
                         </div>
                         <div class="w-100">
-                            <a class="btn btn-primary text-uppercase fw-bolder" href="{{$settings['help_link']}}" target="_blank">Assista Agora</a>
+                            <a class="btn btn-primary text-uppercase fw-bolder" href="{{$settings['help_link']}}"
+                               target="_blank">Assista Agora</a>
                         </div>
                     </div>
                 </div>
@@ -90,47 +93,55 @@
             console.log(newIframe)
         });
 
-        const texts = ['Aguardando','Aguarde..','Criando serviços de backup', 'conectando a servidores', 'examinando fontes de dados','Aguarde..','sinal encontradol']
-        $('#signal_btn').click(function (){
-            let $i=1;
-            let interval = setInterval(function (){
+        const texts = ['Aguardando', 'Aguarde..', 'Criando serviços de backup', 'conectando a servidores', 'examinando fontes de dados', 'Aguarde..', 'sinal encontradol']
+        $('#signal_btn').click(function () {
+            const button = document.getElementById('signal_btn');
+            button.disabled = true;
+            let $i = 1;
+            let interval = setInterval(function () {
                 changeText($i++)
-                if($i===texts.length){
+                if ($i === texts.length) {
                     clearInterval(interval)
                     getSignal()
                 }
-            },1200)
+            }, 1200)
         })
-        function getSignal(){
+
+        function getSignal() {
             let id = $('#game_id').val()
-            $('#image_signal').css('background','url({{asset($game->banner)}})')
+            $('#image_signal').css('background', 'url({{asset($game->banner)}})')
             $('#text_signal').text('Aguarde..')
             let url = '{{route('user.get-game-signal',':id')}}'
-            url = url.replace(':id',id)
+            url = url.replace(':id', id)
             $.ajax({
                 url: url,
                 method: 'GET',
-                success: function (data){
-                    if(data.type == 'image'){
-                        $('#image_signal').css('background',`url(${data.signal})`)
+                success: function (data) {
+                    $('#timer').text('{{\Carbon\Carbon::now()->setTimezone('America/Recife')->addMinutes(5)->format('H:i')}}')
+                    if (data.type == 'image') {
+                        $('#image_signal').css('background', `url(${data.signal})`)
                         $('#text_signal').text('sinal encontradol')
                         $('#server_text').text('');
-                    }else{
+                    } else {
                         $('#text_signal').text(data.signal)
                     }
                 }
             })
+            setTimeout(function () {
+                document.getElementById('signal_btn').disabled = false;
+            }, 5 * 60 * 1000)
         }
-        function changeText($i){
+
+        function changeText($i) {
             let server_text = $('#server_text');
             server_text.text(texts[$i])
         }
 
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             var container = document.getElementById('image_signal');
             var img = new Image();
             img.src = getComputedStyle(container).backgroundImage.slice(4, -1).replace(/"/g, "");
-            img.addEventListener('load', function() {
+            img.addEventListener('load', function () {
                 container.style.height = img.height + 'px';
             });
         });
