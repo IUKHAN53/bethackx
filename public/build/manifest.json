@@ -5,12 +5,12 @@
     "src": "resources/css/splide.min.css"
   },
   "resources/css/style.css": {
-    "file": "assets/style-71edbb4c.css",
+    "file": "assets/style-7a673cba.css",
     "isEntry": true,
     "src": "resources/css/style.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-0c4f0f79.js",
+    "file": "assets/app-032fc481.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },

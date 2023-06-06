@@ -37,6 +37,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('user-view', [\App\Http\Controllers\User\UserController::class, 'index'])->name('user.view');
         Route::get('game/{id}', [\App\Http\Controllers\User\HomeController::class, 'viewGame'])->name('user.view-game');
+        Route::get('game/{id}/get-signal', [\App\Http\Controllers\User\HomeController::class, 'getGameSignal'])->name('user.get-game-signal');
     });
 });
 

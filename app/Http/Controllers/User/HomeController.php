@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\GameData;
 use App\Models\Games;
 use Illuminate\Http\Request;
 
@@ -31,5 +32,22 @@ class HomeController extends Controller
         $game = Games::query()->find($id);
         return view('user.game-view')->with(['game' => $game]);
 
+    }
+
+    public function getGameSignal(Request $request, $id){
+        $game_signal = GameData::query()->where('game_id',$id)->inRandomOrder()->first();
+        $game = Games::query()->find($id);
+        $signal = '';
+        if ($game_signal){
+            if ($game_signal->signal_type == 'image'){
+                $signal = asset('img/signals/'.$game->name .'/'. $game_signal->signal);
+            }else{
+                $signal = $game_signal->signal;
+            }
+        }
+        return response()->json([
+            'type' => $game_signal->signal_type,
+            'signal' => $signal,
+        ]);
     }
 }
