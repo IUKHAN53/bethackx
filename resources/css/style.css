@@ -8983,3 +8983,19 @@ body.dark-mode-active.rtl-mode .notification-dialog.android-style .notification-
     background-position: center !important;
     background-repeat: no-repeat !important;
 }
+
+.iframe-container {
+    position: relative;
+    width: 300px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+    overflow: hidden;
+}
+
+.iframe-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}

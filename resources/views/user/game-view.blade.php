@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="header-large-title bg-primary text-center">
-        <h4 class="subtitle">altere as informações e depois clique em salvar!</h4>
-    </div>
     <div class="section full mt-3">
         <div class=" mx-3 pt-2 pb-2">
             <div>
@@ -14,7 +11,7 @@
                 </div>
                 <div class="text-center d-flex justify-content-center game-banner align-items-center" id="image_signal"
                      style="background-image: url('{{asset($game->banner)}}');">
-                    <span style="background-color: rgba(255,255,255,0.51);padding: 7px" id="server_text" class="text-center text-dark rounded fw-bolder">Aguardando</span>
+                    <span style="color: white" id="server_text" class="text-center fw-bolder">Aguardando</span>
                 </div>
             </div>
             <div class="mt-3">
@@ -50,7 +47,7 @@
                         recarregar página
                     </a>
                 </div>
-                <div>
+                <div class="iframe-container">
                     <iframe src="{{$game->iframe_link}}" style="background-color: white" width="100%" height="100%"></iframe>
                 </div>
             </div>
