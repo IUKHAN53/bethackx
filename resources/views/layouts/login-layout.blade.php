@@ -15,7 +15,7 @@
 
     <!-- Scripts -->
     <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" sizes="32x32">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('img/icon/192x192.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('img/favicon.png')}}">
     @vite(['resources/sass/app.scss','resources/css/splide.min.css','resources/css/style.css', 'resources/js/app.js'])
     @laravelPWA
 </head>

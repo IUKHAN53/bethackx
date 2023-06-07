@@ -130,7 +130,7 @@
                                 </div>
                                 <div class="w-100">
                                     <a href="{{$g_settings['admin_tutorial_link']}}"
-                                       class="btn btn-primary text-uppercase fw-bolder">Assista Agora</a>
+                                       class="btn btn-primary text-uppercase fw-bolder  float-end">Assista Agora</a>
                                 </div>
                             </div>
                         </div>

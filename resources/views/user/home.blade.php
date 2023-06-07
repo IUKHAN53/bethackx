@@ -36,7 +36,7 @@
                             <span class="text-small">Está com dúvidas? Aprenda a operar o Bot!</span>
                         </div>
                         <div class="w-100">
-                            <button class="btn btn-primary text-uppercase fw-bolder">Assista Agora</button>
+                            <button class="btn btn-primary text-uppercase fw-bolder float-end">Assista Agora</button>
                         </div>
                     </div>
                 </div>
