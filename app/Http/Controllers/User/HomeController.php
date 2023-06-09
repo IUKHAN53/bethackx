@@ -38,7 +38,7 @@ class HomeController extends Controller
         $signal = '';
         if ($game_signal){
             if ($game_signal->signal_type == 'image'){
-                $signal = asset('img/signals/'.$game->name .'/'. $game_signal->signal);
+                $signal = asset('img/signals/'. $game->name .'/'. $game_signal->signal);
             }else{
                 $signal = $game_signal->signal;
             }

@@ -41,7 +41,9 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-//        dd($user->isAdmin());
+        if ( $user->isSuperAdmin() ) {
+            return redirect()->route('super-admin.view');
+        }
         if ( $user->isAdmin() ) {
             return redirect()->route('admin.view');
         }

@@ -3,17 +3,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/test', function () {
     return view('test');
 });
@@ -31,6 +20,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('save-banner', [\App\Http\Controllers\Admin\AdminController::class, 'saveBanner'])->name('admin.save-banner');
         Route::post('add-user', [\App\Http\Controllers\Admin\AdminController::class, 'addUser'])->name('admin.add-user');
         Route::post('search-user', [\App\Http\Controllers\Admin\AdminController::class, 'searchUser'])->name('admin.search-user');
+    });
+});
+Route::group(['prefix' => 'super-admin', 'as' => 'super-admin.'], function () {
+    Route::view('login', 'superadmin.login')->name('login');
+    Route::group(['middleware' => 'super-admin'], function () {
+        Route::get('view', [\App\Http\Controllers\SuperAdmin\SuperAdminController::class, 'index'])->name('view');
+        Route::resource('users', App\Http\Controllers\SuperAdmin\UserController::class);
+        Route::resource('companies', App\Http\Controllers\SuperAdmin\UserController::class);
+        Route::resource('plans', App\Http\Controllers\SuperAdmin\UserController::class);
     });
 });
 Route::group(['prefix' => 'user'], function () {

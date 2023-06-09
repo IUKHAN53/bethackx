@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->is_admin;
     }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->is_super_admin;
+    }
 }

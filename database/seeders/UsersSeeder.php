@@ -15,6 +15,13 @@ class UsersSeeder extends Seeder
         User::truncate();
         $users = [
             [
+                'name' => 'Super Admin',
+                'email' => 'super@gmail.com',
+                'password' => '12345678',
+                'is_admin' => 0,
+                'is_super_admin' => 1,
+            ],
+            [
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => '12345678',
@@ -38,6 +45,7 @@ class UsersSeeder extends Seeder
                 'email' => $user['email'],
                 'password' => Hash::make($user['password']),
                 'is_admin' => $user['is_admin'] ?? 0,
+                'is_super_admin' => $user['is_super_admin'] ?? 0,
             ]);
         }
     }

@@ -1,51 +1,83 @@
-@extends('layouts.login-layout')
+<!DOCTYPE html>
+<html lang="pt-br">
 
-@section('content')
-    <div class="login-form mt-1 d-flex justify-content-center gap-5 flex-column" style="height: 90vh">
-        <div class="section mt-1">
-            <h2 style="color: #747474">SUPERADMINISTRADOR</h2>
-            <img src="{{asset('img/logo.png')}}" alt="image" class="form-image">
-        </div>
-        <div class="section mt-1 mb-5 d-flex justify-content-center align-items-center">
-            <form class="w-100 mt-5" method="POST" action="{{ route('login') }}">
-                @csrf
-                <div class="form-group boxed">
-                    <div class="input-wrapper">
-                        <input type="email"
-                               class="form-control login-input-control @error('email') is-invalid @enderror" id="email1"
-                               placeholder="E-mail" name="email" value="{{ old('email') }}">
-                        <i class="clear-input">
-                            <ion-icon name="close-circle"></ion-icon>
-                        </i>
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="form-group boxed">
-                    <div class="input-wrapper">
-                        <input type="password"
-                               class="form-control login-input-control @error('password') is-invalid @enderror"
-                               id="password1"
-                               placeholder="Senha"
-                               name="password"
-                               autocomplete="off">
-                        <i class="clear-input">
-                            <ion-icon name="close-circle"></ion-icon>
-                        </i>
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="">
-                    <button type="submit" class="btn btn-primary btn-block btn-lg login-btn">Acessar</button>
-                </div>
-            </form>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetHackX - Superadministrador</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            margin-top: 100px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        .form-group{
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-login {
+            width: 100%;
+        }
+        .error-message {
+            color: #dc3545;
+        }
+    </style>
+    @vite(['resources/sass/app.scss','resources/css/splide.min.css','resources/css/style.css', 'resources/js/app.js'])
+
+</head>
+
+<body>
+<div class="container">
+    <div class="logo">
+        <img src="{{asset('img/home_logo.png')}}" alt="Logo">
     </div>
-@endsection
+    <h2 class="text-center">Login de Superadministrador</h2>
+    <form method="POST" action="{{route('login')}}">
+        @csrf
+        <div class="form-group">
+            <label for="username">Usuário</label>
+            <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
+            @error('email')<span class="error-message">{{$message}}</span>@enderror
+        </div>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" placeholder="Digite sua senha">
+            @error('password')<span class="error-message">{{$message}}</span>@enderror
+        </div>
+        <button class="btn btn-primary btn-login">Entrar</button>
+    </form>
+</div>
+</body>
+
+</html>

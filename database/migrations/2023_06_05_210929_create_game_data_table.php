@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('game_name')->nullable();
             $table->string('signal_type')->nullable();
             $table->string('signal')->nullable();
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->timestamps();
         });
     }

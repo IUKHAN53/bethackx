@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('banner')->nullable();
             $table->smallInteger('status')->default(1);
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->timestamps();
         });
     }
