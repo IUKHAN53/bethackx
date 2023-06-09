@@ -13,11 +13,11 @@ class SuperAdminController extends Controller
 
     public function index()
     {
-
-        $view_vars = [
-
-        ];
-        return view('supersuper-admin.home')->with($view_vars);
+        return redirect()->route('super-admin.users.index');
+//        $view_vars = [
+//
+//        ];
+//        return view('super-admin.home')->with($view_vars);
     }
 
 }

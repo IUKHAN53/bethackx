@@ -27,8 +27,8 @@ Route::group(['prefix' => 'super-admin', 'as' => 'super-admin.'], function () {
     Route::group(['middleware' => 'super-admin'], function () {
         Route::get('view', [\App\Http\Controllers\SuperAdmin\SuperAdminController::class, 'index'])->name('view');
         Route::resource('users', App\Http\Controllers\SuperAdmin\UserController::class);
-        Route::resource('companies', App\Http\Controllers\SuperAdmin\UserController::class);
-        Route::resource('plans', App\Http\Controllers\SuperAdmin\UserController::class);
+        Route::resource('companies', App\Http\Controllers\SuperAdmin\CompanyController::class);
+        Route::resource('plans', App\Http\Controllers\SuperAdmin\PlanController::class);
     });
 });
 Route::group(['prefix' => 'user'], function () {

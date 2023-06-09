@@ -78,9 +78,6 @@
     <h3>&nbsp;&nbsp;&nbsp;Super Admin Panel</h3>
     <ul class="nav flex-column">
         <li class="nav-item active">
-            <a class="nav-link" href="{{route('super-admin.view')}}">Painel</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="{{route('super-admin.users.index')}}">Usuárias</a>
         </li>
         <li class="nav-item">
@@ -98,6 +95,11 @@
     @csrf
 </form>
 <div class="content">
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
     @yield('content')
 </div>
 </body>

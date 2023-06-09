@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\SuperAdmin;
 
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,19 +11,19 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::query()->where('id', '!=', auth()->id())->get();
         return view('superadmin.users.index', compact('users'));
     }
 
     public function create()
     {
-        return view('superadmin.users.create');
+        return view('superadmin.users.create')->with([
+            'companies' => Company::query()->pluck('name', 'id')->toArray(),
+        ]);
     }
 
     public function store(Request $request)
     {
-        // Validate and store the new user
-        // Example: Assume the validation and storing logic is implemented
         User::create($request->all());
 
         return redirect()->route('super-admin.users.index')->with('success', 'User created successfully');
@@ -31,13 +32,16 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        return view('super-admin.users.show', compact('user'));
+        return view('superadmin.users.show', compact('user'));
     }
 
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        return view('super-admin.users.edit', compact('user'));
+        return view('superadmin.users.edit')
+            ->with([
+                'companies' => Company::query()->pluck('name', 'id')->toArray(),
+                'user' => User::findOrFail($id),
+            ]);;
     }
 
     public function update(Request $request, $id)
