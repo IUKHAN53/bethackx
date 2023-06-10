@@ -9,6 +9,7 @@
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
         }
+
         .sidebar {
             position: fixed;
             top: 0;
@@ -57,14 +58,20 @@
         }
 
         .table th {
-            font-weight: bold;
+            text-align: center;
         }
 
-        .table td:last-child {
-            white-space: nowrap;
+        .table td {
+            text-align: center;
         }
+
         .active {
             background-color: #6c757d;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
     </style>
     @vite(['resources/sass/app.scss','resources/css/splide.min.css','resources/css/style.css', 'resources/js/app.js'])
@@ -77,14 +84,17 @@
     </div>
     <h3>&nbsp;&nbsp;&nbsp;Super Admin Panel</h3>
     <ul class="nav flex-column">
-        <li class="nav-item active">
+        <li class="nav-item {{ request()->routeIs('super-admin.users.*') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('super-admin.users.index')}}">Usuárias</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item {{ request()->routeIs('super-admin.companies.*') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('super-admin.companies.index')}}">Empresas</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item {{ request()->routeIs('super-admin.plans.*') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('super-admin.plans.index')}}">Planas</a>
+        </li>
+        <li class="nav-item {{ request()->routeIs('super-admin.games.*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('super-admin.games.index')}}">Jogos</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="javascript:void(0)" onclick="$('#logout_form').submit()">Sair</a>

@@ -16,7 +16,14 @@ class Games extends Model
         'image',
         'banner',
         'status',
+        'is_default',
+        'company_id',
     ];
 
     const GAME_TYPES = ['slots', 'cartas', 'roletas', 'dados'];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

@@ -1,4 +1,10 @@
-﻿body {
+﻿:root {
+    --primary-color: #0c1624;
+    --secondary-color: #2f3240;
+    --tertiary-color: #423ed4;
+}
+
+body {
     font-family: "Inter", sans-serif;
     font-size: 15px;
     line-height: 1.55rem;

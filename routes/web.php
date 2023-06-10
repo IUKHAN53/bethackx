@@ -29,6 +29,7 @@ Route::group(['prefix' => 'super-admin', 'as' => 'super-admin.'], function () {
         Route::resource('users', App\Http\Controllers\SuperAdmin\UserController::class);
         Route::resource('companies', App\Http\Controllers\SuperAdmin\CompanyController::class);
         Route::resource('plans', App\Http\Controllers\SuperAdmin\PlanController::class);
+        Route::resource('games', App\Http\Controllers\SuperAdmin\GameController::class);
     });
 });
 Route::group(['prefix' => 'user'], function () {

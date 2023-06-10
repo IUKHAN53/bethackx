@@ -8,23 +8,23 @@
     <table class="table table-striped table-bordered">
         <thead>
         <tr>
-            <th style="text-align: center">ID</th>
-            <th style="text-align: center">Nome</th>
-            <th style="text-align: center">E-mail</th>
-            <th style="text-align: center">Empresa</th>
-            <th style="text-align: center">Created At</th>
-            <th style="text-align: center">Ação</th>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Empresa</th>
+            <th>Created At</th>
+            <th>Ação</th>
         </tr>
         </thead>
         <tbody>
         @foreach($users as $user)
             <tr>
-                <td style="text-align: center">{{ $user->id }}</td>
-                <td style="text-align: center">{{ $user->name }}</td>
-                <td style="text-align: center">{{ $user->email }}</td>
-                <td style="text-align: center">{{ $user->company_id }}</td>
-                <td style="text-align: center">{{ $user->created_at }}</td>
-                <td style="text-align: center">
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->company->name ?? '' }}</td>
+                <td>{{ $user->created_at }}</td>
+                <td>
                     <div class="btn-group" role="group">
                         <a href="{{ route('super-admin.users.show', $user->id) }}" class="btn btn-sm btn-primary">View</a>
                         <a href="{{ route('super-admin.users.edit', $user->id) }}" class="btn btn-sm btn-secondary">Edit</a>

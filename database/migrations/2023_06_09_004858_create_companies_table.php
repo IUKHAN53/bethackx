@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('secondary_color')->nullable();
             $table->string('tertiary_color')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->smallInteger('is_default')->default(0);
             $table->unsignedBigInteger('admin_id');
             $table->timestamps();
         });

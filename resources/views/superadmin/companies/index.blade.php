@@ -9,33 +9,33 @@
     <table class="table table-striped table-bordered">
         <thead>
         <tr>
-            <th style="text-align: center">Nome</th>
-            <th style="text-align: center">Logo</th>
-            <th style="text-align: center">Favicon</th>
-            <th style="text-align: center">Cor Primária</th>
-            <th style="text-align: center">Cor Secundária</th>
-            <th style="text-align: center">Cor Terciária</th>
-            <th style="text-align: center">Ativo</th>
-            <th style="text-align: center">ID do Administrador</th>
-            <th style="text-align: center">Ação</th>
+            <th>Nome</th>
+            <th>Logo</th>
+            <th>Favicon</th>
+            <th>Cor Primária</th>
+            <th>Cor Secundária</th>
+            <th>Cor Terciária</th>
+            <th>Ativo</th>
+            <th>Administrador</th>
+            <th>Ação</th>
         </tr>
         </thead>
         <tbody>
         @foreach($companies as $company)
             <tr>
-                <td style="text-align: center">{{ $company->name }}</td>
-                <td style="text-align: center">
-                    <img src="{{ Storage::url($company->logo) }}" alt="Logo" width="50" height="50">
+                <td>{{ $company->name }}</td>
+                <td>
+                    <img src="{{ Storage::url($company->logo) }}" alt="Logo" width="30" height="30">
                 </td>
-                <td style="text-align: center">
+                <td>
                     <img src="{{ Storage::url($company->favicon) }}" alt="Favicon" width="30" height="30">
                 </td>
-                <td style="text-align: center"><span style="color: {{ $company->primary_color }}">{{ $company->primary_color }}</span></td>
-                <td style="text-align: center"><span style="color: {{ $company->secondary_color }}">{{ $company->secondary_color }}</span></td>
-                <td style="text-align: center"><span style="color: {{ $company->tertiary_color }}">{{ $company->tertiary_color }}</span></td>
-                <td style="text-align: center">{{ $company->is_active ? 'Sim' : 'Não' }}</td>
-                <td style="text-align: center">{{ $company->admin->name ?? '' }}</td>
-                <td style="text-align: center">
+                <td><span style="color: {{ $company->primary_color }}">{{ $company->primary_color }}</span></td>
+                <td><span style="color: {{ $company->secondary_color }}">{{ $company->secondary_color }}</span></td>
+                <td><span style="color: {{ $company->tertiary_color }}">{{ $company->tertiary_color }}</span></td>
+                <td>{{ $company->is_active ? 'Sim' : 'Não' }}</td>
+                <td>{{ $company->admin->name ?? '' }}</td>
+                <td>
                     <div class="btn-group" role="group">
                         <a href="{{ route('super-admin.companies.show', $company->id) }}"
                            class="btn btn-sm btn-primary">View</a>

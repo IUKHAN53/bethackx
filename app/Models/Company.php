@@ -18,6 +18,7 @@ class Company extends Model
         'tertiary_color',
         'is_active',
         'admin_id',
+        'is_default',
     ];
 
     public function admin()

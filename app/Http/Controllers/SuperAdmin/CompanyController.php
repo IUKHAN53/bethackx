@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
@@ -66,11 +67,11 @@ class CompanyController extends Controller
 
         // Upload logo image
         $logo = $request->file('logo');
-        $logoPath = $logo->storeAs('public/' . $company->id, 'logo.' . $logo->getClientOriginalExtension());
+        $logoPath = $logo->storeAs('public/companies/' . $company->id, 'logo-' . time() . '.' . $logo->getClientOriginalExtension());
 
         // Upload favicon image
         $favicon = $request->file('favicon');
-        $faviconPath = $favicon->storeAs('public/' . $company->id, 'favicon.' . $logo->getClientOriginalExtension());
+        $faviconPath = $favicon->storeAs('public/companies/' . $company->id, 'favicon-' . time() . '.' . $logo->getClientOriginalExtension());
 
         // Update the logo and favicon paths in the company record
         $company->logo = $logoPath;
@@ -124,17 +125,34 @@ class CompanyController extends Controller
         $company->is_active = $validatedData['is_active'];
         $company->admin_id = $validatedData['admin_id'];
 
+        if ($request->hasFile('logo') && Storage::exists($company->logo)) {
+            $linkPath = Storage::path($company->logo);
+            if (file_exists($linkPath)) {
+                unlink($linkPath);
+            }
+            Storage::delete($company->logo);
+            $company->logo = null;
+        }
+        if ($request->hasFile('favicon') && Storage::exists($company->favicon)) {
+            $linkPath = Storage::path($company->favicon);
+            if (file_exists($linkPath)) {
+                unlink($linkPath);
+            }
+            Storage::delete($company->favicon);
+            $company->favicon = null;
+        }
+        $company->save();
         // Handle logo file upload
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $logoPath = $logo->storeAs('public/' . $company->id, 'logo.' . $logo->getClientOriginalExtension());
+            $logoPath = $logo->storeAs('public/companies' . $company->id, 'logo-' . time() . '.' . $logo->getClientOriginalExtension());
             $company->logo = $logoPath;
         }
 
         // Handle favicon file upload
         if ($request->hasFile('favicon')) {
             $favicon = $request->file('favicon');
-            $faviconPath = $favicon->storeAs('public/' . $company->id, 'favicon.' . $favicon->getClientOriginalExtension());
+            $faviconPath = $favicon->storeAs('public/companies' . $company->id, 'favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
             $company->favicon = $faviconPath;
         }
 

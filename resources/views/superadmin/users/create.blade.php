@@ -21,7 +21,7 @@
             <label for="company_id">Empresa</label>
             <select name="company_id" id="company_id" class="form-control">
                 @foreach($companies as $key=>$name)
-                    <option value="{{ $key }}" {{(old('company_id') == $user->company_id ? 'selected' : '')}}>{{ $name }}</option>
+                    <option value="{{ $key }}" {{(old('company_id') == $key ? 'selected' : '')}}>{{ $name }}</option>
                 @endforeach
             </select>
             @error('company_id')<span style="color: darkred">{{$message}}</span>@enderror
