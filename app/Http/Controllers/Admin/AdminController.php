@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Games;
 use App\Models\GlobalSettings;
 use App\Models\User;
@@ -23,6 +24,7 @@ class AdminController extends Controller
             'users' => User::query()->where('id', '!=', auth()->id())->get(),
             'games' => Games::query()->where('status', '!=', 0)->get(),
             'g_settings' => $settings,
+            'company' => Company::query()->where('admin_id', auth()->id())->first()
         ];
         return view('admin.home')->with($view_vars);
     }
@@ -95,4 +97,41 @@ class AdminController extends Controller
             'message' => 'searched Users.',
         ]);
     }
+
+    public function updateCompany(Request $request)
+    {
+        $request->validate([
+            'company_name' => 'required',
+            'company_logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'favicon' => 'image|mimes:jpeg,png,jpg,gif,ico|max:2048',
+            'primary_color' => 'required',
+            'secondary_color' => 'required',
+            'tertiary_color' => 'required',
+        ]);
+
+        $company = Company::query()->where('admin_id', auth()->id())->first();
+
+        $company->name = $request->input('company_name');
+
+        if ($request->hasFile('company_logo')) {
+            $companyLogo = $request->file('company_logo');
+            $companyLogoPath = $companyLogo->store('company', 'public');
+            $company->logo = $companyLogoPath;
+        }
+
+        if ($request->hasFile('favicon')) {
+            $favicon = $request->file('favicon');
+            $faviconPath = $favicon->store('favicon', 'public');
+            $company->favicon = $faviconPath;
+        }
+
+        $company->primary_color = $request->input('primary_color');
+        $company->secondary_color = $request->input('secondary_color');
+        $company->tertiary_color = $request->input('tertiary_color');
+
+        $company->save();
+
+        return redirect()->back()->with('success', 'Company details updated successfully.');
+    }
+
 }

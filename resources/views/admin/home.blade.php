@@ -11,15 +11,20 @@
             <ul class="nav nav-tabs capsuled" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab" aria-selected="true">
-                        <ion-icon name="home" role="img" class="md hydrated" aria-label="home"></ion-icon>
+                        <ion-icon name="home"></ion-icon>
                         ESTRUTURA
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="tab" href="#users" role="tab" aria-selected="false">
-                        <ion-icon name="person-circle" role="img" class="md hydrated"
-                                  aria-label="person circle"></ion-icon>
+                        <ion-icon name="person-circle"></ion-icon>
                         USUÁRIOS
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#company" role="tab" aria-selected="false">
+                        <ion-icon name="briefcase-outline"></ion-icon>
+                        Empresa
                     </a>
                 </li>
             </ul>
@@ -151,15 +156,91 @@
                             @include('admin.partials.users-table')
                         </div>
                     </div>
-{{--                    <nav>--}}
-{{--                        <ul class="pagination pagination-rounded">--}}
-{{--                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>--}}
-{{--                            <li class="page-item"><a class="page-link" href="#">1</a></li>--}}
-{{--                            <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
-{{--                            <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
-{{--                            <li class="page-item"><a class="page-link" href="#">Next</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </nav>--}}
+                    {{--                    <nav>--}}
+                    {{--                        <ul class="pagination pagination-rounded">--}}
+                    {{--                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>--}}
+                    {{--                            <li class="page-item"><a class="page-link" href="#">1</a></li>--}}
+                    {{--                            <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
+                    {{--                            <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
+                    {{--                            <li class="page-item"><a class="page-link" href="#">Next</a></li>--}}
+                    {{--                        </ul>--}}
+                    {{--                    </nav>--}}
+                </div>
+                <div class="tab-pane fade" id="company" role="tabpanel">
+                    <div class="mt-3">
+                        <div class="d-flex justify-content-start align-items-center mb-2 ms-3">
+                            <ion-icon name="briefcase-outline"></ion-icon>
+                            <h4 class="fw-bold ms-1 text-uppercase mt-1">Configurações da Empresa</h4>
+                        </div>
+
+                        <div class="border p-2 custom-card">
+                            <form action="{{ route('admin.update-company') }}" method="POST"
+                                  enctype="multipart/form-data">
+                                @csrf
+                                <div class="d-flex flex-column gap-2 w-100">
+                                    <label for="company_name"
+                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
+                                        <span class="w-100">Nome da Empresa:</span>
+                                        <input type="text" id="company_name" name="company_name"
+                                               class="form-control-custom w-100" value="{{ $company->name ?? '' }}"
+                                               required>
+                                    </label>
+                                    @error('company_name')<span style="color: darkred">{{ $message }}</span>@enderror
+
+                                    <label for="company_logo"
+                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
+                                        <span class="w-100">Logo da Empresa:</span>
+                                        <input type="text" id="logoNamePreview"
+                                               class="form-control-custom w-100" readonly>
+                                        <input type="file" name="company_logo" id="uploadLogo"
+                                               class="custom-file-input form-control-custom w-100" hidden>
+                                        <button class="btn btn-primary btn-sm me-1" type="button" id="btnLogoUpload">
+                                            UPLOAD
+                                        </button>
+                                    </label>
+                                    @error('company_logo')<span style="color: darkred">{{ $message }}</span>@enderror
+
+                                    <label for="favicon"
+                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
+                                        <span class="w-100">Favicon:</span>
+                                        <input type="text" id="faviconNamePreview"
+                                               class="form-control-custom w-100" readonly>
+                                        <input type="file" name="company_favicon" id="uploadFavicon"
+                                               class="custom-file-input form-control-custom w-100" hidden>
+                                        <button class="btn btn-primary btn-sm me-1" type="button" id="btnFaviconUpload">
+                                            UPLOAD
+                                        </button>
+                                    </label>
+                                    @error('favicon')<span style="color: darkred">{{ $message }}</span>@enderror
+                                    <label for="primary_color"
+                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
+                                        <span class="w-100">Cor Primária:</span>
+                                        <input type="color" name="primary_color" id="primary_color"
+                                               class="form-control-custom">
+                                    </label>
+                                    @error('primary_color')<span style="color: darkred">{{ $message }}</span>@enderror
+                                    <label for="secondary_color"
+                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
+                                        <span class="w-100">Cor Secundária:</span>
+                                        <input type="color" name="secondary_color" id="secondary_color"
+                                               class="form-control-custom">
+                                    </label>
+                                    @error('secondary_color')<span style="color: darkred">{{ $message }}</span>@enderror
+                                    <label for="tertiary_color"
+                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
+                                        <span class="w-100">Cor Terciária:</span>
+                                        <input type="color" name="tertiary_color" id="tertiary_color"
+                                               class="form-control-custom">
+                                    </label>
+                                    @error('tertiary_color')<span style="color: darkred">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="text-end mt-3">
+                                    <button type="submit" class="btn btn-primary btn-sm">SALVAR</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <!-- Dialog Form -->
@@ -220,7 +301,7 @@
 @endsection
 @push('scripts')
     <script type="module">
-        $("#keyword").keyup(function() {
+        $("#keyword").keyup(function () {
             let str = $("#keyword").val();
             let _token = $('input[name=_token]').val();
             $.ajax({
@@ -235,7 +316,7 @@
                 }
             })
         });
-        $('#save-user').on('click', function (){
+        $('#save-user').on('click', function () {
             let name = $('#name').val();
             let email = $('#email').val();
             let password = $('#password').val();
