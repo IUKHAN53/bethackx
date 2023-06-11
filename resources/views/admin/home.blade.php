@@ -192,7 +192,7 @@
                                         <span class="w-100">Logo da Empresa:</span>
                                         <input type="text" id="logoNamePreview"
                                                class="form-control-custom w-100" readonly>
-                                        <input type="file" name="company_logo" id="uploadLogo"
+                                        <input type="file" name="logo" id="uploadLogo"
                                                class="custom-file-input form-control-custom w-100" hidden>
                                         <button class="btn btn-primary btn-sm me-1" type="button" id="btnLogoUpload">
                                             UPLOAD
@@ -205,7 +205,7 @@
                                         <span class="w-100">Favicon:</span>
                                         <input type="text" id="faviconNamePreview"
                                                class="form-control-custom w-100" readonly>
-                                        <input type="file" name="company_favicon" id="uploadFavicon"
+                                        <input type="file" name="favicon" id="uploadFavicon"
                                                class="custom-file-input form-control-custom w-100" hidden>
                                         <button class="btn btn-primary btn-sm me-1" type="button" id="btnFaviconUpload">
                                             UPLOAD
