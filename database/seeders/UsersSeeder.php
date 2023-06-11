@@ -12,7 +12,6 @@ class UsersSeeder extends Seeder
      * Run the database seeds.
      */
     public function run() {
-        User::truncate();
         $users = [
             [
                 'name' => 'Super Admin',

@@ -90,11 +90,14 @@
         <li class="nav-item {{ request()->routeIs('super-admin.companies.*') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('super-admin.companies.index')}}">Empresas</a>
         </li>
+        <li class="nav-item {{ request()->routeIs('super-admin.games.*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('super-admin.games.index')}}">Jogos</a>
+        </li>
         <li class="nav-item {{ request()->routeIs('super-admin.plans.*') ? 'active' : '' }}">
             <a class="nav-link" href="{{route('super-admin.plans.index')}}">Planas</a>
         </li>
-        <li class="nav-item {{ request()->routeIs('super-admin.games.*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{route('super-admin.games.index')}}">Jogos</a>
+        <li class="nav-item {{ request()->routeIs('super-admin.subscriptions.*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{route('super-admin.subscriptions.index')}}">assinaturas</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="javascript:void(0)" onclick="$('#logout_form').submit()">Sair</a>

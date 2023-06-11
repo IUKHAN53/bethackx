@@ -13,7 +13,6 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-        Company::truncate();
         Company::create([
             'name' => 'BetHackX',
             'logo' => 'img/home_logo.png',

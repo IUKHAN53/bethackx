@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GamesSeeder::class);
         $this->call(GlobalSettingsSeeder::class);
         $this->call(GameDataSeeder::class);
+        $this->call(PlansSeeder::class);
     }
 }
