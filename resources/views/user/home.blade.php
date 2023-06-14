@@ -46,7 +46,7 @@
                             @foreach($games as $game)
                                 @php
                                     $locked = false;
-                                    if($game->premium() && !auth()->user()->hasPremium()){
+                                    if(!auth()->user()->hasPremiumForGame($game->id)){
                                         $locked = true;
                                     }
                                 @endphp

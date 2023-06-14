@@ -14,3 +14,16 @@
         </div>
     </div>
 </div>
+<div class="modal fade dialogbox" id="add_plan_to_games" data-bs-backdrop="static" tabindex="-1"
+     role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Adicionar jogos ao plano</h5>
+            </div>
+            <div id="user_plans" class="row">
+            </div>
+
+        </div>
+    </div>
+</div>

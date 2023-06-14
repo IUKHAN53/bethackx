@@ -55,6 +55,8 @@ Route::group(['prefix' => '{company}'], function ($company) {
                 Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
                 Route::post('fetch-games', [AdminController::class, 'getPlanGames'])->name('admin.fetch-games');
                 Route::post('add-games-to-plan', [AdminController::class, 'addPlanGames'])->name('admin.add-games-to-plan');
+                Route::post('fetch-plans', [AdminController::class, 'getUserPlans'])->name('admin.fetch-plans');
+                Route::post('add-plan-to-users', [AdminController::class, 'addUserPlans'])->name('admin.add-plan-to-user');
             });
         });
         Route::get('/home', [HomeController::class, 'index'])->name('home');

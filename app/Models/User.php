@@ -79,7 +79,27 @@ class User extends Authenticatable
 
     public function hasPremium(): bool
     {
-        return $this->subscriptions()->where('start_date', '<=', now())->where('end_date', '>=', now())->count() > 0;
+        return $this->subscriptions()->count() > 0;
+    }
+
+    public function hasPremiumForGame($game_id): bool
+    {
+        $plans_id = GamesPlans::query()->where('game_id', $game_id)->pluck('plan_id')->toArray();
+        $subscription = $this->subscriptions()->whereIn('plan_id', $plans_id)->count();
+        return $subscription > 0;
+    }
+
+    public function subscribedPlans(){
+        return $this->subscriptions->pluck('plan_id')->toArray();
+    }
+
+    public function subscribePlan($plan_id){
+        $subscription = new Subscription();
+        $subscription->user_id = $this->id;
+        $subscription->plan_id = $plan_id;
+        $subscription->start_date = now();
+        $subscription->end_date = now()->addDays(30);
+        $subscription->save();
     }
 
 }

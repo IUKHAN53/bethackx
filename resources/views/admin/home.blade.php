@@ -95,6 +95,40 @@
 @push('scripts')
     <script type="module">
 
+        $('#user_plan_form').submit(function (event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url: '{{ route("admin.add-plan-to-user", $current_company->slug) }}',
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    alert('Plans saved successfully!');
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+
+
+        window.fetchCurrentUserPlans = function (id) {
+            let _token = $('input[name=_token]').val();
+            $.ajax({
+                url: "{{route('admin.fetch-plans',$current_company->slug)}}",
+                type: "POST",
+                data: {
+                    id: id,
+                    _token: _token
+                },
+                success: function (response) {
+                    $('#user_plans').html(response.html)
+                }
+            })
+        }
         $('#plan_form').submit(function (event) {
             event.preventDefault();
             var formData = new FormData(this);

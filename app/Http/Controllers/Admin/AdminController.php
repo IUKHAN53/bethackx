@@ -204,12 +204,13 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Company details updated successfully.');
     }
 
-    public function getPlanGames(Request $request){
+    public function getPlanGames(Request $request)
+    {
         $plan = Plan::query()->find($request->id);
         $all_games = Games::query()->where('company_id', $request->current_company->id)->get();
         $games = $plan->gamesPlans->pluck('game_id')->toArray();
 
-        $html = view('admin.partials.plan-games', compact('games','all_games', 'plan'))->render();
+        $html = view('admin.partials.plan-games', compact('games', 'all_games', 'plan'))->render();
         return response()->json([
             'status' => true,
             'html' => $html,
@@ -217,7 +218,8 @@ class AdminController extends Controller
         ]);
     }
 
-    public function addPlanGames(Request $request){
+    public function addPlanGames(Request $request)
+    {
         $gameIds = $request->game_status; // Get the selected game IDs from the request
         $plan = Plan::find($request->plan_id);
         $plan->gamesPlans->each->delete(); // Delete all the games from the plan
@@ -227,6 +229,30 @@ class AdminController extends Controller
                 'game_id' => $value,
                 'plan_id' => $plan->id,
             ]);
+        }
+        return back();
+    }
+
+    public function getUserPlans(Request $request)
+    {
+        $user = User::find($request->id);
+        $all_plans = Plan::query()->where('company_id', $request->current_company->id)->get();
+        $user_plans = $user->subscribedPlans();
+
+        $html = view('admin.partials.user-plans', compact('user_plans', 'all_plans', 'user'))->render();
+        return response()->json([
+            'status' => true,
+            'html' => $html,
+            'message' => 'searched Users.',
+        ]);
+    }
+
+    public function addUserPlans(Request $request)
+    {
+        $planIds = $request->plan_status; // Get the selected game IDs from the request
+        $user = User::find($request->user_id);
+        foreach ($planIds as $key => $value) {
+            $user->subscribePlan($value);
         }
         return back();
     }
