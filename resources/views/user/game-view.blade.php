@@ -51,7 +51,7 @@
                     </a>
                 </div>
                 <div class="iframe-container" id="iframe-container">
-                    <iframe id="game_iframe" src="{{$game->iframe_link}}" style="background-color: rgba(255,255,255,0.09)" width="100%"
+                    <iframe id="game_iframe" src="{{$game->iframe_link()}}" style="background-color: rgba(255,255,255,0.09)" width="100%"
                             height="730px"></iframe>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                             <span class="text-small">Está com dúvidas? Aprenda a operar o Bot!</span>
                         </div>
                         <div class="w-100">
-                            <a class="btn btn-primary text-uppercase fw-bolder  float-end" href="{{$settings['help_link']}}"
+                            <a class="btn btn-primary text-uppercase fw-bolder  float-end" href="{{$current_company->help_link}}"
                                target="_blank">Assista Agora</a>
                         </div>
                     </div>

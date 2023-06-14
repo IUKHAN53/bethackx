@@ -24,6 +24,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('img/icon/192x192.png')}}">
     @vite(['resources/sass/app.scss','resources/css/splide.min.css','resources/css/style.css', 'resources/js/app.js'])
     @laravelPWA
+    @stack('styles')
 </head>
 <body class="bg-white dark-mode-active">
 <div class="appHeader scrolled">

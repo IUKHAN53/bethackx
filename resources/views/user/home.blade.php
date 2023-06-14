@@ -1,4 +1,28 @@
 @extends('layouts.app')
+@push('styles')
+    <style>
+        .disabled-lock {
+            position: relative;
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .disabled-lock::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-image: url('{{asset('img/lock.png')}}');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+@endpush
 
 @section('content')
     <div class="text-center my-2">
@@ -20,7 +44,13 @@
                     <div class="border p-2 custom-card ">
                         <div class="row">
                             @foreach($games as $game)
-                                <div class="col-4 mb-2 d-flex justify-content-center" onclick="location.href='{{route('user.view-game',['company' => $current_company,'id' => $game->id])}}'">
+                                @php
+                                    $locked = false;
+                                    if($game->premium() && !auth()->user()->hasPremium()){
+                                        $locked = true;
+                                    }
+                                @endphp
+                                <div class="col-4 mb-2 d-flex justify-content-center {{$locked ?'disabled-lock':''}}" onclick="location.href='{{route('user.view-game',['company' => $current_company,'id' => $game->id])}}'">
                                     <img src="{{asset($game->image)}}" class="rounded" alt="" style="max-width: 100px; max-height: 100px">
                                 </div>
                             @endforeach

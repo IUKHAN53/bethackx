@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Signal;
 use App\Models\Games;
 use Illuminate\Http\Request;
@@ -17,9 +18,14 @@ class HomeController extends Controller
     public function index()
     {
         $types = [];
-
+        $games = request()->current_company->companyGames()->where('is_active', 1)->get();
         foreach (Games::GAME_TYPES as $type) {
-            $types[$type] = Games::query()->where('status', '!=', 0)->where('game_type', $type)->get();
+            $g = [];
+            foreach ($games as $game) {
+                if ($game->game->game_type == $type)
+                    $g[] = $game->game;
+            }
+            $types[$type] = $g;
         }
         $view_vars = [
             'types' => $types,
@@ -29,7 +35,7 @@ class HomeController extends Controller
 
     public function viewGame(Request $request,$company, $id){
         $game = Games::query()->find($id);
-        return view('user.game-view')->with(['game' => $game, 'settings' => (new \App\Models\GlobalSettings)->getSettings()]);
+        return view('user.game-view')->with(['game' => $game]);
 
     }
 

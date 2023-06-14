@@ -72,4 +72,14 @@ class User extends Authenticatable
         return $query->where('is_admin', 1);
     }
 
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class, 'user_id', 'id');
+    }
+
+    public function hasPremium(): bool
+    {
+        return $this->subscriptions()->where('start_date', '<=', now())->where('end_date', '>=', now())->count() > 0;
+    }
+
 }

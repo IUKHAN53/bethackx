@@ -127,7 +127,6 @@ class GamesSeeder extends Seeder
                 'game_type' => $game['game_type'],
                 'game_text' => $game['game_text'],
                 'banner' => $game['banner'],
-                'company_id' => Company::query()->first()->id,
                 'is_default' => 1,
             ]);
         }

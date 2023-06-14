@@ -42,6 +42,17 @@ class Company extends Model
         return 'slug';
     }
 
+    public function companyGames()
+    {
+        return $this->hasMany(CompanyGames::class, 'company_id');
+    }
+    public function games()
+    {
+        return $this->belongsToMany(CompanyGames::class, 'company_game', 'game_id', 'company_id')
+            ->withPivot('is_premium', 'is_active', 'iframe_link');
+    }
+
+
     public function scopeActive($query)
     {
         return $query->where('is_active', 1);
@@ -51,8 +62,6 @@ class Company extends Model
     {
         return $query->where('is_default', 1);
     }
-
-
 
 
 }

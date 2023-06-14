@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Company;
+use App\Models\CompanyGames;
+use App\Models\Games;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -13,7 +15,7 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-        Company::create([
+        $company = Company::create([
             'name' => 'BetHackX',
             'slug' => 'bethackx',
             'logo' => 'img/home_logo.png',
@@ -25,5 +27,14 @@ class CompanySeeder extends Seeder
             'is_default' => 1,
             'admin_id' => User::query()->where('is_admin', 1)->first()->id,
         ]);
+
+        foreach (Games::query()->where('status', 1)->get() as $game) {
+            CompanyGames::create(
+                [
+                    'company_id' => $company->id,
+                    'game_id' => $game->id,
+                    'iframe_link' => $game->iframe_link,
+                ]);
+        }
     }
 }
