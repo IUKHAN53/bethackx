@@ -14,7 +14,13 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" sizes="32x32">
+    @if ($current_company)
+        @if ($current_company->favicon)
+            <link rel="icon" type="image/png" href="{{Storage::url($current_company->favicon)}}" sizes="32x32">
+        @endif
+    @else
+        <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" sizes="32x32">
+    @endif
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('img/icon/192x192.png')}}">
     @vite(['resources/sass/app.scss','resources/css/splide.min.css','resources/css/style.css', 'resources/js/app.js'])
     @laravelPWA
@@ -22,10 +28,19 @@
 <body class="bg-white dark-mode-active">
 <div class="appHeader scrolled">
     <div class="left">
-        <a href="#" class="headerButton toggle-searchbox gap-2">
-            <img src="{{asset('img/home_logo.png')}}" alt="" style="max-width: 50px">
-            <img src="{{asset('img/logo.png')}}" alt="" style="max-width: 120px">
-        </a>
+        @if ($current_company)
+            @if ($current_company->logo)
+                <a href="#" class="headerButton toggle-searchbox gap-2">
+                    <img src="{{Storage::url($current_company->logo)}}" alt="" style="max-width: 120px; max-height: 50px">
+                </a>
+            @endif
+        @else
+            <a href="#" class="headerButton toggle-searchbox gap-2">
+                <img src="{{asset('img/home_logo.png')}}" alt="" style="max-width: 50px">
+                <img src="{{asset('img/logo.png')}}" alt="" style="max-width: 120px">
+            </a>
+        @endif
+
     </div>
     <div class="right">
         <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
@@ -40,7 +55,7 @@
 <!-- Ionicons -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script>
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         if (window.scrollY > 0) {
             document.querySelector('.appHeader').style.backgroundColor = '#0F1C2F';
         } else {

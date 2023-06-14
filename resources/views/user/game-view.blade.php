@@ -51,7 +51,7 @@
                     </a>
                 </div>
                 <div class="iframe-container" id="iframe-container">
-                    <iframe id="game_iframe" src="{{$game->iframe_link}}" style="background-color: white" width="100%"
+                    <iframe id="game_iframe" src="{{$game->iframe_link}}" style="background-color: rgba(255,255,255,0.09)" width="100%"
                             height="730px"></iframe>
                 </div>
             </div>
@@ -85,7 +85,7 @@
             newIframe.src = '{{$game->iframe_link}}';
             newIframe.style.width = '100%';
             newIframe.style.height = '730px';
-            newIframe.style.backgroundColor = 'white';
+            newIframe.style.backgroundColor = 'rgba(255,255,255,0.09)';
 
             // Remove the existing iframe (if any)
             while (iframeContainer.firstChild) {
@@ -115,7 +115,7 @@
             let id = $('#game_id').val()
             $('#image_signal').css('background', 'url({{asset($game->banner)}})')
             $('#text_signal').text('Aguarde..')
-            let url = '{{route('user.get-game-signal',':id')}}'
+            let url = '{{route('user.get-game-signal',[$current_company,':id'])}}'
             url = url.replace(':id', id)
             $.ajax({
                 url: url,

@@ -31,7 +31,7 @@
             <div class="tab-content mt-2">
                 <div class="tab-pane fade active show" id="home" role="tabpanel">
                     <div class="border p-2 custom-card">
-                        <form action="{{route('admin.save-games')}}" method="POST">
+                        <form action="{{route('admin.save-games',$current_company->slug)}}" method="POST">
                             @csrf
                             <div class="d-flex flex-column gap-2 w-100">
                                 @foreach($games as $game)
@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="border p-2 custom-card">
-                            <form action="{{route('admin.save-external-links')}}" method="post">
+                            <form action="{{route('admin.save-external-links',$current_company->slug)}}" method="post">
                                 @csrf
                                 <div class="d-flex flex-column gap-2 w-100">
                                     <label for=""
@@ -95,7 +95,7 @@
                         </div>
 
                         <div class="border p-2 custom-card">
-                            <form action="{{route('admin.save-banner')}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('admin.save-banner',$current_company->slug)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="d-flex flex-column gap-2 w-100">
                                     <label for=""
@@ -174,7 +174,7 @@
                         </div>
 
                         <div class="border p-2 custom-card">
-                            <form action="{{ route('admin.update-company') }}" method="POST"
+                            <form action="{{ route('admin.update-company',$current_company->slug) }}" method="POST"
                                   enctype="multipart/form-data">
                                 @csrf
                                 <div class="d-flex flex-column gap-2 w-100">
@@ -215,21 +215,21 @@
                                     <label for="primary_color"
                                            class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
                                         <span class="w-100">Cor Primária:</span>
-                                        <input type="color" name="primary_color" id="primary_color"
+                                        <input type="color" name="primary_color" id="primary_color" value="{{ $company->primary_color ?? '' }}"
                                                class="form-control-custom">
                                     </label>
                                     @error('primary_color')<span style="color: darkred">{{ $message }}</span>@enderror
                                     <label for="secondary_color"
                                            class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
                                         <span class="w-100">Cor Secundária:</span>
-                                        <input type="color" name="secondary_color" id="secondary_color"
+                                        <input type="color" name="secondary_color" id="secondary_color"  value="{{ $company->secondary_color ?? '' }}"
                                                class="form-control-custom">
                                     </label>
                                     @error('secondary_color')<span style="color: darkred">{{ $message }}</span>@enderror
                                     <label for="tertiary_color"
                                            class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
                                         <span class="w-100">Cor Terciária:</span>
-                                        <input type="color" name="tertiary_color" id="tertiary_color"
+                                        <input type="color" name="tertiary_color" id="tertiary_color" value="{{ $company->tertiary_color ?? '' }}"
                                                class="form-control-custom">
                                     </label>
                                     @error('tertiary_color')<span style="color: darkred">{{ $message }}</span>@enderror
@@ -251,7 +251,7 @@
                         <div class="modal-header">
                             <h5 class="modal-title">Cadastrar / Editar usuário</h5>
                         </div>
-                        <form action="{{route('admin.add-user')}}" method="POST">
+                        <form action="{{route('admin.add-user',$current_company->slug)}}" method="POST">
                             @csrf
                             <div class="modal-body text-start mb-2">
                                 <div class="form-group boxed">
@@ -305,7 +305,7 @@
             let str = $("#keyword").val();
             let _token = $('input[name=_token]').val();
             $.ajax({
-                url: "{{route('admin.search-user')}}",
+                url: "{{route('admin.search-user',$current_company->slug)}}",
                 type: "POST",
                 data: {
                     keyword: str,
@@ -322,7 +322,7 @@
             let password = $('#password').val();
             let _token = $('input[name=_token]').val();
             $.ajax({
-                url: "{{route('admin.add-user')}}",
+                url: "{{route('admin.add-user',$current_company->slug)}}",
                 type: "POST",
                 data: {
                     name: name,

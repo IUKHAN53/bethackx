@@ -10,6 +10,7 @@
         <thead>
         <tr>
             <th>Nome</th>
+            <th>URL</th>
             <th>Logo</th>
             <th>Favicon</th>
             <th>Cor Primária</th>
@@ -24,6 +25,7 @@
         @foreach($companies as $company)
             <tr>
                 <td>{{ $company->name }}</td>
+                <td>{{ url('/'.$company->slug) }}</td>
                 <td>
                     <img src="{{ Storage::url($company->logo) }}" alt="Logo" width="30" height="30">
                 </td>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\GameData;
+use App\Models\Signal;
 use App\Models\Games;
 use Illuminate\Http\Request;
 
@@ -26,14 +26,14 @@ class HomeController extends Controller
         return view('user.home')->with($view_vars);
     }
 
-    public function viewGame(Request $request, $id){
+    public function viewGame(Request $request,$company, $id){
         $game = Games::query()->find($id);
         return view('user.game-view')->with(['game' => $game, 'settings' => (new \App\Models\GlobalSettings)->getSettings()]);
 
     }
 
-    public function getGameSignal(Request $request, $id){
-        $game_signal = GameData::query()->where('game_id',$id)->inRandomOrder()->first();
+    public function getGameSignal(Request $request,$company, $id){
+        $game_signal = Signal::query()->where('game_id',$id)->inRandomOrder()->first();
         $game = Games::query()->find($id);
         $signal = '';
         if ($game_signal){

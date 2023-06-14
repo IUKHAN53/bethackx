@@ -583,7 +583,7 @@ button:hover, button:active, button:focus {
 }
 
 .profileBox {
-    width: 300px;
+    width: var(--bs-offcanvas-width);
     padding-left: 16px;
     padding-right: 16px;
     display: flex;

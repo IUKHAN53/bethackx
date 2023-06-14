@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CompanyController extends Controller
 {
@@ -56,6 +57,7 @@ class CompanyController extends Controller
         // Create a new company
         $company = new Company;
         $company->name = $request->input('name');
+        $company->slug = Str::slug($request->input('name'),'-');
         $company->primary_color = $request->input('primary_color');
         $company->secondary_color = $request->input('secondary_color');
         $company->tertiary_color = $request->input('tertiary_color');
@@ -119,6 +121,7 @@ class CompanyController extends Controller
 
         // Update the company data
         $company->name = $validatedData['name'];
+        $company->slug = Str::slug($validatedData['name'],'-');
         $company->primary_color = $validatedData['primary_color'];
         $company->secondary_color = $validatedData['secondary_color'];
         $company->tertiary_color = $validatedData['tertiary_color'];

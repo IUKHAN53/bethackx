@@ -11,6 +11,7 @@ class Company extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'logo',
         'favicon',
         'primary_color',
@@ -30,6 +31,23 @@ class Company extends Model
     {
         return $this->hasMany(User::class, 'company_id');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
+    public function scopeDefault($query)
+    {
+        return $query->where('is_default', 1);
+    }
+
+
 
 
 }

@@ -1,5 +1,5 @@
 <div class="appBottomMenu">
-    <a href="{{request()->routeIs('home')?'#type_roletas':route('home').'/#type_roletas'}}" class="item active">
+    <a href="{{request()->routeIs('home')?'#type_roletas':route('home', $current_company).'/#type_roletas'}}" class="item active">
         <div class="col">
             <div class="d-flex justify-content-center align-items-center flex-column gap-1 rounded py-1">
                 <img src="{{asset('img/icon/roletas.png')}}" alt="">
@@ -7,7 +7,7 @@
             </div>
         </div>
     </a>
-    <a href="{{request()->routeIs('home')?'#type_dados':route('home').'/#type_dados'}}" class="item">
+    <a href="{{request()->routeIs('home')?'#type_dados':route('home', $current_company).'/#type_dados'}}" class="item">
         <div class="col">
             <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1">
                 <img src="{{asset('img/icon/dados.png')}}" alt="">
@@ -15,7 +15,7 @@
             </div>
         </div>
     </a>
-    <a href="{{route('home')}}" class="item">
+    <a href="{{route('home', $current_company)}}" class="item">
         <div class="col d-flex justify-content-center align-items-center flex-column gap-1">
             <div style="position: relative">
                 <img src="{{asset('img/home_logo.png')}}" class="bg-primary p-1 shadow"
@@ -25,7 +25,7 @@
             <span class="text-white mt-3">BetHack</span>
         </div>
     </a>
-    <a href="{{request()->routeIs('home')?'#type_cartas':route('home').'/#type_cartas'}}" class="item">
+    <a href="{{request()->routeIs('home')?'#type_cartas':route('home', $current_company).'/#type_cartas'}}" class="item">
         <div class="col">
             <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1">
                 <img src="{{asset('img/icon/cartas.png')}}" alt="">
@@ -33,7 +33,7 @@
             </div>
         </div>
     </a>
-    <a href="{{request()->routeIs('home')?'#type_slots':route('home').'/#type_slots'}}" class="item">
+    <a href="{{request()->routeIs('home')?'#type_slots':route('home', $current_company).'/#type_slots'}}" class="item">
         <div class="col">
             <div class="d-flex justify-content-center align-items-center flex-column gap-1 py-1">
                 <img src="{{asset('img/icon/slots.png')}}" alt="">
@@ -76,32 +76,8 @@
                 </a>
             </li>
         </ul>
-        <form action="{{route('logout')}}" method="POST" id="logout_form">
+        <form action="{{route('logout', $current_company->slug )}}" method="POST" id="logout_form">
             @csrf
         </form>
-    </div>
-</div>
-
-<div id="notification-welcome" class="notification-box">
-    <div class="notification-dialog android-style">
-        <div class="notification-header">
-            <div class="in">
-                <img src="assets/img/icon/72x72.png" alt="image" class="imaged w24">
-                <strong>Mobilekit</strong>
-                <span>just now</span>
-            </div>
-            <a href="#" class="close-button">
-                <ion-icon name="close" role="img" class="md hydrated" aria-label="close"></ion-icon>
-            </a>
-        </div>
-        <div class="notification-content">
-            <div class="in">
-                <h3 class="subtitle">Welcome to Mobilekit</h3>
-                <div class="text">
-                    Mobilekit is a PWA ready Mobile UI Kit Template.
-                    Great way to start your mobile websites and pwa projects.
-                </div>
-            </div>
-        </div>
     </div>
 </div>

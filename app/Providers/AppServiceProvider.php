@@ -21,9 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if(Schema::hasTable('global_settings')){ // Check if table exists
-            $settings = (new \App\Models\GlobalSettings)->getSettings();
-            View::share('settings', $settings);
-        }
+
     }
 }

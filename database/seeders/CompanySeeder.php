@@ -15,6 +15,7 @@ class CompanySeeder extends Seeder
     {
         Company::create([
             'name' => 'BetHackX',
+            'slug' => 'bethackx',
             'logo' => 'img/home_logo.png',
             'favicon' => 'img/favicon.png',
             'primary_color' => '#0c1624',

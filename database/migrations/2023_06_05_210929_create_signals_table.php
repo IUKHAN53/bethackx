@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('game_data', function (Blueprint $table) {
+        Schema::create('signals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('game_id')->nullable();
             $table->string('game_name')->nullable();

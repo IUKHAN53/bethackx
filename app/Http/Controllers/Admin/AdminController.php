@@ -21,10 +21,10 @@ class AdminController extends Controller
     {
         $settings = (new \App\Models\GlobalSettings)->getSettings();
         $view_vars = [
-            'users' => User::query()->where('id', '!=', auth()->id())->get(),
+            'users' => User::query()->companyScope()->where('id', '!=', auth()->id())->get(),
             'games' => Games::query()->where('status', '!=', 0)->get(),
             'g_settings' => $settings,
-            'company' => Company::query()->where('admin_id', auth()->id())->first()
+            'company' => request()->current_company,
         ];
         return view('admin.home')->with($view_vars);
     }
@@ -109,7 +109,7 @@ class AdminController extends Controller
             'tertiary_color' => 'required',
         ]);
 
-        $company = Company::query()->where('admin_id', auth()->id())->first();
+        $company = $request->current_company;
 
         $company->name = $request->input('company_name');
 

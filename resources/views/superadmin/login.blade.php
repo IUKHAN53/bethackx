@@ -56,14 +56,13 @@
     @vite(['resources/sass/app.scss','resources/css/splide.min.css','resources/css/style.css', 'resources/js/app.js'])
 
 </head>
-
 <body>
 <div class="container">
     <div class="logo">
         <img src="{{asset('img/home_logo.png')}}" alt="Logo">
     </div>
     <h2 class="text-center">Login de Superadministrador</h2>
-    <form method="POST" action="{{route('login')}}">
+    <form method="POST" action="{{route('login', $company->slug )}}">
         @csrf
         <div class="form-group">
             <label for="username">Usuário</label>

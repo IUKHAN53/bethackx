@@ -7,7 +7,7 @@
             <img src="{{asset('img/logo.png')}}" alt="image" class="form-image">
         </div>
         <div class="section mt-1 mb-5 d-flex justify-content-center align-items-center">
-            <form class="w-100 mt-5" method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{route('login', $companySlug )}}">
                 @csrf
                 <div class="form-group boxed">
                     <div class="input-wrapper">
