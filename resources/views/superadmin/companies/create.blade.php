@@ -68,11 +68,40 @@
                             <label for="admin_id"> Administrador:</label>
                             <select name="admin_id" id="admin_id" class="form-control" required>
                                 <option value="">Selecione um usuário existente</option>
-                                @foreach($admins as $id=>$name)
+                                @foreach($admins as $id => $name)
                                     <option value="{{$id}}">{{$name}}</option>
                                 @endforeach
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label for="request_access_link">Link de Solicitação de Acesso:</label>
+                            <input type="text" class="form-control" id="request_access_link" name="request_access_link" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="help_link">Link de Ajuda:</label>
+                            <input type="text" class="form-control" id="help_link" name="help_link" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="home_banner">Banner da Página Inicial:</label>
+                            <input type="file" class="form-control" id="home_banner" name="home_banner" accept="image/*"
+                                   onchange="previewImage(this, 'home-banner-preview')" required>
+                            <img id="home-banner-preview" src="#" alt="Prévia do Banner"
+                                 style="max-width: 100px; margin-top: 10px; display: none;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="home_banner_ref_link">Link de Referência do Banner:</label>
+                            <input type="text" class="form-control" id="home_banner_ref_link" name="home_banner_ref_link" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="admin_tutorial_link">Link do Tutorial do Administrador:</label>
+                            <input type="text" class="form-control" id="admin_tutorial_link" name="admin_tutorial_link" required>
+                        </div>
+
                         <button type="submit" class="btn btn-primary mt-3">Criar</button>
                     </form>
                 </div>

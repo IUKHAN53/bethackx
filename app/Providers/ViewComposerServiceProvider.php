@@ -16,7 +16,6 @@ class ViewComposerServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view) {
             $view->with([
-                'settings' => (new \App\Models\GlobalSettings)->getSettings(),
                 'current_company' => request()->get('current_company'),
             ]);
         });

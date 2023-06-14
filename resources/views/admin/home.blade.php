@@ -63,21 +63,21 @@
                                            class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
                                         <span class="w-100">Solicitar acesso:</span>
                                         <input type="text" name="settings['request_access_link']" id=""
-                                               value="{{$g_settings['request_access_link']}}"
+                                               value="{{$current_company->request_access_link}}"
                                                class="form-control form-control-custom w-100">
                                     </label>
                                     <label for=""
                                            class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
                                         <span class="w-100">Preciso de Ajuda:</span>
                                         <input type="text" name="settings['help_link']" id=""
-                                               value="{{$g_settings['help_link']}}"
+                                               value="{{$current_company->help_link}}"
                                                class="form-control form-control-custom w-100">
                                     </label>
                                     <label for=""
                                            class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
                                         <span class="w-100">Link do Tutorial:</span>
                                         <input type="text" name="settings['admin_tutorial_link']" id=""
-                                               value="{{$g_settings['admin_tutorial_link']}}"
+                                               value="{{$current_company->admin_tutorial_link}}"
                                                class="form-control form-control-custom w-100">
                                     </label>
                                 </div>
@@ -134,7 +134,7 @@
                                     <span class="text-small">Está com dúvidas? Aprenda administrar o App.</span>
                                 </div>
                                 <div class="w-100">
-                                    <a href="{{$g_settings['admin_tutorial_link']}}"
+                                    <a href="{{$current_company->admin_tutorial_link}}"
                                        class="btn btn-primary text-uppercase fw-bolder  float-end">Assista Agora</a>
                                 </div>
                             </div>

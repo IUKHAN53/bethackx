@@ -8,22 +8,42 @@ use App\Models\Games;
 use App\Models\GlobalSettings;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['login']);
     }
 
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('web')->attempt($credentials)) {
+            $user = Auth::guard('web')->user();
+
+            if ($user->companyScope() && $user->isAdmin()) {
+                return redirect()->route('admin.view', $request->current_company->slug);
+            }
+        }
+
+        return redirect()->back()->withErrors([
+            'email' => 'Invalid credentials or company.',
+        ]);
+    }
+    public function logout()
+    {
+        Auth::guard('web')->logout();
+        return redirect()->route('admin.login', request()->get('current_company')->slug);
+    }
     public function index()
     {
-        $settings = (new \App\Models\GlobalSettings)->getSettings();
         $view_vars = [
             'users' => User::query()->companyScope()->where('id', '!=', auth()->id())->get(),
             'games' => Games::query()->where('status', '!=', 0)->get(),
-            'g_settings' => $settings,
             'company' => request()->current_company,
         ];
         return view('admin.home')->with($view_vars);
@@ -45,9 +65,9 @@ class AdminController extends Controller
     {
         if (isset($request->settings)) {
             foreach ($request->settings as $key => $value) {
-                $setting = GlobalSettings::query()->where('key', trim($key, "'"))->first();
-                $setting->value = $value;
-                $setting->save();
+                $key = trim($key, "'");
+                $request->current_company->{$key} = $value;
+                $request->current_company->save();
             }
         }
         return redirect()->back();
@@ -60,12 +80,11 @@ class AdminController extends Controller
                 $key = trim($key, "'");
                 if ($key == 'home_banner') {
                     $name = 'home_banner-' . time() . '.' . $value->getClientOriginalExtension();
-                    $banner = $value->storeAs('banners/', $name);
+                    $banner = $value->storeAs('/', $name);
                     $value = $banner;
                 }
-                $setting = GlobalSettings::query()->where('key', $key)->first();
-                $setting->value = $value;
-                $setting->save();
+                $request->current_company->{$key} = $value;
+                $request->current_company->save();
             }
         }
         return redirect()->back();

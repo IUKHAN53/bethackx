@@ -104,7 +104,7 @@
         </li>
     </ul>
 </div>
-<form action="{{route('logout', $companySlug )}}" method="POST" id="logout_form">
+<form action="{{route('super-admin.logout')}}" method="POST" id="logout_form">
     @csrf
 </form>
 <div class="content">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\CompanyGames;
+use App\Models\Games;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +26,7 @@ class CompanyController extends Controller
     {
         // Return the company create view
         return view('superadmin.companies.create')->with([
-            'admins' => User::query()->pluck('name', 'id')->toArray(),
+            'admins' => User::query()->pluck('name', 'id')->where('is_admin', 0)->where('is_super_admin', 0)->toArray(),
         ]);
     }
 
@@ -52,20 +54,29 @@ class CompanyController extends Controller
             'tertiary_color' => 'required|string|max:255',
             'is_active' => 'required|boolean',
             'admin_id' => 'required|numeric',
+            'request_access_link' => 'nullable|string',
+            'help_link' => 'nullable|string',
+            'home_banner' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'home_banner_ref_link' => 'nullable|string',
+            'admin_tutorial_link' => 'nullable|string',
         ], $messages);
 
         // Create a new company
         $company = new Company;
         $company->name = $request->input('name');
-        $company->slug = Str::slug($request->input('name'),'-');
+        $company->slug = Str::slug($request->input('name'), '-');
         $company->primary_color = $request->input('primary_color');
         $company->secondary_color = $request->input('secondary_color');
         $company->tertiary_color = $request->input('tertiary_color');
         $company->is_active = $request->input('is_active');
         $company->admin_id = $request->input('admin_id');
+        $company->request_access_link = $request->input('request_access_link');
+        $company->help_link = $request->input('help_link');
+        $company->home_banner_ref_link = $request->input('home_banner_ref_link');
+        $company->admin_tutorial_link = $request->input('admin_tutorial_link');
         $company->save();
 
-        User::query()->where('id', $request->input('admin_id'))->update(['company_id' => $company->id, 'is_admin' => true]);
+        User::query()->where('id', $request->input('admin_id'))->update(['company_id' => $company->id, 'is_admin' => 1]);
 
         // Upload logo image
         $logo = $request->file('logo');
@@ -73,31 +84,40 @@ class CompanyController extends Controller
 
         // Upload favicon image
         $favicon = $request->file('favicon');
-        $faviconPath = $favicon->storeAs('public/companies/' . $company->id, 'favicon-' . time() . '.' . $logo->getClientOriginalExtension());
+        $faviconPath = $favicon->storeAs('public/companies/' . $company->id, 'favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
+
+        // Upload home banner image
+        $homeBanner = $request->file('home_banner');
+        if ($homeBanner) {
+            $homeBannerPath = $homeBanner->storeAs('public/companies/' . $company->id, 'home-banner-' . time() . '.' . $homeBanner->getClientOriginalExtension());
+            $company->home_banner = $homeBannerPath;
+        }
 
         // Update the logo and favicon paths in the company record
         $company->logo = $logoPath;
         $company->favicon = $faviconPath;
         $company->save();
 
+//        create games for the company
+        foreach (Games::query()->where('status', 1)->get() as $game) {
+            CompanyGames::create(
+                [
+                    'company_id' => $company->id,
+                    'game_id' => $game->id,
+                    'iframe_link' => $game->iframe_link,
+                ]);
+        }
+
         // Redirect to the company index page or show a success message
         return redirect()->route('super-admin.companies.index')->with('success', 'Empresa criada com sucesso!');
-    }
-
-    public function show($id)
-    {
-        // Find the company by ID
-        $company = Company::findOrFail($id);
-
-        // Return the company show view with the found company
-        return view('superadmin.companies.show', compact('company'));
     }
 
     public function edit($id)
     {
         // Find the company by ID
         $company = Company::findOrFail($id);
-        $admins = User::query()->pluck('name', 'id')->toArray();
+        $admins = User::query()->where('is_admin', 0)->where('is_super_admin', 0)->pluck('name', 'id')->toArray();
+        $admins[$company->admin_id] = User::query()->where('id', $company->admin_id)->first()->name;
 
         // Return the company edit view with the found company
         return view('superadmin.companies.edit', compact('company', 'admins'));
@@ -117,16 +137,38 @@ class CompanyController extends Controller
             'tertiary_color' => 'nullable|string|max:255',
             'is_active' => 'required|boolean',
             'admin_id' => 'required|integer',
+            'request_access_link' => 'nullable|string',
+            'help_link' => 'nullable|string',
+            'home_banner' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'home_banner_ref_link' => 'nullable|string',
+            'admin_tutorial_link' => 'nullable|string',
         ]);
 
         // Update the company data
         $company->name = $validatedData['name'];
-        $company->slug = Str::slug($validatedData['name'],'-');
+        $company->slug = Str::slug($validatedData['name'], '-');
         $company->primary_color = $validatedData['primary_color'];
         $company->secondary_color = $validatedData['secondary_color'];
         $company->tertiary_color = $validatedData['tertiary_color'];
         $company->is_active = $validatedData['is_active'];
-        $company->admin_id = $validatedData['admin_id'];
+
+        $company->request_access_link = $validatedData['request_access_link'];
+        $company->help_link = $validatedData['help_link'];
+        $company->home_banner_ref_link = $validatedData['home_banner_ref_link'];
+        $company->admin_tutorial_link = $validatedData['admin_tutorial_link'];
+
+        if($company->admin_id != $validatedData['admin_id']){
+            $p_admin = User::query()->where('id', $company->admin_id)->first();
+            $p_admin->company_id = null;
+            $p_admin->is_admin = 0;
+            $p_admin->save();
+
+            $company->admin_id = $validatedData['admin_id'];
+            $n_admin = User::query()->where('id', $validatedData['admin_id'])->first();
+            $n_admin->company_id = $company->id;
+            $n_admin->is_admin = 1;
+            $n_admin->save();
+        }
 
         if ($request->hasFile('logo') && Storage::exists($company->logo)) {
             $linkPath = Storage::path($company->logo);
@@ -144,19 +186,35 @@ class CompanyController extends Controller
             Storage::delete($company->favicon);
             $company->favicon = null;
         }
+        if ($request->hasFile('home_banner') && $company->home_banner != null &&Storage::exists($company->home_banner)) {
+            $linkPath = Storage::path($company->home_banner);
+            if (file_exists($linkPath)) {
+                unlink($linkPath);
+            }
+            Storage::delete($company->home_banner);
+            $company->home_banner = null;
+        }
         $company->save();
+
         // Handle logo file upload
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $logoPath = $logo->storeAs('public/companies' . $company->id, 'logo-' . time() . '.' . $logo->getClientOriginalExtension());
+            $logoPath = $logo->storeAs('public/companies/' . $company->id, 'logo-' . time() . '.' . $logo->getClientOriginalExtension());
             $company->logo = $logoPath;
         }
 
         // Handle favicon file upload
         if ($request->hasFile('favicon')) {
             $favicon = $request->file('favicon');
-            $faviconPath = $favicon->storeAs('public/companies' . $company->id, 'favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
+            $faviconPath = $favicon->storeAs('public/companies/' . $company->id, 'favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
             $company->favicon = $faviconPath;
+        }
+
+        // Handle home banner file upload
+        if ($request->hasFile('home_banner')) {
+            $homeBanner = $request->file('home_banner');
+            $homeBannerPath = $homeBanner->storeAs('public/companies/' . $company->id, 'home-banner-' . time() . '.' . $homeBanner->getClientOriginalExtension());
+            $company->home_banner = $homeBannerPath;
         }
 
         // Save the updated company data
@@ -165,10 +223,24 @@ class CompanyController extends Controller
         return redirect()->route('super-admin.companies.index')->with('success', 'Empresa atualizada com sucesso!');
     }
 
+
+    public function show($id)
+    {
+        // Find the company by ID
+        $company = Company::findOrFail($id);
+
+        // Return the company show view with the found company
+        return view('superadmin.companies.show', compact('company'));
+    }
+
+
     public function destroy($id)
     {
         // Find the company by ID
         $company = Company::findOrFail($id);
+
+//        Delete the company games
+        CompanyGames::where('company_id', $company->id)->delete();
 
         // Delete the company
         $company->delete();

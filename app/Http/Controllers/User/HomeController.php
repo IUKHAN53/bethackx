@@ -17,6 +17,7 @@ class HomeController extends Controller
     public function index()
     {
         $types = [];
+
         foreach (Games::GAME_TYPES as $type) {
             $types[$type] = Games::query()->where('status', '!=', 0)->where('game_type', $type)->get();
         }

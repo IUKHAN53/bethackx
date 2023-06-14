@@ -13,7 +13,6 @@ class GamesSeeder extends Seeder
      */
     public function run()
     {
-        Games::truncate();
         $games = [
             [
                 'name' => 'Gates of Bet7k',

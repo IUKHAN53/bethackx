@@ -13,6 +13,7 @@
             <th>URL</th>
             <th>Logo</th>
             <th>Favicon</th>
+            <th>Home Banner</th>
             <th>Cor Primária</th>
             <th>Cor Secundária</th>
             <th>Cor Terciária</th>
@@ -31,6 +32,9 @@
                 </td>
                 <td>
                     <img src="{{ Storage::url($company->favicon) }}" alt="Favicon" width="30" height="30">
+                </td>
+                <td>
+                    <img src="{{ Storage::url($company->home_banner) }}" alt="Favicon" width="30" height="30">
                 </td>
                 <td><span style="color: {{ $company->primary_color }}">{{ $company->primary_color }}</span></td>
                 <td><span style="color: {{ $company->secondary_color }}">{{ $company->secondary_color }}</span></td>

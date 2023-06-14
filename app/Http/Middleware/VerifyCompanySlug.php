@@ -10,9 +10,8 @@ class VerifyCompanySlug
     {
         $companySlug = $request->route('company');
         $company = Company::where('slug', $companySlug)->first();
-
         if (!$company) {
-            abort(404); // or handle the invalid company slug in a different way
+            dd('Company not found');
         }
 
         // Store the company in the request for easy access

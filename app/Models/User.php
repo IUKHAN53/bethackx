@@ -67,4 +67,9 @@ class User extends Authenticatable
         return $query->where('company_id', request()->current_company->id);
     }
 
+    public function scopeAdminScope($query)
+    {
+        return $query->where('is_admin', 1);
+    }
+
 }

@@ -62,7 +62,7 @@
         <img src="{{asset('img/home_logo.png')}}" alt="Logo">
     </div>
     <h2 class="text-center">Login de Superadministrador</h2>
-    <form method="POST" action="{{route('login', $company->slug )}}">
+    <form method="POST" action="{{route('super-admin.login')}}">
         @csrf
         <div class="form-group">
             <label for="username">Usuário</label>

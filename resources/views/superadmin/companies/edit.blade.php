@@ -89,6 +89,51 @@
                 @enderror
             </div>
 
+            <div class="mb-3">
+                <label for="request_access_link" class="form-label">Link de Solicitação de Acesso</label>
+                <input type="text" name="request_access_link" id="request_access_link" class="form-control" value="{{ old('request_access_link', $company->request_access_link) }}">
+                @error('request_access_link')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="help_link" class="form-label">Link de Ajuda</label>
+                <input type="text" name="help_link" id="help_link" class="form-control" value="{{ old('help_link', $company->help_link) }}">
+                @error('help_link')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="home_banner" class="form-label">Banner da Página Inicial</label>
+                <input type="file" name="home_banner" id="home_banner" class="form-control" onchange="previewImage(this, 'home-banner-preview')">
+                @if($company->home_banner)
+                    <div>
+                        <img id="home-banner-preview" src="{{ Storage::url($company->home_banner) }}" alt="Banner" style="max-width: 100px;">
+                    </div>
+                @endif
+                @error('home_banner')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="home_banner_ref_link" class="form-label">Link de Referência do Banner</label>
+                <input type="text" name="home_banner_ref_link" id="home_banner_ref_link" class="form-control" value="{{ old('home_banner_ref_link', $company->home_banner_ref_link) }}">
+                @error('home_banner_ref_link')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="admin_tutorial_link" class="form-label">Link do Tutorial do Administrador</label>
+                <input type="text" name="admin_tutorial_link" id="admin_tutorial_link" class="form-control" value="{{ old('admin_tutorial_link', $company->admin_tutorial_link) }}">
+                @error('admin_tutorial_link')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+
             <button type="submit" class="btn btn-primary">Atualizar</button>
         </form>
     </div>

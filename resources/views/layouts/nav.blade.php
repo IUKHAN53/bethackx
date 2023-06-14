@@ -76,7 +76,7 @@
                 </a>
             </li>
         </ul>
-        <form action="{{route('logout', $current_company->slug )}}" method="POST" id="logout_form">
+        <form action="{{route('user.logout', $current_company->slug )}}" method="POST" id="logout_form">
             @csrf
         </form>
     </div>
