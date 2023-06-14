@@ -21,6 +21,15 @@
     @else
         <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" sizes="32x32">
     @endif
+    <style>
+        /* Apply the colors dynamically */
+        :root {
+            --primary-color: {{ $current_company->primary_color }} !important;
+            --secondary-color: {{ $current_company->secondary_color }} !important;
+            --tertiary-color: {{ $current_company->tertiary_color }} !important;
+            /* Add other color variables as needed */
+        }
+    </style>
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('img/icon/192x192.png')}}">
     @vite(['resources/sass/app.scss','resources/css/splide.min.css','resources/css/style.css', 'resources/js/app.js'])
     @laravelPWA
