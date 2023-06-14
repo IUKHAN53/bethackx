@@ -11,7 +11,7 @@
                               style="color: #b2b2b2"
                               aria-label="user"></ion-icon>
                 </a>
-                <a href="">
+                <a href="#" onclick="deleteUser('{{$user->id}}')">
                     <ion-icon name="trash" role="img" class="md hydrated"
                               style="color: #b2b2b2"
                               aria-label="trash"></ion-icon>

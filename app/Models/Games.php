@@ -38,5 +38,9 @@ class Games extends Model
         return $this->companyGames()->where('company_id', request()->current_company->id)->first()->is_premium;
     }
 
+    public function plans()
+    {
+        return $this->belongsToMany(Plan::class, 'games_plans', 'game_id', 'plan_id');
+    }
 
 }

@@ -21,4 +21,14 @@ class Plan extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function games()
+    {
+        return $this->belongsToMany(Games::class, 'games_plans', 'plan_id', 'game_id');
+    }
+
+    public function gamesPlans()
+    {
+        return $this->hasMany(GamesPlans::class);
+    }
 }

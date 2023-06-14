@@ -48,8 +48,13 @@ Route::group(['prefix' => '{company}'], function ($company) {
                 Route::post('save-banner', [AdminController::class, 'saveBanner'])->name('admin.save-banner');
                 Route::post('update-company', [AdminController::class, 'updateCompany'])->name('admin.update-company');
                 Route::post('add-user', [AdminController::class, 'addUser'])->name('admin.add-user');
+                Route::post('delete-user', [AdminController::class, 'deleteUser'])->name('admin.delete-user');
                 Route::post('search-user', [AdminController::class, 'searchUser'])->name('admin.search-user');
+                Route::post('add-plan', [AdminController::class, 'addPlan'])->name('admin.add-plan');
+                Route::post('delete-plan', [AdminController::class, 'deletePlan'])->name('admin.delete-plan');
                 Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
+                Route::post('fetch-games', [AdminController::class, 'getPlanGames'])->name('admin.fetch-games');
+                Route::post('add-games-to-plan', [AdminController::class, 'addPlanGames'])->name('admin.add-games-to-plan');
             });
         });
         Route::get('/home', [HomeController::class, 'index'])->name('home');

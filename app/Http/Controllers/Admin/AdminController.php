@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\CompanyGames;
 use App\Models\Games;
 use App\Models\GlobalSettings;
+use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,16 +36,19 @@ class AdminController extends Controller
             'email' => 'Invalid credentials or company.',
         ]);
     }
+
     public function logout()
     {
         Auth::guard('web')->logout();
         return redirect()->route('admin.login', request()->get('current_company')->slug);
     }
+
     public function index()
     {
         $view_vars = [
             'users' => User::query()->companyScope()->where('id', '!=', auth()->id())->get(),
             'games' => Games::query()->where('status', '!=', 0)->get(),
+            'plans' => Plan::query()->where('company_id', request()->current_company->id)->get(),
             'company' => request()->current_company,
         ];
         return view('admin.home')->with($view_vars);
@@ -53,7 +58,7 @@ class AdminController extends Controller
     {
         if (isset($request->games)) {
             foreach ($request->games as $key => $link) {
-                $game = Games::query()->find($key);
+                $game = CompanyGames::query()->where('company_id', $request->current_company->id)->where('game_id', $key)->first();
                 $game->iframe_link = $link;
                 $game->save();
             }
@@ -72,6 +77,7 @@ class AdminController extends Controller
         }
         return redirect()->back();
     }
+
     public function saveBanner(Request $request)
     {
 
@@ -96,8 +102,9 @@ class AdminController extends Controller
         $user->name = $request->name;
         $user->email = strtolower($request->email);
         $user->password = bcrypt($request->password);
+        $user->company_id = $request->current_company->id;
         $user->save();
-        $users = User::query()->where('id', '!=', auth()->id())->get();
+        $users = User::query()->where('id', '!=', auth()->id())->where('company_id', $request->current_company->id)->get();
         $html = view('admin.partials.users-table', compact('users'))->render();
         return response()->json([
             'status' => true,
@@ -106,9 +113,53 @@ class AdminController extends Controller
         ]);
     }
 
+    public function deleteUser(Request $request)
+    {
+        $user = User::query()->find($request->id);
+        $user->delete();
+        $users = User::query()->where('id', '!=', auth()->id())->where('company_id', $request->current_company->id)->get();
+        $html = view('admin.partials.users-table', compact('users'))->render();
+        return response()->json([
+            'status' => true,
+            'html' => $html,
+            'message' => 'Deleted User.',
+        ]);
+    }
+
+    public function addPlan(Request $request)
+    {
+        $plan = new Plan();
+        $plan->name = $request->name;
+        $plan->description = $request->description;
+        $plan->company_id = $request->current_company->id;
+        $plan->save();
+        $plans = Plan::query()->where('company_id', $request->current_company->id)->get();
+        $html = view('admin.partials.plans-table', compact('plans'))->render();
+        return response()->json([
+            'status' => true,
+            'html' => $html,
+            'message' => 'Added Plan.',
+        ]);
+    }
+
+    public function deletePlan(Request $request)
+    {
+        $plan = Plan::query()->find($request->id);
+        $plan->delete();
+        $plans = Plan::query()->where('company_id', $request->current_company->id)->get();
+        $html = view('admin.partials.plans-table', compact('plans'))->render();
+        return response()->json([
+            'status' => true,
+            'html' => $html,
+            'message' => 'Deleted Plan.',
+        ]);
+    }
+
     public function searchUser(Request $request)
     {
-        $users = User::query()->where('id', '!=', auth()->id())->where('name', 'like', '%' . $request->keyword . '%')->get();
+        $users = User::query()->where('id', '!=', auth()->id())
+            ->where('name', 'like', '%' . $request->keyword . '%')
+            ->where('company_id', $request->current_company->id)->get();
         $html = view('admin.partials.users-table', compact('users'))->render();
         return response()->json([
             'status' => true,
@@ -151,6 +202,33 @@ class AdminController extends Controller
         $company->save();
 
         return redirect()->back()->with('success', 'Company details updated successfully.');
+    }
+
+    public function getPlanGames(Request $request){
+        $plan = Plan::query()->find($request->id);
+        $all_games = Games::query()->where('company_id', $request->current_company->id)->get();
+        $games = $plan->gamesPlans->pluck('game_id')->toArray();
+
+        $html = view('admin.partials.plan-games', compact('games','all_games', 'plan'))->render();
+        return response()->json([
+            'status' => true,
+            'html' => $html,
+            'message' => 'searched Users.',
+        ]);
+    }
+
+    public function addPlanGames(Request $request){
+        $gameIds = $request->game_status; // Get the selected game IDs from the request
+        $plan = Plan::find($request->plan_id);
+        $plan->gamesPlans->each->delete(); // Delete all the games from the plan
+
+        foreach ($gameIds as $key => $value) {
+            $plan->gamesPlans()->create([
+                'game_id' => $value,
+                'plan_id' => $plan->id,
+            ]);
+        }
+        return back();
     }
 
 }

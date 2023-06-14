@@ -12,236 +12,29 @@
                 <li class="nav-item">
                     <a class="nav-link active" data-bs-toggle="tab" href="#home" role="tab" aria-selected="true">
                         <ion-icon name="home"></ion-icon>
-                        ESTRUTURA
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="tab" href="#users" role="tab" aria-selected="false">
                         <ion-icon name="person-circle"></ion-icon>
-                        USUÁRIOS
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="tab" href="#company" role="tab" aria-selected="false">
                         <ion-icon name="briefcase-outline"></ion-icon>
-                        Empresa
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#plans" role="tab" aria-selected="false">
+                        <ion-icon name="pricetags-outline"></ion-icon>
                     </a>
                 </li>
             </ul>
             <div class="tab-content mt-2">
-                <div class="tab-pane fade active show" id="home" role="tabpanel">
-                    <div class="border p-2 custom-card">
-                        <form action="{{route('admin.save-games',$current_company->slug)}}" method="POST">
-                            @csrf
-                            <div class="d-flex flex-column gap-2 w-100">
-                                @foreach($games as $game)
-                                    <label for="game"
-                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
-                                        <span class="w-100">{{$game->name}}:</span>
-                                        <input type="text" name="games[{{$game->id}}]" id="mines"
-                                               class="form-control form-control-custom w-100"
-                                               value="{{$game->iframe_link}}">
-                                    </label>
-                                @endforeach
-                            </div>
-                            <div class="text-end mt-3">
-                                <button type="submit" class="btn btn-primary btn-sm">SALVAR</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="mt-3">
-                        <div class="d-flex justify-content-start align-items-center mb-2 ms-3">
-                            <img src="{{asset('img/icon/slots.png')}}" class="bg-primary p-1 shadow rounded" alt="">
-                            <h4 class="fw-bold ms-1 text-uppercase mt-1">outros links</h4>
-                        </div>
-
-                        <div class="border p-2 custom-card">
-                            <form action="{{route('admin.save-external-links',$current_company->slug)}}" method="post">
-                                @csrf
-                                <div class="d-flex flex-column gap-2 w-100">
-                                    <label for=""
-                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
-                                        <span class="w-100">Solicitar acesso:</span>
-                                        <input type="text" name="settings['request_access_link']" id=""
-                                               value="{{$current_company->request_access_link}}"
-                                               class="form-control form-control-custom w-100">
-                                    </label>
-                                    <label for=""
-                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
-                                        <span class="w-100">Preciso de Ajuda:</span>
-                                        <input type="text" name="settings['help_link']" id=""
-                                               value="{{$current_company->help_link}}"
-                                               class="form-control form-control-custom w-100">
-                                    </label>
-                                    <label for=""
-                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
-                                        <span class="w-100">Link do Tutorial:</span>
-                                        <input type="text" name="settings['admin_tutorial_link']" id=""
-                                               value="{{$current_company->admin_tutorial_link}}"
-                                               class="form-control form-control-custom w-100">
-                                    </label>
-                                </div>
-                                <div class="text-end mt-3">
-                                    <button type="submit" class="btn btn-primary btn-sm">SALVAR</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="mt-3">
-                        <div class="d-flex justify-content-start align-items-center mb-2 ms-3">
-                            <img src="{{asset('img/icon/slots.png')}}" class="bg-primary p-1 shadow rounded" alt="">
-                            <h4 class="fw-bold ms-1 text-uppercase mt-1">Banner</h4>
-                        </div>
-
-                        <div class="border p-2 custom-card">
-                            <form action="{{route('admin.save-banner',$current_company->slug)}}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                <div class="d-flex flex-column gap-2 w-100">
-                                    <label for=""
-                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
-                                        <span class="w-100">imagem:</span>
-                                        <input type="text" id="fileNamePreview"
-                                               class="form-control-custom w-100" readonly>
-                                        <input type="file" name="settings['home_banner']" id="upload"
-                                               class="custom-file-input form-control-custom w-100" hidden>
-                                        <button class="btn btn-primary btn-sm me-1" type="button" id="btnUpload">
-                                            UPLOAD
-                                        </button>
-                                    </label>
-                                    @error('settings.home_banner')<span
-                                        style="color: darkred">{{$message}}</span>@enderror
-                                    <label for=""
-                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
-                                        <span class="w-100">link da imagem:</span>
-                                        <input type="text" name="settings['home_banner_ref_link']" id=""
-                                               class="form-control form-control-custom w-100">
-                                    </label>
-
-                                </div>
-                                <div class="text-end mt-3">
-                                    <button type="submit" class="btn btn-primary btn-sm">SALVAR</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 mb-4">
-                        <div class="border p-2 custom-card">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-column justify-content-start">
-                                    <h4 class="text-start fw-bolder m-0">Tutorial Admin</h4>
-                                    <span class="text-small">Está com dúvidas? Aprenda administrar o App.</span>
-                                </div>
-                                <div class="w-100">
-                                    <a href="{{$current_company->admin_tutorial_link}}"
-                                       class="btn btn-primary text-uppercase fw-bolder  float-end">Assista Agora</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade mb-5" id="users" role="tabpanel">
-                    <div class="">
-                        <label for="keyword"
-                               class="form-label-custom d-flex justify-content-start align-items-center ps-2 mb-3 rounded">
-                            <input type="text" name="" id="keyword" class="form-control form-control-custom w-100"
-                                   placeholder="digite para buscar">
-                            <ion-icon name="search" role="img" class="md hydrated" aria-label="search"></ion-icon>
-                        </label>
-                        <button class="btn btn-secondary btn-sm mb-2" data-bs-toggle="modal"
-                                data-bs-target="#create_edit_user_modal">Adicionar usuário
-                        </button>
-                        <div id="users_div">
-                            @include('admin.partials.users-table')
-                        </div>
-                    </div>
-                    {{--                    <nav>--}}
-                    {{--                        <ul class="pagination pagination-rounded">--}}
-                    {{--                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>--}}
-                    {{--                            <li class="page-item"><a class="page-link" href="#">1</a></li>--}}
-                    {{--                            <li class="page-item"><a class="page-link" href="#">2</a></li>--}}
-                    {{--                            <li class="page-item"><a class="page-link" href="#">3</a></li>--}}
-                    {{--                            <li class="page-item"><a class="page-link" href="#">Next</a></li>--}}
-                    {{--                        </ul>--}}
-                    {{--                    </nav>--}}
-                </div>
-                <div class="tab-pane fade" id="company" role="tabpanel">
-                    <div class="mt-3">
-                        <div class="d-flex justify-content-start align-items-center mb-2 ms-3">
-                            <ion-icon name="briefcase-outline"></ion-icon>
-                            <h4 class="fw-bold ms-1 text-uppercase mt-1">Configurações da Empresa</h4>
-                        </div>
-
-                        <div class="border p-2 custom-card">
-                            <form action="{{ route('admin.update-company',$current_company->slug) }}" method="POST"
-                                  enctype="multipart/form-data">
-                                @csrf
-                                <div class="d-flex flex-column gap-2 w-100">
-                                    <label for="company_name"
-                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
-                                        <span class="w-100">Nome da Empresa:</span>
-                                        <input type="text" id="company_name" name="company_name"
-                                               class="form-control-custom w-100" value="{{ $company->name ?? '' }}"
-                                               required>
-                                    </label>
-                                    @error('company_name')<span style="color: darkred">{{ $message }}</span>@enderror
-
-                                    <label for="company_logo"
-                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
-                                        <span class="w-100">Logo da Empresa:</span>
-                                        <input type="text" id="logoNamePreview"
-                                               class="form-control-custom w-100" readonly>
-                                        <input type="file" name="logo" id="uploadLogo"
-                                               class="custom-file-input form-control-custom w-100" hidden>
-                                        <button class="btn btn-primary btn-sm me-1" type="button" id="btnLogoUpload">
-                                            UPLOAD
-                                        </button>
-                                    </label>
-                                    @error('company_logo')<span style="color: darkred">{{ $message }}</span>@enderror
-
-                                    <label for="favicon"
-                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
-                                        <span class="w-100">Favicon:</span>
-                                        <input type="text" id="faviconNamePreview"
-                                               class="form-control-custom w-100" readonly>
-                                        <input type="file" name="favicon" id="uploadFavicon"
-                                               class="custom-file-input form-control-custom w-100" hidden>
-                                        <button class="btn btn-primary btn-sm me-1" type="button" id="btnFaviconUpload">
-                                            UPLOAD
-                                        </button>
-                                    </label>
-                                    @error('favicon')<span style="color: darkred">{{ $message }}</span>@enderror
-                                    <label for="primary_color"
-                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
-                                        <span class="w-100">Cor Primária:</span>
-                                        <input type="color" name="primary_color" id="primary_color" value="{{ $company->primary_color ?? '' }}"
-                                               class="form-control-custom">
-                                    </label>
-                                    @error('primary_color')<span style="color: darkred">{{ $message }}</span>@enderror
-                                    <label for="secondary_color"
-                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
-                                        <span class="w-100">Cor Secundária:</span>
-                                        <input type="color" name="secondary_color" id="secondary_color"  value="{{ $company->secondary_color ?? '' }}"
-                                               class="form-control-custom">
-                                    </label>
-                                    @error('secondary_color')<span style="color: darkred">{{ $message }}</span>@enderror
-                                    <label for="tertiary_color"
-                                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
-                                        <span class="w-100">Cor Terciária:</span>
-                                        <input type="color" name="tertiary_color" id="tertiary_color" value="{{ $company->tertiary_color ?? '' }}"
-                                               class="form-control-custom">
-                                    </label>
-                                    @error('tertiary_color')<span style="color: darkred">{{ $message }}</span>@enderror
-                                </div>
-                                <div class="text-end mt-3">
-                                    <button type="submit" class="btn btn-primary btn-sm">SALVAR</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
+                @include('admin.partials.tab-home')
+                @include('admin.partials.tab-users')
+                @include('admin.partials.tab-company')
+                @include('admin.partials.tab-plans')
             </div>
             <!-- Dialog Form -->
             <div class="modal fade dialogbox" id="create_edit_user_modal" data-bs-backdrop="static" tabindex="-1"
@@ -301,6 +94,70 @@
 @endsection
 @push('scripts')
     <script type="module">
+
+        $('#plan_form').submit(function (event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url: '{{ route("admin.add-games-to-plan", $current_company->slug) }}',
+                method: 'POST',
+                data: formData,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    alert('Games saved successfully!');
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+
+
+        window.fetchCurrentPlanGames = function (id) {
+            let _token = $('input[name=_token]').val();
+            $.ajax({
+                url: "{{route('admin.fetch-games',$current_company->slug)}}",
+                type: "POST",
+                data: {
+                    id: id,
+                    _token: _token
+                },
+                success: function (response) {
+                    $('#plan_games').html(response.html)
+                }
+            })
+        }
+        window.deleteUser = function (id) {
+            let _token = $('input[name=_token]').val();
+            $.ajax({
+                url: "{{route('admin.delete-user',$current_company->slug)}}",
+                type: "POST",
+                data: {
+                    id: id,
+                    _token: _token
+                },
+                success: function (response) {
+                    $('#users_div').html(response.html)
+                }
+            })
+        }
+        window.deletePlan = function (id) {
+            let _token = $('input[name=_token]').val();
+            $.ajax({
+                url: "{{route('admin.delete-plan',$current_company->slug)}}",
+                type: "POST",
+                data: {
+                    id: id,
+                    _token: _token
+                },
+                success: function (response) {
+                    $('#plans_div').html(response.html)
+                }
+            })
+        }
+
         $("#keyword").keyup(function () {
             let str = $("#keyword").val();
             let _token = $('input[name=_token]').val();
@@ -332,6 +189,23 @@
                 },
                 success: function (response) {
                     $('#users_div').html(response.html)
+                }
+            })
+        })
+        $('#save-plan').on('click', function () {
+            let name = $('#plan_name').val();
+            let description = $('#plan_description').val();
+            let _token = $('input[name=_token]').val();
+            $.ajax({
+                url: "{{route('admin.add-plan',$current_company->slug)}}",
+                type: "POST",
+                data: {
+                    name: name,
+                    description: description,
+                    _token: _token
+                },
+                success: function (response) {
+                    $('#plans_div').html(response.html)
                 }
             })
         })
