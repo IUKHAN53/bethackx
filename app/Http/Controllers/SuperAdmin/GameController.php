@@ -4,6 +4,7 @@ namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\CompanyGames;
 use App\Models\Games as Game;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -101,6 +102,7 @@ class GameController extends Controller
             if ($game->image) {
                 Storage::delete($game->image);
             }
+            $game->is_default = 0;
             $image = $request->file('image');
             $imagePath = $image->storeAs('public/games/' . $game->id, 'image-' . time() . '.' . $image->getClientOriginalExtension());
 
@@ -112,12 +114,15 @@ class GameController extends Controller
             if ($game->banner) {
                 Storage::delete($game->banner);
             }
+            $game->is_default = 0;
             $banner = $request->file('banner');
             $bannerPath = $banner->storeAs('public/games/' . $game->id, 'banner-' . time() . '.' . $banner->getClientOriginalExtension());
             $game->banner = $bannerPath;
         }
-
         $game->save();
+
+//        update game status in company games
+        CompanyGames::query()->where('game_id', $game->id)->update(['is_active' => $game->status]);
 
         return redirect()->route('super-admin.games.index')->with('success', 'Jogo atualizado com sucesso!');
     }

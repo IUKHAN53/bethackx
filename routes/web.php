@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/test', function () {
     return view('test');
 });
-Route::group(['middleware' => 'verifyCompanySlug'], function () {
-    Route::get('/', function () {
-        return redirect()->route('login', request()->get('current_company')->slug);
-    });
-});
 
 Route::group(['prefix' => 'super-admin', 'as' => 'super-admin.'], function () {
     Route::view('login', 'superadmin.login');
@@ -35,9 +30,7 @@ Route::get('/offline', function () {
 });
 Route::group(['prefix' => '{company}'], function ($company) {
     Route::group(['middleware' => 'verifyCompanySlug'], function () {
-        Route::get('/', function () {
-            return redirect()->route('user.login', request()->get('current_company')->slug);
-        });
+        Route::view('/', 'welcome');
         Route::group(['prefix' => 'admin'], function () {
             Route::view('login', 'admin.login');
             Route::post('login', [AdminController::class, 'login'])->name('admin.login');

@@ -14,7 +14,7 @@
             <h2 class="text-white mt-4">Login</h2>
         </div>
         <div class="section mt-1 mb-5 d-flex justify-content-center align-items-center">
-            <form method="POST" action="{{route('user.login', $current_company->slug )}}">
+            <form method="POST" action="{{route('user.login', $current_company->slug )}}" class="w-100">
                 @csrf
                 <div class="form-group boxed">
                     <div class="input-wrapper">

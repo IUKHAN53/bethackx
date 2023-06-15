@@ -12,7 +12,7 @@
                 <p class="card-text">Descrição: {{ $game->description }}</p>
                 <p class="card-text">Link do Iframe: {{ $game->iframe_link }}</p>
                 <p class="card-text">Status: {{ $game->status ? 'Ativo' : 'Inativo' }}</p>
-                <p class="card-text">Empresa: {{ $game->company->name }}</p>
+                <p class="card-text">Empresa: {{ $game->company->name ?? '' }}</p>
                 <p class="card-text">Imagem:</p>
                 @if ($game->image)
                     <img src="{{ $game->is_default ? asset($game->image) : Storage::url($game->image)}}" alt="Imagem do Jogo" style="max-width: 200px;">
