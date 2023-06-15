@@ -105,6 +105,7 @@ class CompanyController extends Controller
                     'company_id' => $company->id,
                     'game_id' => $game->id,
                     'iframe_link' => $game->iframe_link,
+                    'is_active' => $game->status,
                 ]);
         }
 

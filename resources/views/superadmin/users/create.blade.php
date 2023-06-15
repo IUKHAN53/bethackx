@@ -16,27 +16,10 @@
             <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}" required>
             @error('email')<span style="color: darkred">{{$message}}</span>@enderror
         </div>
-
-        <div class="form-group">
-            <label for="company_id">Empresa</label>
-            <select name="company_id" id="company_id" class="form-control">
-                @foreach($companies as $key=>$name)
-                    <option value="{{ $key }}" {{(old('company_id') == $key ? 'selected' : '')}}>{{ $name }}</option>
-                @endforeach
-            </select>
-            @error('company_id')<span style="color: darkred">{{$message}}</span>@enderror
-        </div>
-
         <div class="form-group">
             <label for="password">Senha</label>
             <input type="password" class="form-control" id="password" name="password" required>
             @error('password')<span style="color: darkred">{{$message}}</span>@enderror
-        </div>
-        <div class="form-check mt-3">
-            <input class="form-check-input" name="is_company_admin" type="checkbox" id="is_company_admin">
-            <label class="form-check-label" for="is_company_admin">
-                É administrador da empresa
-            </label>
         </div>
         <button type="submit" class="btn btn-primary float-end mt-2">Create</button>
     </form>

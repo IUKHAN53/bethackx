@@ -207,7 +207,8 @@ class AdminController extends Controller
     public function getPlanGames(Request $request)
     {
         $plan = Plan::query()->find($request->id);
-        $all_games = Games::query()->where('company_id', $request->current_company->id)->get();
+        $all_games_id = CompanyGames::query()->where('company_id', $request->current_company->id)->pluck('game_id')->toArray();
+        $all_games = Games::find($all_games_id);
         $games = $plan->gamesPlans->pluck('game_id')->toArray();
 
         $html = view('admin.partials.plan-games', compact('games', 'all_games', 'plan'))->render();
