@@ -12,6 +12,7 @@ Route::get('/run-config-commands', function () {
     Artisan::call('view:cache');
     Artisan::call('route:cache');
     Artisan::call('config:cache');
+    return redirect('/');
 });
 
 Route::get('/test', function () {
