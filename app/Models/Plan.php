@@ -19,7 +19,8 @@ class Plan extends Model
 
     public function scopeCompanyScope($query)
     {
-        return $query->where('company_id', request()->current_company->id);
+        if (request()->current_company)
+            return $query->where('company_id', request()->current_company->id);
     }
 
     public function company()

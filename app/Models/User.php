@@ -76,7 +76,8 @@ class User extends Authenticatable
 
     public function scopeCompanyScope($query)
     {
-        return $query->where('company_id', request()->current_company->id);
+        if (request()->current_company)
+            return $query->where('company_id', request()->current_company->id);
     }
 
     public function scopeAdminScope($query)
@@ -97,22 +98,23 @@ class User extends Authenticatable
 
     public function hasPremiumForGame($game_id): bool
     {
-        $premium = Plan::where('name','!=', 'Free')->companyScope()->first();
+        $premium = Plan::where('name', '!=', 'Free')->companyScope()->first();
         $plans_id = GamesPlans::query()->where('game_id', $game_id)->where('plan_id', $premium->id)->pluck('plan_id')->toArray();
         return $this->subscriptions()->whereIn('plan_id', $plans_id)->exists();
     }
 
-    public function subscribedPlans(){
+    public function subscribedPlans()
+    {
         return $this->subscriptions->pluck('plan_id')->toArray();
     }
 
-    public function subscribePlan($plan_id){
+    public function subscribePlan($plan_id)
+    {
         $subscription = new Subscription();
         $subscription->user_id = $this->id;
         $subscription->plan_id = $plan_id;
         $subscription->save();
     }
-
 
 
 }
