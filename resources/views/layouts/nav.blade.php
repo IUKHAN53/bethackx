@@ -19,7 +19,7 @@
         <div class="col d-flex justify-content-center align-items-center flex-column gap-1">
             <div style="position: relative">
                 <img src="{{asset('img/home_logo.png')}}" class="bg-primary p-1 shadow"
-                     style="border: 1px solid white; border-radius: 100%; width: 70px; height: 65px; position: absolute; bottom: -1rem; left: -2.2rem; right: 2rem"
+                     style="border-radius: 100%; width: 70px; height: 65px; position: absolute; bottom: -1rem; left: -2.2rem; right: 2rem"
                      alt="">
             </div>
             <span class="text-white mt-3">BetHack</span>

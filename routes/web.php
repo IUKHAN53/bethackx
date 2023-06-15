@@ -28,8 +28,9 @@ Route::group(['prefix' => 'super-admin', 'as' => 'super-admin.'], function () {
 Route::get('/offline', function () {
     return view('modules/laravelpwa/offline');
 });
-Route::group(['prefix' => '{company}'], function ($company) {
+Route::group(['prefix' => '{company}'], function () {
     Route::group(['middleware' => 'verifyCompanySlug'], function () {
+        Route::get('/create-user/{email}', [HomeController::class, 'createFreeUser'])->name('create-free-user');
         Route::view('/', 'welcome');
         Route::group(['prefix' => 'admin'], function () {
             Route::view('login', 'admin.login');

@@ -27,7 +27,7 @@
             --primary-color: {{ $current_company->primary_color }} !important;
             --secondary-color: {{ $current_company->secondary_color }} !important;
             --tertiary-color: {{ $current_company->tertiary_color }} !important;
-            --button-color: {{ $current_company->button_color }} !important;
+            --button-color: {{ $current_company->buttons_color }} !important;
             --notices-color: {{ $current_company->notices_color }} !important;
             /* Add other color variables as needed */
         }
@@ -60,10 +60,13 @@
         </a>
     </div>
 </div>
-<div id="appCapsule">
-    @yield('content')
+<div class="container">
+    <div id="appCapsule">
+        @yield('content')
+    </div>
+    @include('layouts.nav')
 </div>
-@include('layouts.nav')
+
 <!-- Ionicons -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script>

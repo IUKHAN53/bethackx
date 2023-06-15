@@ -31,16 +31,16 @@ class SubscriptionController extends Controller
             'plan_id' => 'required|exists:plans,id',
             'user_id' => 'required|exists:users,id',
             'status' => 'required|in:0,1',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date|after:start_date',
+//            'start_date' => 'nullable|date',
+//            'end_date' => 'nullable|date|after:start_date',
         ]);
 
         $subscription = Subscription::create([
             'plan_id' => $request->input('plan_id'),
             'user_id' => $request->input('user_id'),
             'status' => $request->input('status'),
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date'),
+//            'start_date' => $request->input('start_date'),
+//            'end_date' => $request->input('end_date'),
         ]);
 
         // Redirect or perform additional actions as needed
@@ -70,16 +70,16 @@ class SubscriptionController extends Controller
             'plan_id' => 'required|exists:plans,id',
             'user_id' => 'required|exists:users,id',
             'status' => 'required|in:0,1',
-            'start_date' => 'nullable|date',
-            'end_date' => 'nullable|date|after:start_date',
+//            'start_date' => 'nullable|date',
+//            'end_date' => 'nullable|date|after:start_date',
         ]);
 
         $subscription->update([
             'plan_id' => $request->input('plan_id'),
             'user_id' => $request->input('user_id'),
             'status' => $request->input('status'),
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date'),
+//            'start_date' => $request->input('start_date'),
+//            'end_date' => $request->input('end_date'),
         ]);
 
         // Redirect or perform additional actions as needed

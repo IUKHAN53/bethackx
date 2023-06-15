@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['createFreeUser']);
     }
 
     public function index()
@@ -33,20 +33,22 @@ class HomeController extends Controller
         return view('user.home')->with($view_vars);
     }
 
-    public function viewGame(Request $request,$company, $id){
+    public function viewGame(Request $request, $company, $id)
+    {
         $game = Games::query()->find($id);
         return view('user.game-view')->with(['game' => $game]);
 
     }
 
-    public function getGameSignal(Request $request,$company, $id){
-        $game_signal = Signal::query()->where('game_id',$id)->inRandomOrder()->first();
+    public function getGameSignal(Request $request, $company, $id)
+    {
+        $game_signal = Signal::query()->where('game_id', $id)->inRandomOrder()->first();
         $game = Games::query()->find($id);
         $signal = '';
-        if ($game_signal){
-            if ($game_signal->signal_type == 'image'){
-                $signal = asset('img/signals/'. $game->name .'/'. $game_signal->signal);
-            }else{
+        if ($game_signal) {
+            if ($game_signal->signal_type == 'image') {
+                $signal = asset('img/signals/' . $game->name . '/' . $game_signal->signal);
+            } else {
                 $signal = $game_signal->signal;
             }
         }
@@ -54,5 +56,16 @@ class HomeController extends Controller
             'type' => $game_signal->signal_type,
             'signal' => $signal,
         ]);
+    }
+
+    public function createFreeUser(Request $request, $company, $email)
+    {
+        $request->current_company->users()->create([
+            'name' => 'free user',
+            'email' => $email,
+            'password' => bcrypt('12345678'),
+            'is_admin' => 0,
+        ]);
+        return redirect()->route('user.login', $company);
     }
 }

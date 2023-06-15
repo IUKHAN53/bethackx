@@ -97,8 +97,6 @@ class User extends Authenticatable
         $subscription = new Subscription();
         $subscription->user_id = $this->id;
         $subscription->plan_id = $plan_id;
-        $subscription->start_date = now();
-        $subscription->end_date = now()->addDays(30);
         $subscription->save();
     }
 

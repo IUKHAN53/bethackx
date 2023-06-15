@@ -47,7 +47,7 @@ class AdminController extends Controller
         $view_vars = [
             'users' => User::query()->companyScope()->where('id', '!=', auth()->id())->get(),
             'games' => Games::query()->where('status', '!=', 0)->get(),
-            'plans' => Plan::query()->where('company_id', request()->current_company->id)->get(),
+            'plans' => Plan::query()->get(),
             'company' => request()->current_company,
         ];
         return view('admin.home')->with($view_vars);

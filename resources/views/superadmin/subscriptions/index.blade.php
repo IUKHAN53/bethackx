@@ -12,8 +12,8 @@
             <th>Plano</th>
             <th>Usuário</th>
             <th>Status</th>
-            <th>Data de Início</th>
-            <th>Data de Término</th>
+{{--            <th>Data de Início</th>--}}
+{{--            <th>Data de Término</th>--}}
             <th>Ação</th>
         </tr>
         </thead>
@@ -24,8 +24,8 @@
                 <td>{{ $subscription->plan->name }}</td>
                 <td>{{ $subscription->user->name }}</td>
                 <td>{{ $subscription->status ? 'Ativo' : 'Inativo' }}</td>
-                <td>{{ $subscription->start_date }}</td>
-                <td>{{ $subscription->end_date }}</td>
+{{--                <td>{{ $subscription->start_date }}</td>--}}
+{{--                <td>{{ $subscription->end_date }}</td>--}}
                 <td>
                     <div class="btn-group" role="group">
                         <a href="{{ route('super-admin.subscriptions.show', $subscription->id) }}" class="btn btn-sm btn-primary">Ver</a>

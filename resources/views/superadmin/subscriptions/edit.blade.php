@@ -44,21 +44,21 @@
             @enderror
         </div>
 
-        <div class="form-group">
-            <label for="start_date">Data de Início</label>
-            <input type="datetime-local" id="start_date" name="start_date" class="form-control @error('start_date') is-invalid @enderror" value="{{ $subscription->start_date ? $subscription->start_date->format('Y-m-d\TH:i') : '' }}">
-            @error('start_date')
-            <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+{{--        <div class="form-group">--}}
+{{--            <label for="start_date">Data de Início</label>--}}
+{{--            <input type="datetime-local" id="start_date" name="start_date" class="form-control @error('start_date') is-invalid @enderror" value="{{ $subscription->start_date ? $subscription->start_date->format('Y-m-d\TH:i') : '' }}">--}}
+{{--            @error('start_date')--}}
+{{--            <div class="invalid-feedback">{{ $message }}</div>--}}
+{{--            @enderror--}}
+{{--        </div>--}}
 
-        <div class="form-group">
-            <label for="end_date">Data de Término</label>
-            <input type="datetime-local" id="end_date" name="end_date" class="form-control @error('end_date') is-invalid @enderror" value="{{ $subscription->end_date ? $subscription->end_date->format('Y-m-d\TH:i') : '' }}">
-            @error('end_date')
-            <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+{{--        <div class="form-group">--}}
+{{--            <label for="end_date">Data de Término</label>--}}
+{{--            <input type="datetime-local" id="end_date" name="end_date" class="form-control @error('end_date') is-invalid @enderror" value="{{ $subscription->end_date ? $subscription->end_date->format('Y-m-d\TH:i') : '' }}">--}}
+{{--            @error('end_date')--}}
+{{--            <div class="invalid-feedback">{{ $message }}</div>--}}
+{{--            @enderror--}}
+{{--        </div>--}}
 
         <button type="submit" class="btn btn-primary mt-3 float-end">Atualizar</button>
     </form>

@@ -344,12 +344,13 @@ button:hover, button:active, button:focus {
     border-top: 1px solid #E1E1E1;
     padding-left: 4px;
     padding-right: 4px;
-    padding-bottom: env(safe-area-inset-bottom)
+    padding-bottom: env(safe-area-inset-bottom);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
 }
 
 .appBottomMenu.no-border {
     border: 0 !important;
-    box-shadow: 0 !important
 }
 
 .appBottomMenu.rounded {
@@ -8800,7 +8801,7 @@ body.dark-mode-active .custom-file-upload label.file-uploaded span {
 }
 
 body.dark-mode-active .nav-tabs.capsuled {
-    background: rgba(27, 40, 59, 0.4)
+    background: var(--secondary-color);
 }
 
 body.dark-mode-active .nav-tabs.capsuled .nav-item .nav-link {
