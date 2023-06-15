@@ -4,7 +4,15 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\SuperAdmin\SuperAdminController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/run-config-commands', function () {
+    Artisan::call('storage:link');
+    Artisan::call('view:cache');
+    Artisan::call('route:cache');
+    Artisan::call('config:cache');
+});
 
 Route::get('/test', function () {
     return view('test');
