@@ -11,12 +11,6 @@
         <tr>
             <th>Nome</th>
             <th>URL</th>
-            <th>Logo</th>
-            <th>Favicon</th>
-            <th>Home Banner</th>
-            <th>Cor Primária</th>
-            <th>Cor Secundária</th>
-            <th>Cor Terciária</th>
             <th>Ativo</th>
             <th>Administrador</th>
             <th>Ação</th>
@@ -26,19 +20,7 @@
         @foreach($companies as $company)
             <tr>
                 <td>{{ $company->name }}</td>
-                <td>{{ url('/'.$company->slug) }}</td>
-                <td>
-                    <img src="{{ Storage::url($company->logo) }}" alt="Logo" width="30" height="30">
-                </td>
-                <td>
-                    <img src="{{ Storage::url($company->favicon) }}" alt="Favicon" width="30" height="30">
-                </td>
-                <td>
-                    <img src="{{ Storage::url($company->home_banner) }}" alt="Favicon" width="30" height="30">
-                </td>
-                <td><span style="color: {{ $company->primary_color }}">{{ $company->primary_color }}</span></td>
-                <td><span style="color: {{ $company->secondary_color }}">{{ $company->secondary_color }}</span></td>
-                <td><span style="color: {{ $company->tertiary_color }}">{{ $company->tertiary_color }}</span></td>
+                <td><a href="{{ url('/'.$company->slug) }}">{{ url('/'.$company->slug) }}</a></td>
                 <td>{{ $company->is_active ? 'Sim' : 'Não' }}</td>
                 <td>{{ $company->admin->name ?? '' }}</td>
                 <td>

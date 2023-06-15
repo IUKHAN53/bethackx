@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyGames;
 use App\Models\Games;
-use App\Models\GlobalSettings;
 use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -198,6 +197,8 @@ class AdminController extends Controller
         $company->primary_color = $request->input('primary_color');
         $company->secondary_color = $request->input('secondary_color');
         $company->tertiary_color = $request->input('tertiary_color');
+        $company->buttons_color = $request->input('buttons_color');
+        $company->notices_color = $request->input('notices_color');
 
         $company->save();
 

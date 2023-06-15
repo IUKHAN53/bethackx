@@ -2,6 +2,8 @@
     --primary-color: #0c1624;
     --secondary-color: #1b2226;
     --tertiary-color: #0564fd;
+    --button-color: #0d6efd;
+    --notices-color: #6f42c1;
     --label-color: #A1A1A2;
 }
 
@@ -2131,19 +2133,19 @@ i.bi {
 }
 
 .btn-primary {
-    background: var(--tertiary-color) !important;
-    border-color: var(--tertiary-color) !important;
+    background: var(--button-color) !important;
+    border-color: var(--button-color) !important;
     color: #ffffff !important
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
-    background: var(--tertiary-color) !important;
-    border-color: var(--tertiary-color) !important
+    background: var(--button-color) !important;
+    border-color: var(--button-color) !important
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
-    background: var(--tertiary-color);
-    border-color: var(--tertiary-color);
+    background: var(--button-color);
+    border-color: var(--button-color);
     opacity: 0.5
 }
 
@@ -2217,7 +2219,7 @@ i.bi {
 }
 
 .btn-link {
-    color: var(--tertiary-color) !important
+    color: var(--button-color) !important
 }
 
 .btn-info {
@@ -2274,27 +2276,27 @@ i.bi {
 
 .btn-outline-primary {
     background: transparent;
-    border-color: var(--tertiary-color);
+    border-color: var(--button-color);
     border-width: 1px !important;
-    color: var(--tertiary-color);
+    color: var(--button-color);
     transition: none
 }
 
 .btn-outline-primary:hover, .btn-outline-primary:active {
     background: rgba(30, 116, 253, 0.15) !important;
-    border-color: var(--tertiary-color) !important;
-    color: var(--tertiary-color) !important
+    border-color: var(--button-color) !important;
+    color: var(--button-color) !important
 }
 
 .btn-outline-primary.active {
-    background: var(--tertiary-color) !important;
+    background: var(--button-color) !important;
     color: #fff !important;
-    border-color: var(--tertiary-color) !important
+    border-color: var(--button-color) !important
 }
 
 .btn-outline-primary.disabled, .btn-outline-primary:disabled {
-    color: var(--tertiary-color) !important;
-    border-color: var(--tertiary-color) !important;
+    color: var(--button-color) !important;
+    border-color: var(--button-color) !important;
     background: transparent !important;
     opacity: 0.5
 }
@@ -2472,7 +2474,7 @@ i.bi {
 .btn-text-primary {
     background: transparent;
     border-color: transparent;
-    color: var(--tertiary-color) !important;
+    color: var(--button-color) !important;
     transition: none
 }
 
@@ -2483,12 +2485,12 @@ i.bi {
 .btn-text-primary:active, .btn-text-primary.active {
     background: rgba(30, 116, 253, 0.15) !important;
     border-color: transparent !important;
-    color: var(--tertiary-color) !important
+    color: var(--button-color) !important
 }
 
 .btn-text-primary.disabled, .btn-text-primary:disabled {
-    color: var(--tertiary-color) !important;
-    border-color: var(--tertiary-color) !important;
+    color: var(--button-color) !important;
+    border-color: var(--button-color) !important;
     background: transparent !important;
     opacity: 0.5
 }
@@ -2881,8 +2883,8 @@ i.bi {
 }
 
 .btn-check:checked + .btn-outline-primary {
-    background: var(--tertiary-color) !important;
-    border-color: var(--tertiary-color) !important
+    background: var(--button-color) !important;
+    border-color: var(--button-color) !important
 }
 
 .btn-check:checked + .btn-outline-secondary {
@@ -3513,7 +3515,7 @@ i.bi {
 }
 
 .bg-primary {
-    background: var(--tertiary-color) !important;
+    background: var(--notices-color) !important;
     color: #FFF
 }
 
@@ -3552,12 +3554,12 @@ i.bi {
 }
 
 a.bg-primary {
-    background: var(--tertiary-color) !important;
+    background: var(--primary-color) !important;
     color: #FFF !important
 }
 
 a.bg-primary:hover, a.bg-primary:active {
-    background: var(--tertiary-color) !important
+    background: var(--primary-color) !important
 }
 
 a.bg-secondary {
@@ -3623,7 +3625,7 @@ a.bg-dark:hover, a.bg-dark:active {
 }
 
 .text-primary, a.text-primary {
-    color: var(--tertiary-color) !important
+    color: var(--primary-color) !important
 }
 
 .text-secondary, a.text-secondary {
@@ -3655,7 +3657,7 @@ a.bg-dark:hover, a.bg-dark:active {
 }
 
 .border-primary {
-    border-color: var(--tertiary-color) !important
+    border-color: var(--primary-color) !important
 }
 
 .border-secondary {
@@ -3745,9 +3747,9 @@ a.bg-dark:hover, a.bg-dark:active {
 }
 
 .alert-primary {
-    background: var(--tertiary-color);
+    background: var(--notices-color);
     color: #fff;
-    border: 1px solid var(--tertiary-color)
+    border: 1px solid var(--notices-color)
 }
 
 .alert-primary a {
@@ -3765,26 +3767,26 @@ a.bg-dark:hover, a.bg-dark:active {
 
 .alert-outline-primary {
     background: transparent;
-    color: var(--tertiary-color);
-    border: 1px solid var(--tertiary-color)
+    color: var(--notices-color);
+    border: 1px solid var(--notices-color)
 }
 
 .alert-outline-primary a {
-    color: var(--tertiary-color) !important;
+    color: var(--notices-color) !important;
     text-decoration: underline !important
 }
 
 .alert-outline-primary .alert-title {
-    color: var(--tertiary-color)
+    color: var(--notices-color)
 }
 
 .alert-outline-primary .btn-close {
-    color: var(--tertiary-color);
+    color: var(--notices-color);
     opacity: 1
 }
 
 .alert-outline-primary .btn-close:before, .alert-outline-primary .btn-close:after {
-    background: var(--tertiary-color)
+    background: var(--notices-color)
 }
 
 .alert-secondary {

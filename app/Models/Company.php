@@ -17,6 +17,8 @@ class Company extends Model
         'primary_color',
         'secondary_color',
         'tertiary_color',
+        'buttons_color',
+        'notices_color',
         'request_access_link',
         'help_link',
         'home_banner',

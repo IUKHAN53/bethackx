@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('primary_color')->nullable();
             $table->string('secondary_color')->nullable();
             $table->string('tertiary_color')->nullable();
+            $table->string('buttons_color')->nullable();
+            $table->string('notices_color')->nullable();
             $table->string('request_access_link')->nullable();
             $table->string('help_link')->nullable();
             $table->string('home_banner')->nullable();

@@ -57,6 +57,17 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="buttons_color">Cor dos botões:</label>
+                            <input type="color" class="form-control" id="buttons_color" name="buttons_color"
+                                   required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notices_color">Avisa a cor:</label>
+                            <input type="color" class="form-control" id="notices_color" name="notices_color" required>
+                        </div>
+
+                        <div class="form-group">
                             <label for="is_active">Ativo:</label>
                             <select class="form-control" id="is_active" name="is_active" required>
                                 <option value="1">Sim</option>
@@ -76,7 +87,8 @@
 
                         <div class="form-group">
                             <label for="request_access_link">Link de Solicitação de Acesso:</label>
-                            <input type="text" class="form-control" id="request_access_link" name="request_access_link" required>
+                            <input type="text" class="form-control" id="request_access_link" name="request_access_link"
+                                   required>
                         </div>
 
                         <div class="form-group">
@@ -94,12 +106,14 @@
 
                         <div class="form-group">
                             <label for="home_banner_ref_link">Link de Referência do Banner:</label>
-                            <input type="text" class="form-control" id="home_banner_ref_link" name="home_banner_ref_link" required>
+                            <input type="text" class="form-control" id="home_banner_ref_link"
+                                   name="home_banner_ref_link" required>
                         </div>
 
                         <div class="form-group">
                             <label for="admin_tutorial_link">Link do Tutorial do Administrador:</label>
-                            <input type="text" class="form-control" id="admin_tutorial_link" name="admin_tutorial_link" required>
+                            <input type="text" class="form-control" id="admin_tutorial_link" name="admin_tutorial_link"
+                                   required>
                         </div>
 
                         <button type="submit" class="btn btn-primary mt-3">Criar</button>

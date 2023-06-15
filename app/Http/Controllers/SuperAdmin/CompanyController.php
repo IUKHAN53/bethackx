@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyGames;
 use App\Models\Games;
+use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -68,6 +69,8 @@ class CompanyController extends Controller
         $company->primary_color = $request->input('primary_color');
         $company->secondary_color = $request->input('secondary_color');
         $company->tertiary_color = $request->input('tertiary_color');
+        $company->buttons_color = $request->input('buttons_color');
+        $company->notices_color = $request->input('notices_color');
         $company->is_active = $request->input('is_active');
         $company->admin_id = $request->input('admin_id');
         $company->request_access_link = $request->input('request_access_link');
@@ -100,6 +103,16 @@ class CompanyController extends Controller
 
 //        create games for the company
         foreach (Games::query()->where('status', 1)->get() as $game) {
+            CompanyGames::create(
+                [
+                    'company_id' => $company->id,
+                    'game_id' => $game->id,
+                    'iframe_link' => $game->iframe_link,
+                    'is_active' => $game->status,
+                ]);
+        }
+//        create plans for the company
+        foreach (Plan::query()->where('status', 1)->get() as $game) {
             CompanyGames::create(
                 [
                     'company_id' => $company->id,
@@ -151,6 +164,8 @@ class CompanyController extends Controller
         $company->primary_color = $validatedData['primary_color'];
         $company->secondary_color = $validatedData['secondary_color'];
         $company->tertiary_color = $validatedData['tertiary_color'];
+        $company->buttons_color = $validatedData['buttons_color'];
+        $company->notices_color = $validatedData['notices_color'];
         $company->is_active = $validatedData['is_active'];
 
         $company->request_access_link = $validatedData['request_access_link'];

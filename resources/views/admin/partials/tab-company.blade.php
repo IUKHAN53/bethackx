@@ -68,6 +68,22 @@
                                class="form-control-custom">
                     </label>
                     @error('tertiary_color')<span style="color: darkred">{{ $message }}</span>@enderror
+                    <label for="buttons_color"
+                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
+                        <span class="w-100">Cor dos botões:</span>
+                        <input type="color" name="buttons_color" id="buttons_color"
+                               value="{{ $company->buttons_color ?? '' }}"
+                               class="form-control-custom">
+                    </label>
+                    @error('buttons_color')<span style="color: darkred">{{ $message }}</span>@enderror
+                    <label for="notices_color"
+                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
+                        <span class="w-100">Avisa a cor:</span>
+                        <input type="color" name="notices_color" id="notices_color"
+                               value="{{ $company->notices_color ?? '' }}"
+                               class="form-control-custom">
+                    </label>
+                    @error('notices_color')<span style="color: darkred">{{ $message }}</span>@enderror
                 </div>
                 <div class="text-end mt-3">
                     <button type="submit" class="btn btn-primary btn-sm">SALVAR</button>

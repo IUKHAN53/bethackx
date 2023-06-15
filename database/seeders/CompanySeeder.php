@@ -23,6 +23,8 @@ class CompanySeeder extends Seeder
             'primary_color' => '#0c1624',
             'secondary_color' => '#2f3240',
             'tertiary_color' => '#423ed4',
+            'buttons_color' => '#0d6efd',
+            'notices_color' => '#6f42c1',
             'is_active' => 1,
             'is_default' => 1,
             'admin_id' => User::query()->where('is_admin', 1)->first()->id,

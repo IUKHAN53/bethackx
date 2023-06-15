@@ -63,18 +63,20 @@
         </div>
         <!-- * profile box -->
 
-        <ul class="listview flush transparent no-line image-listview mt-2">
-            <li>
-                <a href="{{route('admin.view', $current_company->slug)}}" class="item">
-                    <div class="icon-box bg-primary">
-                        <ion-icon name="desktop-outline"></ion-icon>
-                    </div>
-                    <div class="in">
-                        Admin
-                    </div>
-                </a>
-            </li>
-        </ul>
+        @if(auth()->user()->isAdmin())
+            <ul class="listview flush transparent no-line image-listview mt-2">
+                <li>
+                    <a href="{{route('admin.view', $current_company->slug)}}" class="item">
+                        <div class="icon-box bg-primary">
+                            <ion-icon name="desktop-outline"></ion-icon>
+                        </div>
+                        <div class="in">
+                            Admin
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        @endif
         <ul class="listview flush transparent no-line image-listview mt-2">
             <li>
                 <a href="javascript:void(0)" class="item" onclick="$('#logout_form').submit()">
