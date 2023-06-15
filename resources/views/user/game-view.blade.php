@@ -20,8 +20,7 @@
                     <div class="d-flex justify-content-between align-items-center gap-2">
                         <div class="d-flex flex-column justify-content-start">
                             <h5 class="text-start fw-bolder m-0">Hackear Mines</h5>
-                            <span style="font-size: 10px">Clique em no botão ao lado para gerar uma nova probabilidade de
-                                entrada.</span>
+                            <span style="font-size: 10px">Você não está inscrito no Free clique aqui para se tornar premium e jogar todos os jogos</span>
                         </div>
                         <div>
                             <button class="btn btn-primary text-uppercase fw-bolder" id="signal_btn" style="min-width: 105px">Hackear</button>

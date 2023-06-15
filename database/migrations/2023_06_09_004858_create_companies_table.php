@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('home_banner')->nullable();
             $table->string('home_banner_ref_link')->nullable();
             $table->string('admin_tutorial_link')->nullable();
+            $table->string('plan_checkout_link')->nullable();
             $table->boolean('is_active')->default(true);
             $table->smallInteger('is_default')->default(0);
             $table->unsignedBigInteger('admin_id');

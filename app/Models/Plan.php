@@ -17,6 +17,11 @@ class Plan extends Model
         'company_id',
     ];
 
+    public function scopeCompanyScope($query)
+    {
+        return $query->where('company_id', request()->current_company->id);
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class);

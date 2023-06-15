@@ -115,6 +115,11 @@
                             <input type="text" class="form-control" id="admin_tutorial_link" name="admin_tutorial_link"
                                    required>
                         </div>
+                        <div class="form-group">
+                            <label for="plan_checkout_link">Plano de link de checkout:</label>
+                            <input type="text" class="form-control" id="plan_checkout_link" name="plan_checkout_link"
+                                   required>
+                        </div>
 
                         <button type="submit" class="btn btn-primary mt-3">Criar</button>
                     </form>

@@ -77,6 +77,7 @@ class CompanyController extends Controller
         $company->help_link = $request->input('help_link');
         $company->home_banner_ref_link = $request->input('home_banner_ref_link');
         $company->admin_tutorial_link = $request->input('admin_tutorial_link');
+        $company->plan_checkout_link = $request->input('plan_checkout_link');
         $company->save();
 
         User::query()->where('id', $request->input('admin_id'))->update(['company_id' => $company->id, 'is_admin' => 1]);
@@ -112,15 +113,20 @@ class CompanyController extends Controller
                 ]);
         }
 //        create plans for the company
-        foreach (Plan::query()->where('status', 1)->get() as $game) {
-            CompanyGames::create(
-                [
-                    'company_id' => $company->id,
-                    'game_id' => $game->id,
-                    'iframe_link' => $game->iframe_link,
-                    'is_active' => $game->status,
-                ]);
-        }
+        Plan::create([
+            'name' => 'Free',
+            'description' => 'Free plan',
+            'price' => 0,
+            'status' => 1,
+            'company_id' => $company->id,
+        ]);
+        Plan::create([
+            'name' => 'Premium',
+            'description' => 'Premium plan',
+            'price' => 100,
+            'status' => 1,
+            'company_id' => $company->id,
+        ]);
 
         // Redirect to the company index page or show a success message
         return redirect()->route('super-admin.companies.index')->with('success', 'Empresa criada com sucesso!');
@@ -172,6 +178,7 @@ class CompanyController extends Controller
         $company->help_link = $validatedData['help_link'];
         $company->home_banner_ref_link = $validatedData['home_banner_ref_link'];
         $company->admin_tutorial_link = $validatedData['admin_tutorial_link'];
+        $company->plan_checkout_link = $validatedData['plan_checkout_link'];
 
         if($company->admin_id != $validatedData['admin_id']){
             $p_admin = User::query()->where('id', $company->admin_id)->first();

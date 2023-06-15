@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyGames;
 use App\Models\Games;
+use App\Models\GamesPlans;
 use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -47,7 +48,7 @@ class AdminController extends Controller
         $view_vars = [
             'users' => User::query()->companyScope()->where('id', '!=', auth()->id())->get(),
             'games' => Games::query()->where('status', '!=', 0)->get(),
-            'plans' => Plan::query()->get(),
+            'plans' => Plan::query()->companyScope()->get(),
             'company' => request()->current_company,
         ];
         return view('admin.home')->with($view_vars);
@@ -199,6 +200,7 @@ class AdminController extends Controller
         $company->tertiary_color = $request->input('tertiary_color');
         $company->buttons_color = $request->input('buttons_color');
         $company->notices_color = $request->input('notices_color');
+        $company->plan_checkout_link = $request->input('plan_checkout_link');
 
         $company->save();
 

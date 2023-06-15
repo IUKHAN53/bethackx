@@ -33,9 +33,13 @@ class Games extends Model
         return $this->companyGames()->where('company_id', request()->current_company->id)->first()->iframe_link;
     }
 
-    public function premium() : bool
+    public function isPremium(): bool
     {
-        return $this->companyGames()->where('company_id', request()->current_company->id)->first()->is_premium;
+        $premium = Plan::where('name', '!=', 'Free')->companyScope()->first();
+        if ($premium) {
+            return $this->plans()->where('plan_id', $premium->id)->exists();
+        }
+        return false;
     }
 
     public function plans()

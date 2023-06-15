@@ -84,6 +84,14 @@
                                class="form-control-custom">
                     </label>
                     @error('notices_color')<span style="color: darkred">{{ $message }}</span>@enderror
+                    <label for="plan_checkout_link"
+                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
+                        <span class="w-100">Plano de link de checkout:</span>
+                        <input type="text" id="plan_checkout_link" name="plan_checkout_link"
+                               class="form-control-custom w-100" value="{{ $company->plan_checkout_link ?? '' }}"
+                               required>
+                    </label>
+                    @error('plan_checkout_link')<span style="color: darkred">{{ $message }}</span>@enderror
                 </div>
                 <div class="text-end mt-3">
                     <button type="submit" class="btn btn-primary btn-sm">SALVAR</button>

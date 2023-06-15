@@ -30,11 +30,15 @@
     </div>
 
     <div class="header-large-title text-center" style="background-color: #423ed4">
-        <h4 class="subtitle" style="font-size: 14px;">clique abaixo no jogo preferido para abrir os sinais</h4>
+        <h4 class="subtitle" style="font-size: 14px;">Clique abaixo no jogo preferido para abrir os sinais</h4>
     </div>
-
     <div class="section full mt-3">
         <div class=" mx-3 pt-2 pb-2">
+            @if(!auth()->user()->hasPremium())
+                <div class="header-large-title text-center" style="background-color: #423ed4">
+                    <h4 class="subtitle" style="font-size: 14px;"><a style="color: white" href="{{$current_company->plan_checkout_link}}">Você não é assinante de nenhum plano clique aqui para Assinar</a></h4>
+                </div>
+            @endif
             @foreach($types as $type => $games)
             <div id="type_{{$type}}">
                     <div class="d-flex justify-content-start align-items-center mb-2 mt-2 ms-3">
@@ -46,7 +50,7 @@
                             @foreach($games as $game)
                                 @php
                                     $locked = false;
-                                    if(!auth()->user()->hasPremiumForGame($game->id)){
+                                    if(!auth()->user()->hasPremiumForGame($game->id) && $game->isPremium()){
                                         $locked = true;
                                     }
                                 @endphp

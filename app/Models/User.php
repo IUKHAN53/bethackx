@@ -47,6 +47,18 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+            $freePlan = Plan::where('name', 'Free')->companyScope()->first();
+            if ($freePlan) {
+                $user->subscribePlan($freePlan->id);
+            }
+        });
+    }
+
     public function isAdmin(): bool
     {
         return $this->is_admin;
@@ -79,14 +91,15 @@ class User extends Authenticatable
 
     public function hasPremium(): bool
     {
-        return $this->subscriptions()->count() > 0;
+        $freePlan = Plan::where('name', 'Free')->companyScope()->first();
+        return $this->subscriptions()->whereNot('plan_id', $freePlan->id)->count() > 0;
     }
 
     public function hasPremiumForGame($game_id): bool
     {
-        $plans_id = GamesPlans::query()->where('game_id', $game_id)->pluck('plan_id')->toArray();
-        $subscription = $this->subscriptions()->whereIn('plan_id', $plans_id)->count();
-        return $subscription > 0;
+        $premium = Plan::where('name','!=', 'Free')->companyScope()->first();
+        $plans_id = GamesPlans::query()->where('game_id', $game_id)->where('plan_id', $premium->id)->pluck('plan_id')->toArray();
+        return $this->subscriptions()->whereIn('plan_id', $plans_id)->exists();
     }
 
     public function subscribedPlans(){
@@ -99,5 +112,7 @@ class User extends Authenticatable
         $subscription->plan_id = $plan_id;
         $subscription->save();
     }
+
+
 
 }
