@@ -7,9 +7,7 @@ if (!function_exists('setEnvFromDatabase')) {
     {
         $currentUrl = url()->current();
         $urlComponents = parse_url($currentUrl);
-        if ($urlComponents['path'] == '/') {
-            abort(404);
-        } else {
+        if (isset($urlComponents['path'])) {
             $pathParts = explode('/', $urlComponents['path']);
             $companySlug = $pathParts[1] ?? '';
             if ($companySlug) {
@@ -17,7 +15,7 @@ if (!function_exists('setEnvFromDatabase')) {
                 if ($company) {
                     $company = Company::where('slug', $companySlug)->first();
                     if (!$company) {
-                        abort(404);
+                        return;
                     }
                     $value = $company->favicon;
                     file_put_contents(app()->environmentFilePath(), str_replace(
@@ -41,11 +39,13 @@ if (!function_exists('setEnvFromDatabase')) {
                     $_ENV['ICON_URL'] = $value;
                     $_SERVER['ICON_URL'] = $value;
                 } else {
-                    abort(404);
+                    return;
                 }
             } else {
-                abort(404);
+                return;
             }
+        } else {
+            return;
         }
     }
 }
