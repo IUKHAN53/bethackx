@@ -109,13 +109,14 @@ class AdminController extends Controller
         return response()->json([
             'status' => true,
             'html' => $html,
-            'message' => 'Added User.',
+            'message' => 'Added User',
         ]);
     }
 
     public function deleteUser(Request $request)
     {
         $user = User::query()->find($request->id);
+        $user->subscriptions()->delete();
         $user->delete();
         $users = User::query()->where('id', '!=', auth()->id())->where('company_id', $request->current_company->id)->get();
         $html = view('admin.partials.users-table', compact('users'))->render();

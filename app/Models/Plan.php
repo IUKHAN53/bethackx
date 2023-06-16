@@ -9,11 +9,13 @@ class Plan extends Model
 {
     use HasFactory;
 
+    const PREMIUM_PLAN_NAME = 'Premium';
+    const FREE_PLAN_NAME = 'Free';
     protected $fillable = [
         'name',
         'description',
         'price',
-        'status',
+        'statusstatus',
         'company_id',
     ];
 

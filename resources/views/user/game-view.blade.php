@@ -50,7 +50,7 @@
                     </a>
                 </div>
                 <div class="iframe-container" id="iframe-container">
-                    <iframe id="game_iframe" src="{{$game->iframe_link()}}" style="background-color: rgba(255,255,255,0.09)" width="100%"
+                    <iframe id="game_iframe" src="{{$game->iframe_link()}}" style="background-color: var(--primary-color);" width="100%"
                             height="730px"></iframe>
                 </div>
             </div>
@@ -84,7 +84,7 @@
             newIframe.src = '{{$game->iframe_link}}';
             newIframe.style.width = '100%';
             newIframe.style.height = '730px';
-            newIframe.style.backgroundColor = 'rgba(255,255,255,0.09)';
+            newIframe.style.backgroundColor = 'var(--primary-color);';
 
             // Remove the existing iframe (if any)
             while (iframeContainer.firstChild) {

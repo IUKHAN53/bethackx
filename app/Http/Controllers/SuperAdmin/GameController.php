@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyGames;
 use App\Models\Games as Game;
+use App\Models\GamesPlans;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -52,7 +54,23 @@ class GameController extends Controller
 
         $game->image = $imagePath;
         $game->banner = $bannerPath;
-        $game->save();
+
+        if($game->save()){
+            foreach (Company::query()->where('is_active', 1)->pluck('id')->toArray() as $company_id){
+                CompanyGames::create([
+                    'company_id' => $company_id,
+                    'game_id' => $game->id,
+                    'iframe_link' => $request->input('iframe_link'),
+                ]);
+            }
+            foreach (Plan::query()->where('status', 1)->where('name', Plan::PREMIUM_PLAN_NAME)->pluck('id')->toArray() as $plan_id){
+                GamesPlans::create([
+                    'plan_id' => $plan_id,
+                    'game_id' => $game->id,
+                ]);
+            }
+        }
+
         return redirect()->route('super-admin.games.index')->with('success', 'Jogo criado com sucesso.');
     }
 
