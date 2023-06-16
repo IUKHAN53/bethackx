@@ -172,8 +172,8 @@ class CompanyController extends Controller
         $company->primary_color = $validatedData['primary_color'];
         $company->secondary_color = $validatedData['secondary_color'];
         $company->tertiary_color = $validatedData['tertiary_color'];
-        $company->buttons_color = $validatedData['buttons_color'];
-        $company->notices_color = $validatedData['notices_color'];
+        $company->buttons_color = $request->buttons_color;
+        $company->notices_color = $request->notices_color;
         $company->is_active = $validatedData['is_active'];
 
         $company->request_access_link = $validatedData['request_access_link'];
