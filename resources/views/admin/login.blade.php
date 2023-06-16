@@ -52,7 +52,7 @@
                     <button type="submit" class="btn btn-primary btn-block btn-lg login-btn">Acessar</button>
                 </div>
                 <div class="mt-4">
-                    <p class="fw-bolder"><span class="text-white">Não tem acesso?</span> <a href="">Clique aqui</a></p>
+                    <p class="fw-bolder"><span class="text-white">Não tem acesso?</span> <a href="{{$current_company->request_access_link}}">Clique aqui</a></p>
                 </div>
             </form>
         </div>
