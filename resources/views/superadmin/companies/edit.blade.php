@@ -173,6 +173,14 @@
                 @enderror
             </div>
 
+            <div class="mb-3">
+                <label for="plan_checkout_link" class="form-label">Plano de link de checkout:</label>
+                <input type="text" name="plan_checkout_link" id="plan_checkout_link" class="form-control"
+                       value="{{ old('plan_checkout_link', $company->plan_checkout_link) }}">
+                @error('plan_checkout_link')
+                <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
             <button type="submit" class="btn btn-primary">Atualizar</button>
         </form>
     </div>
