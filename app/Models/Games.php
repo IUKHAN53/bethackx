@@ -30,7 +30,12 @@ class Games extends Model
 
     public function iframe_link()
     {
-        return $this->companyGames()->where('company_id', request()->current_company->id)->first()->iframe_link;
+        $cg = $this->companyGames()->where('company_id', request()->current_company->id)->first();
+        if ($cg) {
+            return $cg->iframe_link;
+        } else {
+            return $this->iframe_link;
+        }
     }
 
     public function isPremium(): bool
