@@ -26,7 +26,8 @@
 
 @section('content')
     <div class="text-center my-2">
-        <img src="{{$current_company->home_banner != '' ? Storage::url($current_company->home_banner) : asset('img/banners/banner_topo.png')}}" alt="">
+        <img src="{{$current_company->home_banner != '' ? Storage::url($current_company->home_banner) : asset('img/banners/banner_topo.png')}}" alt=""
+        style="max-height: 200px; max-width: 350px">
     </div>
 
     <div class="header-large-title text-center" style="background-color: #423ed4">
