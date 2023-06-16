@@ -86,7 +86,7 @@ class AdminController extends Controller
                 $key = trim($key, "'");
                 if ($key == 'home_banner') {
                     $name = 'home_banner-' . time() . '.' . $value->getClientOriginalExtension();
-                    $banner = $value->storeAs('/', $name);
+                    $banner = $value->storeAs('public', $name);
                     $value = $banner;
                 }
                 $request->current_company->{$key} = $value;
@@ -185,13 +185,13 @@ class AdminController extends Controller
 
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $logoPath = $logo->storeAs('public/companies' . $company->id, 'logo-' . time() . '.' . $logo->getClientOriginalExtension());
+            $logoPath = $logo->storeAs('public', 'company-'.$company->id.'-logo-' . time() . '.' . $logo->getClientOriginalExtension());
             $company->logo = $logoPath;
         }
 
         if ($request->hasFile('favicon')) {
             $favicon = $request->file('favicon');
-            $faviconPath = $favicon->storeAs('public/companies' . $company->id, 'favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
+            $faviconPath = $favicon->storeAs('public', 'company-'.$company->id.'-favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
             $company->favicon = $faviconPath;
         }
 

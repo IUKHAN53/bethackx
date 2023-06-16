@@ -44,11 +44,11 @@ class GameController extends Controller
 
         // Upload image
         $image = $request->file('image');
-        $imagePath = $image->storeAs('public/games/' . $game->id, 'image-' . time() . '.' . $image->getClientOriginalExtension());
+        $imagePath = $image->storeAs('public', 'game-'.$game->id.'-image-' . time() . '.' . $image->getClientOriginalExtension());
 
         // Upload banner
         $banner = $request->file('banner');
-        $bannerPath = $banner->storeAs('public/games/' . $game->id, 'banner-' . time() . '.' . $banner->getClientOriginalExtension());
+        $bannerPath = $banner->storeAs('public', 'game-'.$game->id.'-banner-' . time() . '.' . $banner->getClientOriginalExtension());
 
         $game->image = $imagePath;
         $game->banner = $bannerPath;
@@ -104,7 +104,7 @@ class GameController extends Controller
             }
             $game->is_default = 0;
             $image = $request->file('image');
-            $imagePath = $image->storeAs('public/games/' . $game->id, 'image-' . time() . '.' . $image->getClientOriginalExtension());
+            $imagePath = $image->storeAs('public', 'game-'.$game->id.'-image-' . time() . '.' . $image->getClientOriginalExtension());
 
             $game->image = $imagePath;
         }
@@ -116,7 +116,7 @@ class GameController extends Controller
             }
             $game->is_default = 0;
             $banner = $request->file('banner');
-            $bannerPath = $banner->storeAs('public/games/' . $game->id, 'banner-' . time() . '.' . $banner->getClientOriginalExtension());
+            $bannerPath = $banner->storeAs('public', 'game-'.$game->id.'-banner-' . time() . '.' . $banner->getClientOriginalExtension());
             $game->banner = $bannerPath;
         }
         $game->save();

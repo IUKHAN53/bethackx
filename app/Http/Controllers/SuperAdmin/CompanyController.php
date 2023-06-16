@@ -84,16 +84,16 @@ class CompanyController extends Controller
 
         // Upload logo image
         $logo = $request->file('logo');
-        $logoPath = $logo->storeAs('public/companies/' . $company->id, 'logo-' . time() . '.' . $logo->getClientOriginalExtension());
+        $logoPath = $logo->storeAs('public', 'company-'.$company->id.'-logo-' . time() . '.' . $logo->getClientOriginalExtension());
 
         // Upload favicon image
         $favicon = $request->file('favicon');
-        $faviconPath = $favicon->storeAs('public/companies/' . $company->id, 'favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
+        $faviconPath = $favicon->storeAs('public', 'company-'.$company->id.'-favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
 
         // Upload home banner image
         $homeBanner = $request->file('home_banner');
         if ($homeBanner) {
-            $homeBannerPath = $homeBanner->storeAs('public/companies/' . $company->id, 'home-banner-' . time() . '.' . $homeBanner->getClientOriginalExtension());
+            $homeBannerPath = $homeBanner->storeAs('public', 'company-'.$company->id.'-home-banner-' . time() . '.' . $homeBanner->getClientOriginalExtension());
             $company->home_banner = $homeBannerPath;
         }
 
@@ -222,21 +222,21 @@ class CompanyController extends Controller
         // Handle logo file upload
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $logoPath = $logo->storeAs('public/companies/' . $company->id, 'logo-' . time() . '.' . $logo->getClientOriginalExtension());
+            $logoPath = $logo->storeAs('public', 'company-'.$company->id.'-logo-' . time() . '.' . $logo->getClientOriginalExtension());
             $company->logo = $logoPath;
         }
 
         // Handle favicon file upload
         if ($request->hasFile('favicon')) {
             $favicon = $request->file('favicon');
-            $faviconPath = $favicon->storeAs('public/companies/' . $company->id, 'favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
+            $faviconPath = $favicon->storeAs('public', 'company-'.$company->id.'-favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
             $company->favicon = $faviconPath;
         }
 
         // Handle home banner file upload
         if ($request->hasFile('home_banner')) {
             $homeBanner = $request->file('home_banner');
-            $homeBannerPath = $homeBanner->storeAs('public/companies/' . $company->id, 'home-banner-' . time() . '.' . $homeBanner->getClientOriginalExtension());
+            $homeBannerPath = $homeBanner->storeAs('public', 'company-'.$company->id.'-home-banner-' . time() . '.' . $homeBanner->getClientOriginalExtension());
             $company->home_banner = $homeBannerPath;
         }
 
