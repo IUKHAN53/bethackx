@@ -162,6 +162,8 @@ class CompanyController extends Controller
             'home_banner' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'home_banner_ref_link' => 'nullable|string',
             'admin_tutorial_link' => 'nullable|string',
+            'buttons_color' => 'nullable|string',
+            'notices_color' => 'nullable|string',
         ]);
 
         // Update the company data
