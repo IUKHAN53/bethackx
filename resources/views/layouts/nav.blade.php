@@ -18,7 +18,7 @@
     <a href="{{route('home', $current_company)}}" class="item">
         <div class="col d-flex justify-content-center align-items-center flex-column gap-1">
             <div style="position: relative">
-                <img src="{{asset('img/home_logo.png')}}" class="bg-primary p-1 shadow"
+                <img src="{{Storage::url($current_company->favicon)}}" class="bg-primary p-1 shadow"
                      style="border-radius: 100%; width: 70px; height: 65px; position: absolute; bottom: -1rem; left: -2.2rem; right: 2rem"
                      alt="">
             </div>

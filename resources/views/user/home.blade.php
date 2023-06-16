@@ -30,7 +30,7 @@
         style="max-height: 200px; max-width: 350px">
     </div>
 
-    <div class="header-large-title text-center" style="background-color: #423ed4">
+    <div class="header-large-title bg-primary text-center" style="background-color: #423ed4">
         <h4 class="subtitle" style="font-size: 14px;">Clique abaixo no jogo preferido para abrir os sinais</h4>
     </div>
     <div class="section full mt-3">

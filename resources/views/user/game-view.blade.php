@@ -6,7 +6,7 @@
             <div>
                 <input type="hidden" id="game_id" value="{{$game->id}}">
                 <div class="d-flex justify-content-start align-items-center mb-2">
-                    <img src="{{ $game->is_default ? asset($game->image) : Storage::url($game->image)}}" class="bg-primary p-1 shadow rounded"
+                    <img src="/public/money.png" class="bg-primary p-1 shadow rounded"
                          alt="">
                     <h4 class="fw-bold ms-1 text-uppercase mt-1">{{$game->name}}</h4>
                 </div>
@@ -19,7 +19,7 @@
                 <div class="border p-2 custom-card">
                     <div class="d-flex justify-content-between align-items-center gap-2">
                         <div class="d-flex flex-column justify-content-start">
-                            <h5 class="text-start fw-bolder m-0">Hackear Mines</h5>
+                            <h5 class="text-start fw-bolder m-0">Gerar Sinal</h5>
                             <span style="font-size: 10px">Você não está inscrito no Free clique aqui para se tornar premium e jogar todos os jogos</span>
                         </div>
                         <div>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="flex-item flex-item-25  flex-row justify-content-start p-2 text-center"
                              style="background-color: #0c1624 !important; border-radius: 10px; font-size: 12px">
-                            <span class="text-white" style="font-size: 12px">Válido até</span>
+                            <span class="text-white" style="font-size: 12px">Válido até</span><br/>
                             <span class="text-small fw-bolder text-success" id="timer" style="font-size: 12px">--:--</span>
                         </div>
                     </div>
