@@ -19,9 +19,10 @@
     @endif
     <style>
         :root {
-            --primary-color: {{ $current_company->primary_color }} !important;
-            --secondary-color: {{ $current_company->secondary_color }} !important;
-            --tertiary-color: {{ $current_company->tertiary_color }} !important;
+            --primary-color: {{ $current_company->primary_color }}   !important;
+            --secondary-color: {{ $current_company->secondary_color }}   !important;
+            --tertiary-color: {{ $current_company->tertiary_color }}   !important;
+            --button-color: {{ $current_company->buttons_color }}   !important;
         }
     </style>
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('img/icon/192x192.png')}}">
@@ -30,38 +31,42 @@
 </head>
 
 <body class="bg-white dark-mode-active">
-<div id="appCapsule" class="pt-0">
-
-    <div class="mt-5 d-flex flex-column gap-5">
-        @if ($current_company)
-            @if ($current_company->logo)
-                <div class="d-flex flex-column justify-content-center align-items-center">
-                    <img src="{{Storage::url($current_company->logo)}}" alt="" style="max-width: 120px; max-height: 50px">
-                </div>
-            @endif
-        @else
-            <div class="d-flex flex-column justify-content-center align-items-center">
-                <img src="{{asset('img/home_logo.png')}}" alt="" style="max-width: 50px">
-                <img src="{{asset('img/logo.png')}}" alt="" style="max-width: 120px">
+<div class="container">
+    <div id="appCapsule" class="pt-0">
+        <div class="login-form mt-1 d-flex justify-content-center gap-5 flex-column" style="height: 90vh">
+            <div class="section mt-1">
+                @if ($current_company)
+                    @if ($current_company->logo)
+                        <img src="{{Storage::url($current_company->logo)}}" alt="image" class="form-image">
+                    @endif
+                @else
+                    <img src="{{asset('img/logo.png')}}" alt="image" class="form-image">
+                @endif
             </div>
-        @endif
-        <div class="section mt-1 text-center">
-            <h4 class="text-white fw-bolder">Bem-Vindo a revolução <br> do hack de sinais.</h4>
-            <h4 class="fw-bolder" style="color: #685fc6">Inimigo nº 1 dos Cassinos!</h4>
-        </div>
-        <div class="section mt-1 mb-5 px-5">
-            <div class="d-flex flex-column justify-content-start">
-                <span>Já tem usuário?</span>
-                <a href="{{route('user.login', $current_company->slug)}}" class="btn btn-primary btn-block">Realizar Login</a>
+            <div class="section mt-1 text-center">
+                <h4 class="text-white fw-bolder">Bem-Vindo a revolução <br> do hack de sinais.</h4>
+                <h4 class="fw-bolder" style="color: #685fc6">Inimigo nº 1 dos Cassinos!</h4>
             </div>
-            <div class="d-flex flex-column justify-content-start mt-3">
-                <span>É novo por aqui?</span>
-                <a href="{{$current_company->request_access_link}}" class="btn btn-primary btn-block">Solicitar acesso</a>
+            <div class="section mt-1 mb-5 d-flex justify-content-center align-items-center">
+                <form class="w-100">
+                    <div class="form-group boxed">
+                        <div class="input-wrapper">
+                            <span style="float: left">Já tem usuário?</span>
+                            <a href="{{route('user.login', $current_company->slug)}}"
+                               class="btn btn-primary btn-block w-100">Realizar Login</a>
+                        </div>
+                    </div>
+                    <div class="form-group boxed">
+                        <div class="input-wrapper">
+                            <span style="float: left">É novo por aqui?</span>
+                            <a href="{{$current_company->request_access_link}}" class="btn btn-primary btn-block w-100">Solicitar
+                                acesso</a>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
-
 </div>
 </body>
 </html>

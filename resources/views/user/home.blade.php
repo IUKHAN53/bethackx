@@ -56,7 +56,7 @@
                                     }
                                 @endphp
                                 <div class="col-4 mb-2 d-flex justify-content-center {{$locked ?'disabled-lock':''}}" onclick="location.href='{{route('user.view-game',['company' => $current_company,'id' => $game->id])}}'">
-                                    <img src="{{asset($game->image)}}" class="rounded" alt="" style="max-width: 100px; max-height: 100px">
+                                    <img src="{{ $game->is_default ? asset($game->image) : Storage::url($game->image)}}" class="rounded" alt="" style="max-width: 100px; max-height: 100px">
                                 </div>
                             @endforeach
                         </div>
