@@ -1,4 +1,4 @@
-<div class="appBottomMenu">
+<div class="appBottomMenu" style="max-width: 700px;margin-left: auto; margin-right: auto;">
     <a href="{{request()->routeIs('home')?'#type_roletas':route('home', $current_company).'/#type_roletas'}}" class="item active">
         <div class="col">
             <div class="d-flex justify-content-center align-items-center flex-column gap-1 rounded py-1">
@@ -41,57 +41,4 @@
             </div>
         </div>
     </a>
-</div>
-<script>
-    function gotoSection(id) {
-        // window.location.hash = id;
-    }
-</script>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarPanel">
-    <div class="offcanvas-body">
-        <!-- profile box -->
-        <div class="profileBox">
-            <div class="image-wrapper">
-                <img src="{{asset('img/sample/avatar/avatar1.jpg')}}" alt="image" class="imaged rounded">
-            </div>
-            <div class="in">
-                <strong>{{auth()->user()->name}}</strong>
-            </div>
-            <a href="#" class="close-sidebar-button" data-bs-dismiss="offcanvas">
-                <ion-icon name="close" role="img" class="md hydrated" aria-label="close"></ion-icon>
-            </a>
-        </div>
-        <!-- * profile box -->
-
-        @if(auth()->user()->isAdmin())
-            <ul class="listview flush transparent no-line image-listview mt-2">
-                <li>
-                    <a href="{{route('admin.view', $current_company->slug)}}" class="item">
-                        <div class="icon-box bg-primary">
-                            <ion-icon name="desktop-outline"></ion-icon>
-                        </div>
-                        <div class="in">
-                            Admin
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        @endif
-        <ul class="listview flush transparent no-line image-listview mt-2">
-            <li>
-                <a href="javascript:void(0)" class="item" onclick="$('#logout_form').submit()">
-                    <div class="icon-box bg-primary">
-                        <ion-icon name="log-out-outline" role="img" class="md hydrated"
-                                  aria-label="log out outline"></ion-icon>
-                    </div>
-                    <div class="in">
-                        Logout
-                    </div>
-                </a>
-            </li>
-        </ul>
-        <form action="{{route('user.logout', $current_company->slug )}}" method="POST" id="logout_form">
-            @csrf
-        </form>
-    </div>
 </div>

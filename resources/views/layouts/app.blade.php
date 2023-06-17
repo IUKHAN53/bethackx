@@ -36,9 +36,10 @@
     @vite(['resources/sass/app.scss','resources/css/splide.min.css','resources/css/style.css', 'resources/js/app.js'])
     @laravelPWA
     @stack('styles')
+
 </head>
 <body class="bg-white dark-mode-active">
-<div class="appHeader scrolled">
+<div class="appHeader scrolled" style="max-width: 700px;margin-left: auto; margin-right: auto;">
     <div class="left">
         @if ($current_company)
             @if ($current_company->logo)
@@ -81,14 +82,12 @@
 {{--        </a>--}}
     </div>
 </div>
-<div class="container">
+<div style="max-width: 700px;margin-left: auto; margin-right: auto;">
     <div id="appCapsule">
         @yield('content')
     </div>
-    @include('layouts.nav')
+        @include('layouts.nav')
 </div>
-
-<!-- Ionicons -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script>
     window.addEventListener('scroll', function () {
