@@ -59,8 +59,10 @@ class AdminController extends Controller
         if (isset($request->games)) {
             foreach ($request->games as $key => $link) {
                 $game = CompanyGames::query()->where('company_id', $request->current_company->id)->where('game_id', $key)->first();
-                $game->iframe_link = $link;
-                $game->save();
+                if($game){
+                    $game->iframe_link = $link;
+                    $game->save();
+                }
             }
         }
         return redirect()->back();
