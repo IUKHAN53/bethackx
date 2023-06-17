@@ -21,35 +21,6 @@
             background-position: center;
             background-size: cover;
         }
-
-        /*.notification-container {*/
-        /*    overflow: hidden;*/
-        /*}*/
-
-        .notification {
-            display: inline-block;
-            /*padding: 10px 20px;*/
-            margin-right: 20px;
-            white-space: nowrap;
-            background-color: black;
-            border-radius: 50px;
-            height: 22px;
-        }
-
-        .all-notifications {
-            animation: moveNotifications 15s linear infinite;
-            /*overflow: hidden;*/
-        }
-
-        @keyframes moveNotifications {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(calc(-100% - 20px));
-            }
-        }
-
     </style>
 @endpush
 
@@ -67,9 +38,10 @@
             src="{{$current_company->home_banner != '' ? Storage::url($current_company->home_banner) : asset('img/banners/banner_topo.png')}}"
             alt="" class="img-fluid">
     </div>
-
-    <div class="header-large-title bg-primary text-center" style="background-color: #423ed4">
-        <h4 class="subtitle" style="font-size: 14px;">Clique abaixo no jogo preferido para abrir os sinais</h4>
+    <div class="d-flex justify-content-center">
+        <div class="header-large-title bg-primary text-center" style="width: fit-content; border-radius: 20px">
+            <span style="font-size: 14px;">Clique abaixo no jogo preferido para abrir os sinais</span>
+        </div>
     </div>
     <div class="section full mt-3">
         <div class=" mx-3 pt-2 pb-2">

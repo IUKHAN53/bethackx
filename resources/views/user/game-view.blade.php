@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="text-center my-2">
+        <div style="overflow: hidden">
+            <div class="d-flex gap-3 justify-content-center align-items-center all-notifications">
+
+            </div>
+        </div>
+    </div>
     <div class="section full mt-3">
         <div class=" mx-3 pt-2 pb-2">
             <div>

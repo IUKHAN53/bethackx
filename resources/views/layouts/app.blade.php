@@ -24,11 +24,11 @@
     <style>
         /* Apply the colors dynamically */
         :root {
-            --primary-color: {{ $current_company->primary_color }} !important;
-            --secondary-color: {{ $current_company->secondary_color }} !important;
-            --tertiary-color: {{ $current_company->tertiary_color }} !important;
-            --button-color: {{ $current_company->buttons_color }} !important;
-            --notices-color: {{ $current_company->notices_color }} !important;
+            --primary-color: {{ $current_company->primary_color }}    !important;
+            --secondary-color: {{ $current_company->secondary_color }}    !important;
+            --tertiary-color: {{ $current_company->tertiary_color }}    !important;
+            --button-color: {{ $current_company->buttons_color }}    !important;
+            --notices-color: {{ $current_company->notices_color }}    !important;
             /* Add other color variables as needed */
         }
     </style>
@@ -43,7 +43,8 @@
         @if ($current_company)
             @if ($current_company->logo)
                 <a href="#" class="headerButton toggle-searchbox gap-2">
-                    <img src="{{Storage::url($current_company->logo)}}" alt="" style="max-width: 120px; max-height: 50px">
+                    <img src="{{Storage::url($current_company->logo)}}" alt=""
+                         style="max-width: 120px; max-height: 50px">
                 </a>
             @endif
         @else
@@ -55,22 +56,29 @@
 
     </div>
     <div class="right">
-        @if(request()->routeIs('home'))
-            @if(!auth()->user()->hasPremium())
-                <div class="btn btn-sm" style="height: 25px;background-color: #03DB7BFF">
-                    <img src="{{asset("img/icon/padlock.png")}}" alt="" style="max-width: 12px">
-                    <span class="ms-1 fw-bold">planto free</span>
-                </div>
-            @else
-                <div class="btn btn-sm" style="height: 25px;background-color: #fbd92e">
-                    <img src="{{asset("img/icon/badge.png")}}" alt="" style="max-width: 12px">
-                    <span class="ms-1 fw-bold">Member VIP!</span>
-                </div>
-            @endif
+        @if(!auth()->user()->hasPremium())
+            <div class="btn btn-sm" style="height: 25px;background-color: #03DB7BFF">
+                <img src="{{asset("img/icon/padlock.png")}}" alt="" style="max-width: 12px">
+                <span class="ms-1 fw-bold">planto free</span>
+            </div>
+        @else
+            <div class="btn btn-sm" style="height: 25px;background-color: #fbd92e">
+                <img src="{{asset("img/icon/badge.png")}}" alt="" style="max-width: 12px">
+                <span class="ms-1 fw-bold">Member VIP!</span>
+            </div>
         @endif
-        <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
-            <ion-icon name="menu-outline" role="img" class="md hydrated" aria-label="menu outline"></ion-icon>
-        </a>
+        <div  style="height: 25px; margin: 4px" onclick="location.href = '{{route('admin.view', $current_company->slug)}}'">
+            <img src="{{asset("img/icon/cog.png")}}" alt="" style="max-width: 25px">
+        </div>
+        <div style="height: 25px; margin: 4px" onclick="$('#logout_form').submit()">
+            <img src="{{asset("img/icon/logout.png")}}" alt="" style="max-width: 25px">
+        </div>
+        <form action="{{route('user.logout', $current_company->slug )}}" method="POST" id="logout_form">
+            @csrf
+        </form>
+{{--        <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">--}}
+{{--            <ion-icon name="menu-outline" role="img" class="md hydrated" aria-label="menu outline"></ion-icon>--}}
+{{--        </a>--}}
     </div>
 </div>
 <div class="container">

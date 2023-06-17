@@ -59,9 +59,9 @@ return [
         ],
         'shortcuts' => [
             [
-                'name' => 'BetHackX',
-                'description' => 'A shortcut that opens the app',
-                'url' => '/home',
+                'name' => env('PWA_ICON_NAME', 'BetHackX'),
+                'description' => 'App for betting online smartly',
+                'url' => env('PWA_APP_URL', 'BetHackX'),
                 'icons' => [
                     "src" => env('FAVICON_URL', '/img/favicon.png'),
                     "purpose" => "any"

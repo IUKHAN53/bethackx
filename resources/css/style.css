@@ -9024,3 +9024,31 @@ body.dark-mode-active.rtl-mode .notification-dialog.android-style .notification-
 .flex-item-25 {
     flex-basis: 25%;
 }
+
+/*.notification-container {*/
+/*    overflow: hidden;*/
+/*}*/
+
+.notification {
+    display: inline-block;
+    /*padding: 10px 20px;*/
+    margin-right: 20px;
+    white-space: nowrap;
+    background-color: black;
+    border-radius: 50px;
+    height: 22px;
+}
+
+.all-notifications {
+    animation: moveNotifications 15s linear infinite;
+    /*overflow: hidden;*/
+}
+
+@keyframes moveNotifications {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-100% - 20px));
+    }
+}
