@@ -38,7 +38,10 @@ class HomeController extends Controller
     public function viewGame(Request $request, $company, $id)
     {
         $game = Games::query()->find($id);
-        return view('user.game-view')->with(['game' => $game]);
+        $game_ids = request()->current_company->companyGames()->where('is_active', 1)->pluck('game_id')->toArray();
+        $game_names = Games::query()->whereIn('id', $game_ids)->pluck('name')->toArray();
+
+        return view('user.game-view')->with(['game' => $game, 'game_names' => $game_names]);
 
     }
 

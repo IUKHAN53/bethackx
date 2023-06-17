@@ -24,11 +24,11 @@
     <style>
         /* Apply the colors dynamically */
         :root {
-            --primary-color: {{ $current_company->primary_color }}    !important;
-            --secondary-color: {{ $current_company->secondary_color }}    !important;
-            --tertiary-color: {{ $current_company->tertiary_color }}    !important;
-            --button-color: {{ $current_company->buttons_color }}    !important;
-            --notices-color: {{ $current_company->notices_color }}    !important;
+            --primary-color: {{ $current_company->primary_color }}     !important;
+            --secondary-color: {{ $current_company->secondary_color }}     !important;
+            --tertiary-color: {{ $current_company->tertiary_color }}     !important;
+            --button-color: {{ $current_company->buttons_color }}     !important;
+            --notices-color: {{ $current_company->notices_color }}     !important;
             /* Add other color variables as needed */
         }
     </style>
@@ -68,25 +68,28 @@
                 <span class="ms-1 fw-bold">Member VIP!</span>
             </div>
         @endif
-        <div  style="height: 25px; margin: 4px" onclick="location.href = '{{route('admin.view', $current_company->slug)}}'">
-            <img src="{{asset("img/icon/cog.png")}}" alt="" style="max-width: 25px">
-        </div>
+        @if(auth()->user()->isAdmin())
+            <div style="height: 25px; margin: 4px"
+                 onclick="location.href = '{{route('admin.view', $current_company->slug)}}'">
+                <img src="{{asset("img/icon/cog.png")}}" alt="" style="max-width: 25px">
+            </div>
+        @endif
         <div style="height: 25px; margin: 4px" onclick="$('#logout_form').submit()">
             <img src="{{asset("img/icon/logout.png")}}" alt="" style="max-width: 25px">
         </div>
         <form action="{{route('user.logout', $current_company->slug )}}" method="POST" id="logout_form">
             @csrf
         </form>
-{{--        <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">--}}
-{{--            <ion-icon name="menu-outline" role="img" class="md hydrated" aria-label="menu outline"></ion-icon>--}}
-{{--        </a>--}}
+        {{--        <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">--}}
+        {{--            <ion-icon name="menu-outline" role="img" class="md hydrated" aria-label="menu outline"></ion-icon>--}}
+        {{--        </a>--}}
     </div>
 </div>
 <div style="max-width: 700px;margin-left: auto; margin-right: auto;">
     <div id="appCapsule">
         @yield('content')
     </div>
-        @include('layouts.nav')
+    @include('layouts.nav')
 </div>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script>

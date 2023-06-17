@@ -80,6 +80,42 @@
 @endsection
 @push('scripts')
     <script type="module">
+
+        $(document).ready(function() {
+            var fullNames = [
+                "Ana Silva", "Beatriz Santos", "Carlos Oliveira", "Daniel Almeida", "Eduardo Costa",
+                "Fernanda Pereira", "Gustavo Rodrigues", "Helena Lima", "Isabela Gomes", "João Cardoso",
+                "Karina Fernandes", "Lucas Souza", "Maria Carvalho", "Nathan Santos", "Olivia Castro",
+                "Pedro Costa", "Raquel Alves", "Samuel Ferreira", "Tatiana Ribeiro", "Vitor Andrade",
+                "Antonio Pereira", "Carolina Cunha", "Diego Barbosa", "Fabiana Gonçalves", "Giovanna Marques",
+                "Hugo Rodrigues", "Isadora Castro", "Jorge Oliveira", "Larissa Sousa", "Mariano Costa"
+            ];
+
+            var gameNames = @json($game_names);
+
+            var containerWidth = $('.all-notifications').width();
+            var notificationsWidth = 0;
+
+            for (var i = 0; i < 30; i++) {
+                var randomFullName = fullNames[Math.floor(Math.random() * fullNames.length)];
+                var randomGameName = gameNames[Math.floor(Math.random() * gameNames.length)];
+                var randomReward = (Math.random() * (1000 - 1) + 1).toFixed(2);
+                var notification = `<div class="notification d-flex justify-content-center align-items-center px-2 gap-2">
+                    <img src="{{asset('img/icon/notification-icon.webp')}}" alt="" style="width: 10px">
+                    <span class="text-small text-white" style="font-size: 10px">${randomFullName} - ${randomGameName} - <span
+                            class="text-success">R$ ${randomReward}</span></span>
+                </div>`
+                $('.all-notifications').append(notification);
+                notificationsWidth += notification[0].offsetWidth;
+            }
+            var cloneCount = Math.ceil(containerWidth / notificationsWidth);
+            for (var j = 0; j < cloneCount; j++) {
+                $('.all-notifications').append($('.notification').clone());
+            }
+
+        });
+
+
         const button = document.getElementById('signal_btn');
         let remainingTime = 5 * 60;
 
