@@ -40,7 +40,7 @@ Route::get('/offline', function () {
 Route::group(['prefix' => '{company}'], function () {
     Route::group(['middleware' => 'verifyCompanySlug'], function () {
         Route::get('/create-user/{email}', [HomeController::class, 'createFreeUser'])->name('create-free-user');
-        Route::view('/', 'welcome');
+        Route::view('/', 'welcome')->name('welcome');
         Route::group(['prefix' => 'admin'], function () {
             Route::view('login', 'admin.login');
             Route::post('login', [AdminController::class, 'login'])->name('admin.login');

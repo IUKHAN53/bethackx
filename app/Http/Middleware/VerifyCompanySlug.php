@@ -11,12 +11,10 @@ class VerifyCompanySlug
         $companySlug = $request->route('company');
         $company = Company::where('slug', $companySlug)->first();
         if (!$company) {
-            abort(404);
+            $company_slug = Company::getDefaultOrFirst()->slug;
+            return redirect()->route('welcome', ['company' => $company_slug]);
         }
-
-        // Store the company in the request for easy access
         $request->merge(['current_company' => $company]);
-
         return $next($request);
     }
 }

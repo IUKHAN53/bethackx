@@ -65,5 +65,12 @@ class Company extends Model
         return $query->where('is_default', 1);
     }
 
+    static function getDefaultOrFirst(){
+        $default = Company::query()->where('is_default', 1)->first();
+        if($default){
+            return $default;
+        }
+        return Company::query()->where('is_active', 1)->first();
+    }
 
 }

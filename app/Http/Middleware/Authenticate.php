@@ -12,8 +12,8 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        if ($request->current_company){
-           return route('login', ['company' => $request->current_company->slug]);
+        if ($request->company){
+           return route('user.login', ['company' => $request->company]);
         }
         else{
             abort(404);
