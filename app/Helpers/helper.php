@@ -18,35 +18,33 @@ if (!function_exists('setEnvFromDatabase')) {
                         return;
                     }
                     $value = $company->favicon;
-                    file_put_contents(app()->environmentFilePath(), str_replace(
-                        "FAVICON_URL=" . env('FAVICON_URL'),
-                        "FAVICON_URL=$value",
-                        file_get_contents(app()->environmentFilePath())
-                    ));
-
-                    // Store the updated value in the current request
-                    $_ENV['FAVICON_URL'] = $value;
-                    $_SERVER['FAVICON_URL'] = $value;
+                    setEnvValue('FAVICON_URL', $value);
 
                     $value = $company->logo;
-                    file_put_contents(app()->environmentFilePath(), str_replace(
-                        "ICON_URL=" . env('ICON_URL'),
-                        "ICON_URL=$value",
-                        file_get_contents(app()->environmentFilePath())
-                    ));
+                    setEnvValue('ICON_URL', $value);
 
-                    // Store the updated value in the current request
-                    $_ENV['ICON_URL'] = $value;
-                    $_SERVER['ICON_URL'] = $value;
+                    $value = $company->name ?? 'BetHackX';
+                    setEnvValue('PWA_SHORTCUT_NAME', $value);
 
-                } else {
-                    return;
+                    $value = url('/' . $company->slug);
+                    setEnvValue('PWA_HOME_URL', $value);
                 }
-            } else {
-                return;
             }
-        } else {
-            return;
         }
+    }
+}
+
+if (!function_exists('setEnvValue')) {
+    function setEnvValue($key, $value): void
+    {
+
+        file_put_contents(app()->environmentFilePath(), preg_replace(
+            '/^' . $key . '=.*$/m',
+            $key . '=' . $value,
+            file_get_contents(app()->environmentFilePath())
+        ));
+
+        $_ENV[$key] = $value;
+        $_SERVER[$key] = $value;
     }
 }
