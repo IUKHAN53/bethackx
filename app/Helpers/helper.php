@@ -30,7 +30,7 @@ if (!function_exists('setEnvFromDatabase')) {
 
                     $value = $company->logo;
                     file_put_contents(app()->environmentFilePath(), str_replace(
-                        "ICON_URL=" . env('FAVICON_URL'),
+                        "ICON_URL=" . env('ICON_URL'),
                         "ICON_URL=$value",
                         file_get_contents(app()->environmentFilePath())
                     ));
@@ -38,6 +38,17 @@ if (!function_exists('setEnvFromDatabase')) {
                     // Store the updated value in the current request
                     $_ENV['ICON_URL'] = $value;
                     $_SERVER['ICON_URL'] = $value;
+
+                    $value = $company->name;
+                    file_put_contents(app()->environmentFilePath(), str_replace(
+                        "APP_NAME=" . env('APP_NAME'),
+                        "APP_NAME=$value",
+                        file_get_contents(app()->environmentFilePath())
+                    ));
+
+                    // Store the updated value in the current request
+                    $_ENV['APP_NAME'] = $value;
+                    $_SERVER['APP_NAME'] = $value;
                 } else {
                     return;
                 }
