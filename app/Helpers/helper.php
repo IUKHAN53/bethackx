@@ -23,7 +23,7 @@ if (!function_exists('setEnvFromDatabase')) {
                     $value = $company->logo;
                     setEnvValue('ICON_URL', $value);
 
-                    $value = $company->name ?? 'BetHackX';
+                    $value = $company->slug ?? 'BetHackX';
                     setEnvValue('PWA_SHORTCUT_NAME', $value);
 
                     $value = url('/' . $company->slug);
