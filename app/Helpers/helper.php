@@ -39,16 +39,6 @@ if (!function_exists('setEnvFromDatabase')) {
                     $_ENV['ICON_URL'] = $value;
                     $_SERVER['ICON_URL'] = $value;
 
-                    $value = $company->name;
-                    file_put_contents(app()->environmentFilePath(), str_replace(
-                        "APP_NAME=" . env('APP_NAME'),
-                        "APP_NAME=$value",
-                        file_get_contents(app()->environmentFilePath())
-                    ));
-
-                    // Store the updated value in the current request
-                    $_ENV['APP_NAME'] = $value;
-                    $_SERVER['APP_NAME'] = $value;
                 } else {
                     return;
                 }
