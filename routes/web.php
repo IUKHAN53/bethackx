@@ -39,7 +39,8 @@ Route::get('/offline', function () {
 });
 Route::group(['prefix' => '{company}'], function () {
     Route::group(['middleware' => 'verifyCompanySlug'], function () {
-        Route::get('/create-user/{email}', [HomeController::class, 'createFreeUser'])->name('create-free-user');
+        Route::get('/create-free-user/{email}', [HomeController::class, 'createFreeUser'])->name('create-free-user');
+        Route::get('/create-premium-user/{email}', [HomeController::class, 'createPremiumUser'])->name('create-premium-user');
         Route::view('/', 'welcome')->name('welcome');
         Route::group(['prefix' => 'admin'], function () {
             Route::view('login', 'admin.login');

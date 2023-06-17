@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\Plan;
 use App\Models\Signal;
 use App\Models\Games;
 use Illuminate\Http\Request;
@@ -71,6 +72,20 @@ class HomeController extends Controller
             'password' => bcrypt('12345678'),
             'is_admin' => 0,
         ]);
+        return redirect()->route('user.login', $company);
+    }
+    public function createPremiumUser(Request $request, $company, $email)
+    {
+        $user = $request->current_company->users()->create([
+            'name' => 'free user',
+            'email' => $email,
+            'password' => bcrypt('12345678'),
+            'is_admin' => 0,
+        ]);
+        $premiumPlan = Plan::where('name', Plan::PREMIUM_PLAN_NAME)->companyScope()->first();
+        if ($premiumPlan) {
+            $user->subscribePlan($premiumPlan->id);
+        }
         return redirect()->route('user.login', $company);
     }
 }

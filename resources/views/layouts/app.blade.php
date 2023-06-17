@@ -60,12 +60,12 @@
         @if(!auth()->user()->hasPremium())
             <div class="btn btn-sm" style="height: 25px;background-color: #03DB7BFF">
                 <img src="{{asset("img/icon/padlock.png")}}" alt="" style="max-width: 12px">
-                <span class="ms-1 fw-bold">planto free</span>
+                <span class="ms-1 fw-bold">plano free</span>
             </div>
         @else
             <div class="btn btn-sm" style="height: 25px;background-color: #fbd92e">
                 <img src="{{asset("img/icon/badge.png")}}" alt="" style="max-width: 12px">
-                <span class="ms-1 fw-bold">Member VIP!</span>
+                <span class="ms-1 fw-bold">membro VIP!</span>
             </div>
         @endif
         @if(auth()->user()->isAdmin())
