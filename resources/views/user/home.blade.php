@@ -26,8 +26,9 @@
 
 @section('content')
     <div class="text-center my-2">
-        <img src="{{$current_company->home_banner != '' ? Storage::url($current_company->home_banner) : asset('img/banners/banner_topo.png')}}" alt=""
-        style="max-height: 200px; max-width: 350px">
+        <img
+            src="{{$current_company->home_banner != '' ? Storage::url($current_company->home_banner) : asset('img/banners/banner_topo.png')}}"
+            alt="" class="img-fluid" >
     </div>
 
     <div class="header-large-title bg-primary text-center" style="background-color: #423ed4">
@@ -37,11 +38,13 @@
         <div class=" mx-3 pt-2 pb-2">
             @if(!auth()->user()->hasPremium())
                 <div class="header-large-title text-center" style="background-color: #423ed4">
-                    <h4 class="subtitle" style="font-size: 14px;"><a style="color: white" href="{{$current_company->plan_checkout_link}}">Você não é assinante de nenhum plano clique aqui para Assinar</a></h4>
+                    <h4 class="subtitle" style="font-size: 14px;"><a style="color: white"
+                                                                     href="{{$current_company->plan_checkout_link}}">Você
+                            não é assinante de nenhum plano clique aqui para Assinar</a></h4>
                 </div>
             @endif
             @foreach($types as $type => $games)
-            <div id="type_{{$type}}">
+                <div id="type_{{$type}}">
                     <div class="d-flex justify-content-start align-items-center mb-2 mt-2 ms-3">
                         <img src="{{asset('img/icon/'.$type)}}.png" class="bg-primary p-1 shadow rounded" alt="">
                         <h4 class="fw-bold ms-1 text-uppercase mt-1">{{$type}}</h4>
@@ -55,8 +58,10 @@
                                         $locked = true;
                                     }
                                 @endphp
-                                <div class="col-4 mb-2 d-flex justify-content-center {{$locked ?'disabled-lock':''}}" onclick="location.href='{{route('user.view-game',['company' => $current_company,'id' => $game->id])}}'">
-                                    <img src="{{ $game->is_default ? asset($game->image) : Storage::url($game->image)}}" class="rounded" alt="" style="max-width: 100px; max-height: 100px">
+                                <div class="col-4 mb-2 d-flex justify-content-center {{$locked ?'disabled-lock':''}}"
+                                     onclick="location.href='{{route('user.view-game',['company' => $current_company,'id' => $game->id])}}'">
+                                    <img src="{{ $game->is_default ? asset($game->image) : Storage::url($game->image)}}"
+                                         class="rounded" alt="" style="max-width: 100px; max-height: 100px">
                                 </div>
                             @endforeach
                         </div>
