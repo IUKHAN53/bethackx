@@ -55,6 +55,19 @@
 
     </div>
     <div class="right">
+        @if(request()->routeIs('home'))
+            @if(!auth()->user()->hasPremium())
+                <div class="btn btn-sm" style="height: 25px;background-color: #03DB7BFF">
+                    <img src="{{asset("img/icon/padlock.png")}}" alt="" style="max-width: 12px">
+                    <span class="ms-1 fw-bold">planto free</span>
+                </div>
+            @else
+                <div class="btn btn-sm" style="height: 25px;background-color: #fbd92e">
+                    <img src="{{asset("img/icon/badge.png")}}" alt="" style="max-width: 12px">
+                    <span class="ms-1 fw-bold">Member VIP!</span>
+                </div>
+            @endif
+        @endif
         <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
             <ion-icon name="menu-outline" role="img" class="md hydrated" aria-label="menu outline"></ion-icon>
         </a>

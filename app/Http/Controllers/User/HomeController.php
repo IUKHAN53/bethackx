@@ -27,8 +27,10 @@ class HomeController extends Controller
             }
             $types[$type] = $g;
         }
+        $game_ids = request()->current_company->companyGames()->where('is_active', 1)->pluck('game_id')->toArray();
         $view_vars = [
             'types' => $types,
+            'game_names' => Games::query()->whereIn('id', $game_ids)->pluck('name')->toArray(),
         ];
         return view('user.home')->with($view_vars);
     }

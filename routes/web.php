@@ -44,7 +44,7 @@ Route::group(['prefix' => '{company}'], function () {
         Route::group(['prefix' => 'admin'], function () {
             Route::view('login', 'admin.login');
             Route::post('login', [AdminController::class, 'login'])->name('admin.login');
-            Route::group(['middleware' => ['admin']], function () {
+            Route::group(['middleware' => ['admin', 'auth']], function () {
                 Route::get('admin-view', [AdminController::class, 'index'])->name('admin.view');
                 Route::post('save-games', [AdminController::class, 'saveGames'])->name('admin.save-games');
                 Route::post('save-external-links', [AdminController::class, 'saveExternalLinks'])->name('admin.save-external-links');
