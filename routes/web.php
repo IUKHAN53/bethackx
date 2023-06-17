@@ -60,6 +60,8 @@ Route::group(['prefix' => '{company}'], function () {
                 Route::post('add-games-to-plan', [AdminController::class, 'addPlanGames'])->name('admin.add-games-to-plan');
                 Route::post('fetch-plans', [AdminController::class, 'getUserPlans'])->name('admin.fetch-plans');
                 Route::post('add-plan-to-users', [AdminController::class, 'addUserPlans'])->name('admin.add-plan-to-user');
+                Route::post('fetch-user-data', [AdminController::class, 'getUserData'])->name('admin.fetch-user-data');
+                Route::post('update-user-data', [AdminController::class, 'updateUserData'])->name('admin.update-user-data');
             });
         });
         Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -59,7 +59,7 @@ class AdminController extends Controller
         if (isset($request->games)) {
             foreach ($request->games as $key => $link) {
                 $game = CompanyGames::query()->where('company_id', $request->current_company->id)->where('game_id', $key)->first();
-                if($game){
+                if ($game) {
                     $game->iframe_link = $link;
                     $game->save();
                 }
@@ -188,13 +188,13 @@ class AdminController extends Controller
 
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $logoPath = $logo->storeAs('public', 'company-'.$company->id.'-logo-' . time() . '.' . $logo->getClientOriginalExtension());
+            $logoPath = $logo->storeAs('public', 'company-' . $company->id . '-logo-' . time() . '.' . $logo->getClientOriginalExtension());
             $company->logo = $logoPath;
         }
 
         if ($request->hasFile('favicon')) {
             $favicon = $request->file('favicon');
-            $faviconPath = $favicon->storeAs('public', 'company-'.$company->id.'-favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
+            $faviconPath = $favicon->storeAs('public', 'company-' . $company->id . '-favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
             $company->favicon = $faviconPath;
         }
 
@@ -262,6 +262,33 @@ class AdminController extends Controller
             $user->subscribePlan($value);
         }
         return back();
+    }
+
+    public function getUserData(Request $request)
+    {
+        $user = User::query()->find($request->id);
+        $html = view('admin.partials.user-edit-modal-content', compact('user'))->render();
+        return response()->json([
+            'status' => true,
+            'html' => $html,
+            'message' => 'user modal rendered',
+        ]);
+    }
+
+    public function updateUserData(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->name = empty($request->name) ?: $request->name;
+        $user->password = empty($request->password) ?: bcrypt($request->password);
+        $user->save();
+        $users = User::query()->where('id', '!=', auth()->id())
+            ->where('company_id', $request->current_company->id)->get();
+        $html = view('admin.partials.users-table', compact('users'))->render();
+        return response()->json([
+            'status' => true,
+            'html' => $html,
+            'message' => 'user updated',
+        ]);
     }
 
 }

@@ -27,3 +27,16 @@
         </div>
     </div>
 </div>
+<div class="modal fade dialogbox" id="edit_user_modal" data-bs-backdrop="static" tabindex="-1"
+     role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar usuário</h5>
+            </div>
+            <div id="edit_user_modal_content">
+            </div>
+        </div>
+    </div>
+</div>
+

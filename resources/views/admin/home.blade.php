@@ -42,7 +42,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Cadastrar / Editar usuário</h5>
+                            <h5 class="modal-title">Cadastrar usuário</h5>
                         </div>
                         <form action="{{route('admin.add-user',$current_company->slug)}}" method="POST">
                             @csrf
@@ -243,5 +243,38 @@
                 }
             })
         })
+
+        window.fetchUserData = function (id) {
+            let _token = $('input[name=_token]').val();
+            $.ajax({
+                url: "{{route('admin.fetch-user-data',$current_company->slug)}}",
+                type: "POST",
+                data: {
+                    id: id,
+                    _token: _token
+                },
+                success: function (response) {
+                    $('#edit_user_modal_content').html(response.html)
+                }
+            })
+        }
+        window.submitUserDataForm = function (id) {
+            let _token = $('input[name=_token]').val();
+            let name = $('#user_name').val();
+            let password = $('#user_password').val();
+            $.ajax({
+                url: "{{route('admin.update-user-data',$current_company->slug)}}",
+                type: "POST",
+                data: {
+                    id: id,
+                    name: name,
+                    password: password,
+                    _token: _token
+                },
+                success: function (response) {
+                    $('#users_div').html(response.html)
+                }
+            })
+        }
     </script>
 @endpush
