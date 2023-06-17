@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#000000">
-    <title>Welcome To {{config('app.name')}}</title>
+    <title>Welcome To {{$current_company->name}}</title>
     <meta name="description" content="Irfan's PWA design">
     <meta name="keywords" content="bootstrap 5, mobile pwa">
     @if ($current_company)
