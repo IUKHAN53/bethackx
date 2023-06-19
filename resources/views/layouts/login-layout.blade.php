@@ -12,7 +12,17 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <style>
+        /* Apply the colors dynamically */
+        :root {
+            --primary-color: {{ $current_company->primary_color }}      !important;
+            --secondary-color: {{ $current_company->secondary_color }}      !important;
+            --tertiary-color: {{ $current_company->tertiary_color }}      !important;
+            --button-color: {{ $current_company->buttons_color }}      !important;
+            --notices-color: {{ $current_company->notices_color }}      !important;
+            /* Add other color variables as needed */
+        }
+    </style>
     <!-- Scripts -->
     @if ($current_company && $current_company->is_default==0 )
         @if ($current_company->favicon)

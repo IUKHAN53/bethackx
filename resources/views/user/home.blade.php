@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div class="text-center my-2">
+    <div class="text-center my-2" onclick="window.location='{{$current_company->home_banner_ref_link}}'">
         <img
             src="{{$current_company->home_banner != '' ? Storage::url($current_company->home_banner) : asset('img/banners/banner_topo.png')}}"
             alt="" class="img-fluid">
