@@ -14,9 +14,11 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @if ($current_company && $current_company->is_default==0==0)
+    @if ($current_company && $current_company->is_default==0)
         @if ($current_company->favicon)
             <link rel="icon" type="image/png" href="{{Storage::url($current_company->favicon)}}" sizes="32x32">
+        @else
+            <img src="{{asset('img/favicon.png')}}" alt="image" class="form-image">
         @endif
     @else
         <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" sizes="32x32">
@@ -24,11 +26,11 @@
     <style>
         /* Apply the colors dynamically */
         :root {
-            --primary-color: {{ $current_company->primary_color }}     !important;
-            --secondary-color: {{ $current_company->secondary_color }}     !important;
-            --tertiary-color: {{ $current_company->tertiary_color }}     !important;
-            --button-color: {{ $current_company->buttons_color }}     !important;
-            --notices-color: {{ $current_company->notices_color }}     !important;
+            --primary-color: {{ $current_company->primary_color }}      !important;
+            --secondary-color: {{ $current_company->secondary_color }}      !important;
+            --tertiary-color: {{ $current_company->tertiary_color }}      !important;
+            --button-color: {{ $current_company->buttons_color }}      !important;
+            --notices-color: {{ $current_company->notices_color }}      !important;
             /* Add other color variables as needed */
         }
     </style>
@@ -45,6 +47,11 @@
             @if ($current_company->logo)
                 <a href="#" class="headerButton toggle-searchbox gap-2">
                     <img src="{{Storage::url($current_company->logo)}}" alt=""
+                         style="max-width: 120px; max-height: 50px">
+                </a>
+            @else
+                <a href="#" class="headerButton toggle-searchbox gap-2">
+                    <img src="{{asset('img/home_logo.png')}}" alt="image" class="form-image"
                          style="max-width: 120px; max-height: 50px">
                 </a>
             @endif

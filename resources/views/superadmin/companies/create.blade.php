@@ -76,11 +76,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="admin_id"> Administrador:</label>
+                            <label for="admin_id">Administrador:</label>
                             <select name="admin_id" id="admin_id" class="form-control" required>
                                 <option value="">Selecione um usuário existente</option>
-                                @foreach($admins as $id => $name)
-                                    <option value="{{$id}}">{{$name}}</option>
+                                @foreach($admins as $admin)
+                                    <option value="{{ $admin->id }}">{{ $admin->name . ' ('. $admin->email .')' }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -127,7 +127,7 @@
             </div>
         </div>
     </div>
-    <script>
+    <script type="module">
         function previewImage(input, previewId) {
             var preview = document.getElementById(previewId);
             var reader = new FileReader();
@@ -139,5 +139,10 @@
 
             reader.readAsDataURL(input.files[0]);
         }
+        $('#admin_id').select2({
+            placeholder: 'Selecione um usuário existente',
+            allowClear: true,
+            width: '100%'
+        });
     </script>
 @endsection

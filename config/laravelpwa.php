@@ -11,8 +11,8 @@ return [
         'background_color' => '#0C1624FF',
         'theme_color' => '#282834FF',
         'display' => 'standalone',
-        'orientation'=> 'any',
-        'status_bar'=> 'black',
+        'orientation' => 'any',
+        'status_bar' => 'black',
         'icons' => [
             '72x72' => [
                 'path' => env('FAVICON_URL', '/img/favicon.png'),

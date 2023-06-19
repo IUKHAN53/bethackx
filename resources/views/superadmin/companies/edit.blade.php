@@ -104,9 +104,10 @@
                 <label for="admin_id" class="form-label">Administrador</label>
                 <select name="admin_id" id="admin_id" class="form-control" required>
                     <option value="">Selecione um usuário existente</option>
-                    @foreach($admins as $id=>$name)
-                        <option
-                            value="{{$id}}" {{ old('id', $company->admin_id) == $id ? 'selected' : '' }}>{{$name}}</option>
+                    @foreach($admins as $admin)
+                        <option value="{{ $admin->id }}" {{ old('admin_id', $company->admin_id) == $admin->id ? 'selected' : '' }}>
+                            {{ $admin->name . ' ('. $admin->email .')' }}
+                        </option>
                     @endforeach
                 </select>
                 @error('admin_id')
@@ -184,7 +185,7 @@
             <button type="submit" class="btn btn-primary">Atualizar</button>
         </form>
     </div>
-    <script>
+    <script type="module">
         function previewImage(input, previewId) {
             var preview = document.getElementById(previewId);
             var reader = new FileReader();
@@ -196,5 +197,10 @@
 
             reader.readAsDataURL(input.files[0]);
         }
+            $('#admin_id').select2({
+                placeholder: 'Selecione um usuário existente',
+                allowClear: true,
+                width: '100%'
+            });
     </script>
 @endsection

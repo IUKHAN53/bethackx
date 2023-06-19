@@ -18,6 +18,9 @@
         @if ($current_company->favicon)
             <link rel="icon" type="image/png" href="{{Storage::url($current_company->favicon)}}" sizes="32x32">
             <link rel="apple-touch-icon" sizes="180x180" href="{{Storage::url($current_company->favicon)}}">
+        @else
+            <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" sizes="32x32">
+            <link rel="apple-touch-icon" sizes="180x180" href="{{asset('img/favicon.png')}}">
         @endif
     @else
         <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" sizes="32x32">

@@ -13,6 +13,8 @@
     @if ($current_company && $current_company->is_default==0 )
         @if ($current_company->favicon)
             <link rel="icon" type="image/png" href="{{Storage::url($current_company->favicon)}}" sizes="32x32">
+        @else
+            <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" sizes="32x32">
         @endif
     @else
         <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" sizes="32x32">
@@ -38,6 +40,8 @@
                 @if ($current_company && $current_company->is_default==0 )
                     @if ($current_company->logo)
                         <img src="{{Storage::url($current_company->logo)}}" alt="image" class="form-image">
+                    @else
+                        <img src="{{asset('img/logo.png')}}" alt="image" class="form-image">
                     @endif
                 @else
                     <img src="{{asset('img/logo.png')}}" alt="image" class="form-image">

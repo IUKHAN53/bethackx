@@ -7,6 +7,8 @@
             @if ($current_company && $current_company->is_default==0 )
                 @if ($current_company->logo)
                     <img src="{{Storage::url($current_company->logo)}}" alt="image" class="form-image">
+                @else
+                    <img src="{{asset('img/logo.png')}}" alt="image" class="form-image">
                 @endif
             @else
                 <img src="{{asset('img/logo.png')}}" alt="image" class="form-image">

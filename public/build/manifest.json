@@ -5,17 +5,17 @@
     "src": "resources/css/splide.min.css"
   },
   "resources/css/style.css": {
-    "file": "assets/style-f4a3efce.css",
+    "file": "assets/style-5c56c5e4.css",
     "isEntry": true,
     "src": "resources/css/style.css"
   },
   "resources/js/app.js": {
-    "file": "assets/app-0cec989f.js",
+    "file": "assets/app-0bf372e6.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/sass/app.scss": {
-    "file": "assets/app-bbd6a014.css",
+    "file": "assets/app-5950027b.css",
     "isEntry": true,
     "src": "resources/sass/app.scss"
   }

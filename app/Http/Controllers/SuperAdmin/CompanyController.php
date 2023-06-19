@@ -27,7 +27,7 @@ class CompanyController extends Controller
     {
         // Return the company create view
         return view('superadmin.companies.create')->with([
-            'admins' => User::query()->pluck('name', 'id')->where('is_admin', 0)->where('is_super_admin', 0)->toArray(),
+            'admins' => User::query()->where('is_super_admin', 0)->get(),
         ]);
     }
 
@@ -138,8 +138,7 @@ class CompanyController extends Controller
     {
         // Find the company by ID
         $company = Company::findOrFail($id);
-        $admins = User::query()->where('is_admin', 0)->where('is_super_admin', 0)->pluck('name', 'id')->toArray();
-        $admins[$company->admin_id] = User::query()->where('id', $company->admin_id)->first()->name;
+        $admins = User::query()->where('is_super_admin', 0)->get();
 
         // Return the company edit view with the found company
         return view('superadmin.companies.edit', compact('company', 'admins'));
