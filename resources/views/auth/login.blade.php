@@ -4,7 +4,7 @@
     <div class="login-form mt-1 d-flex justify-content-center gap-5 flex-column" style="height: 90vh">
         <div class="section mt-1">
 
-            @if ($current_company)
+            @if ($current_company && $current_company->is_default==0 )
                 @if ($current_company->logo)
                     <img src="{{Storage::url($current_company->logo)}}" alt="image" class="form-image">
                 @endif

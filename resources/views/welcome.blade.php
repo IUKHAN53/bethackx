@@ -10,7 +10,7 @@
     <title>Welcome To {{$current_company->name}}</title>
     <meta name="description" content="Irfan's PWA design">
     <meta name="keywords" content="bootstrap 5, mobile pwa">
-    @if ($current_company)
+    @if ($current_company && $current_company->is_default==0 )
         @if ($current_company->favicon)
             <link rel="icon" type="image/png" href="{{Storage::url($current_company->favicon)}}" sizes="32x32">
         @endif
@@ -35,7 +35,7 @@
     <div id="appCapsule" class="pt-0">
         <div class="login-form mt-1 d-flex justify-content-center gap-5 flex-column" style="height: 90vh">
             <div class="section mt-1">
-                @if ($current_company)
+                @if ($current_company && $current_company->is_default==0 )
                     @if ($current_company->logo)
                         <img src="{{Storage::url($current_company->logo)}}" alt="image" class="form-image">
                     @endif

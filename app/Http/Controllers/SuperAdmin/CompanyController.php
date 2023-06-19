@@ -48,8 +48,8 @@ class CompanyController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'favicon' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'favicon' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'primary_color' => 'required|string|max:255',
             'secondary_color' => 'required|string|max:255',
             'tertiary_color' => 'required|string|max:255',
@@ -83,23 +83,25 @@ class CompanyController extends Controller
         User::query()->where('id', $request->input('admin_id'))->update(['company_id' => $company->id, 'is_admin' => 1]);
 
         // Upload logo image
-        $logo = $request->file('logo');
-        $logoPath = $logo->storeAs('public', 'company-'.$company->id.'-logo-' . time() . '.' . $logo->getClientOriginalExtension());
-
-        // Upload favicon image
-        $favicon = $request->file('favicon');
-        $faviconPath = $favicon->storeAs('public', 'company-'.$company->id.'-favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
-
+        if ($request->file('logo')) {
+            $logo = $request->file('logo');
+            $logoPath = $logo->storeAs('public', 'company-' . $company->id . '-logo-' . time() . '.' . $logo->getClientOriginalExtension());
+            $company->logo = $logoPath;
+        }
+        if ($request->file('favicon')) {
+            // Upload favicon image
+            $favicon = $request->file('favicon');
+            $faviconPath = $favicon->storeAs('public', 'company-' . $company->id . '-favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
+        }
         // Upload home banner image
         $homeBanner = $request->file('home_banner');
         if ($homeBanner) {
-            $homeBannerPath = $homeBanner->storeAs('public', 'company-'.$company->id.'-home-banner-' . time() . '.' . $homeBanner->getClientOriginalExtension());
+            $homeBannerPath = $homeBanner->storeAs('public', 'company-' . $company->id . '-home-banner-' . time() . '.' . $homeBanner->getClientOriginalExtension());
             $company->home_banner = $homeBannerPath;
+            $company->favicon = $faviconPath;
         }
 
         // Update the logo and favicon paths in the company record
-        $company->logo = $logoPath;
-        $company->favicon = $faviconPath;
         $company->save();
 
 //        create games for the company
@@ -149,8 +151,8 @@ class CompanyController extends Controller
 
         // Validate the form input
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif',
+            'name' => 'nullable|required|string|max:255',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'favicon' => 'image|mimes:jpeg,png,jpg,gif',
             'primary_color' => 'nullable|string|max:255',
             'secondary_color' => 'nullable|string|max:255',
@@ -169,7 +171,7 @@ class CompanyController extends Controller
 
         // Update the company data
         $company->name = $validatedData['name'];
-        $company->slug = Str::slug($validatedData['name'], '-');
+//        $company->slug = Str::slug($validatedData['name'], '-');
         $company->primary_color = $validatedData['primary_color'];
         $company->secondary_color = $validatedData['secondary_color'];
         $company->tertiary_color = $validatedData['tertiary_color'];
@@ -183,7 +185,7 @@ class CompanyController extends Controller
         $company->admin_tutorial_link = $validatedData['admin_tutorial_link'];
         $company->plan_checkout_link = $validatedData['plan_checkout_link'];
 
-        if($company->admin_id != $validatedData['admin_id']){
+        if ($company->admin_id != $validatedData['admin_id']) {
             $p_admin = User::query()->where('id', $company->admin_id)->first();
             $p_admin->company_id = null;
             $p_admin->is_admin = 0;
@@ -212,7 +214,7 @@ class CompanyController extends Controller
             Storage::delete($company->favicon);
             $company->favicon = null;
         }
-        if ($request->hasFile('home_banner') && $company->home_banner != null &&Storage::exists($company->home_banner)) {
+        if ($request->hasFile('home_banner') && $company->home_banner != null && Storage::exists($company->home_banner)) {
             $linkPath = Storage::path($company->home_banner);
             if (file_exists($linkPath)) {
                 unlink($linkPath);
@@ -225,21 +227,21 @@ class CompanyController extends Controller
         // Handle logo file upload
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $logoPath = $logo->storeAs('public', 'company-'.$company->id.'-logo-' . time() . '.' . $logo->getClientOriginalExtension());
+            $logoPath = $logo->storeAs('public', 'company-' . $company->id . '-logo-' . time() . '.' . $logo->getClientOriginalExtension());
             $company->logo = $logoPath;
         }
 
         // Handle favicon file upload
         if ($request->hasFile('favicon')) {
             $favicon = $request->file('favicon');
-            $faviconPath = $favicon->storeAs('public', 'company-'.$company->id.'-favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
+            $faviconPath = $favicon->storeAs('public', 'company-' . $company->id . '-favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
             $company->favicon = $faviconPath;
         }
 
         // Handle home banner file upload
         if ($request->hasFile('home_banner')) {
             $homeBanner = $request->file('home_banner');
-            $homeBannerPath = $homeBanner->storeAs('public', 'company-'.$company->id.'-home-banner-' . time() . '.' . $homeBanner->getClientOriginalExtension());
+            $homeBannerPath = $homeBanner->storeAs('public', 'company-' . $company->id . '-home-banner-' . time() . '.' . $homeBanner->getClientOriginalExtension());
             $company->home_banner = $homeBannerPath;
         }
 

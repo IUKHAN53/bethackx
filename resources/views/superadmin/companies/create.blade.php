@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <label for="logo">Logo:</label>
                             <input type="file" class="form-control" id="logo" name="logo" accept="image/*"
-                                   onchange="previewImage(this, 'logo-preview')" required>
+                                   onchange="previewImage(this, 'logo-preview')">
                             <img id="logo-preview" src="#" alt="Prévia do Logo"
                                  style="max-width: 100px; margin-top: 10px; display: none;">
                         </div>
@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label for="favicon">Favicon:</label>
                             <input type="file" class="form-control" id="favicon" name="favicon" accept="image/*"
-                                   onchange="previewImage(this, 'favicon-preview')" required>
+                                   onchange="previewImage(this, 'favicon-preview')">
                             <img id="favicon-preview" src="#" alt="Prévia do Favicon"
                                  style="max-width: 100px; margin-top: 10px; display: none;">
                         </div>
@@ -99,7 +99,7 @@
                         <div class="form-group">
                             <label for="home_banner">Banner da Página Inicial:</label>
                             <input type="file" class="form-control" id="home_banner" name="home_banner" accept="image/*"
-                                   onchange="previewImage(this, 'home-banner-preview')" required>
+                                   onchange="previewImage(this, 'home-banner-preview')">
                             <img id="home-banner-preview" src="#" alt="Prévia do Banner"
                                  style="max-width: 100px; margin-top: 10px; display: none;">
                         </div>

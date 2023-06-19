@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Company;
+use Symfony\Component\Dotenv\Dotenv;
+use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('setEnvFromDatabase')) {
     function setEnvFromDatabase()
@@ -13,14 +15,17 @@ if (!function_exists('setEnvFromDatabase')) {
             if ($companySlug) {
                 $company = Company::where('slug', $companySlug)->first();
                 if ($company) {
-                    $company = Company::where('slug', $companySlug)->first();
-                    if (!$company) {
-                        return;
+                    if ($company->favicon && $company->is_default == 0) {
+                        $value = Storage::url($company->favicon);
+                    } else {
+                        $value = asset('img/favicon.png');
                     }
-                    $value = $company->favicon;
                     setEnvValue('FAVICON_URL', $value);
-
-                    $value = $company->logo;
+                    if ($company->logo && $company->is_default == 0) {
+                        $value = Storage::url($company->logo);
+                    } else {
+                        $value = asset('img/home_logo.png');
+                    }
                     setEnvValue('ICON_URL', $value);
 
                     $value = $company->slug ?? 'BetHackX';
@@ -28,6 +33,12 @@ if (!function_exists('setEnvFromDatabase')) {
 
                     $value = url('/' . $company->slug);
                     setEnvValue('PWA_HOME_URL', $value);
+
+                    $value = $company->primary_color ?? '#0C1624FF';
+                    setEnvValue('PRIMARY_COLOR', $value);
+
+                    $value = $company->secondary_color ?? '#282834FF';
+                    setEnvValue('SECONDARY_COLOR', $value);
                 }
             }
         }
@@ -37,12 +48,16 @@ if (!function_exists('setEnvFromDatabase')) {
 if (!function_exists('setEnvValue')) {
     function setEnvValue($key, $value): void
     {
-
-        file_put_contents(app()->environmentFilePath(), preg_replace(
-            '/^' . $key . '=.*$/m',
-            $key . '=' . $value,
-            file_get_contents(app()->environmentFilePath())
-        ));
+        $envFile = app()->environmentFilePath();
+        $dotenv = new Dotenv();
+        $envValues = $dotenv->parse(file_get_contents($envFile));
+        $envValues[$key] = $value;
+        $envContent = '';
+        foreach ($envValues as $envKey => $envValue) {
+            $envContent .= $envKey . '=' . $envValue . PHP_EOL;
+        }
+        file_put_contents($envFile, $envContent);
+        $dotenv->load($envFile);
 
         $_ENV[$key] = $value;
         $_SERVER[$key] = $value;

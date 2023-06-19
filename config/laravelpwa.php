@@ -1,13 +1,15 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
     'name' => 'BetHackX',
     'manifest' => [
-        'name' => env('APP_NAME', 'BetHackX'),
-        'short_name' => 'BetHackX',
-        'start_url' => '/',
-        'background_color' => '#1b2226',
-        'theme_color' => '#2f3240',
+        'name' => Str::title(str_replace('-', ' ', env('PWA_SHORTCUT_NAME', 'BetHackX'))),
+        'short_name' => Str::title(str_replace('-', ' ', env('PWA_SHORTCUT_NAME', 'BetHackX'))),
+        'start_url' => env('PWA_HOME_URL', 'http://bethackx.test/bethackx'),
+        'background_color' => '#0C1624FF',
+        'theme_color' => '#282834FF',
         'display' => 'standalone',
         'orientation'=> 'any',
         'status_bar'=> 'black',
@@ -56,17 +58,6 @@ return [
             '1668x2224' => env('FAVICON_URL', '/img/favicon.png'),
             '1668x2388' => env('FAVICON_URL', '/img/favicon.png'),
             '2048x2732' => env('FAVICON_URL', '/img/favicon.png'),
-        ],
-        'shortcuts' => [
-            [
-                'name' => env('PWA_SHORTCUT_NAME', 'BetHackX'),
-                'description' => 'App for betting online smartly',
-                'url' => env('PWA_HOME_URL', 'BetHackX'),
-                'icons' => [
-                    "src" => env('FAVICON_URL', '/img/favicon.png'),
-                    "purpose" => "any"
-                ]
-            ]
         ],
         'custom' => []
     ]

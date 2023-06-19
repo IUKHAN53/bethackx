@@ -14,7 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @if ($current_company)
+    @if ($current_company && $current_company->is_default==0==0)
         @if ($current_company->favicon)
             <link rel="icon" type="image/png" href="{{Storage::url($current_company->favicon)}}" sizes="32x32">
         @endif
@@ -41,7 +41,7 @@
 <body class="bg-white dark-mode-active">
 <div class="appHeader scrolled" style="max-width: 700px;margin-left: auto; margin-right: auto;">
     <div class="left">
-        @if ($current_company)
+        @if ($current_company && $current_company->is_default==0 )
             @if ($current_company->logo)
                 <a href="#" class="headerButton toggle-searchbox gap-2">
                     <img src="{{Storage::url($current_company->logo)}}" alt=""

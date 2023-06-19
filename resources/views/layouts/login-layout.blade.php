@@ -14,7 +14,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @if ($current_company)
+    @if ($current_company && $current_company->is_default==0 )
         @if ($current_company->favicon)
             <link rel="icon" type="image/png" href="{{Storage::url($current_company->favicon)}}" sizes="32x32">
             <link rel="apple-touch-icon" sizes="180x180" href="{{Storage::url($current_company->favicon)}}">
