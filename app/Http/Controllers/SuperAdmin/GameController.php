@@ -56,7 +56,7 @@ class GameController extends Controller
         $game->banner = $bannerPath;
 
         if($game->save()){
-            foreach (Company::query()->where('is_active', 1)->pluck('id')->toArray() as $company_id){
+            foreach (Company::query()->pluck('id')->toArray() as $company_id){
                 CompanyGames::create([
                     'company_id' => $company_id,
                     'game_id' => $game->id,

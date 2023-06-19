@@ -105,7 +105,7 @@ class CompanyController extends Controller
         $company->save();
 
 //        create games for the company
-        foreach (Games::query()->where('status', 1)->get() as $game) {
+        foreach (Games::query()->get() as $game) {
             CompanyGames::create(
                 [
                     'company_id' => $company->id,
