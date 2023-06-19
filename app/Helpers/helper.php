@@ -56,7 +56,7 @@ if (!function_exists('setEnvValue')) {
         foreach ($envValues as $envKey => $envValue) {
             $envContent .= $envKey . '=' . $envValue . PHP_EOL;
         }
-        file_put_contents($envFile, $envContent, LOCK_EX);
+        file_put_contents($envFile, $envContent);
         $dotenv->load($envFile);
 
         $_ENV[$key] = $value;
