@@ -59,7 +59,7 @@
 
                 <div class="mt-4">
                     <p class="fw-bolder"><span class="text-white">Precisa de Ajuda?</span> <a
-                            href="{{$current_company->help_link}}">Clique aqui</a></p>
+                            href="{{$current_company->help_link}}" target="_blank">Clique aqui</a></p>
                 </div>
 
             </form>

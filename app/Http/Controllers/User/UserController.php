@@ -21,13 +21,8 @@ class UserController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('web')->attempt($credentials)) {
-            $user = Auth::guard('web')->user();
-
-            if ($user->companyScope()) {
-                return redirect()->route('user.view', $request->current_company->slug);
-            }
-
+        if (Auth::attempt($credentials) && Auth::user()->company_id && Auth::user()->company_id == $request->current_company->id) {
+            return redirect()->route('home', $request->current_company->slug);
         }
 
         return redirect()->back()->withErrors([

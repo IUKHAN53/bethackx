@@ -104,7 +104,7 @@
                     <span class="text-small">Está com dúvidas? Aprenda administrar o App.</span>
                 </div>
                 <div class="w-100">
-                    <a href="{{$current_company->admin_tutorial_link}}"
+                    <a href="{{$current_company->admin_tutorial_link}}" target="_blank"
                        class="btn btn-primary text-uppercase fw-bolder  float-end">Assista Agora</a>
                 </div>
             </div>

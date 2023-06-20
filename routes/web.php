@@ -65,11 +65,11 @@ Route::group(['prefix' => '{company}'], function () {
                 Route::post('update-user-data', [AdminController::class, 'updateUserData'])->name('admin.update-user-data');
             });
         });
-        Route::get('/home', [HomeController::class, 'index'])->name('home');
         Route::group(['prefix' => 'user'], function () {
             Route::view('login', 'user.login');
             Route::post('login', [UserController::class, 'login'])->name('user.login');
             Route::group(['middleware' => ['auth']], function () {
+                Route::get('home', [HomeController::class, 'index'])->name('home');
                 Route::get('user-view', [HomeController::class, 'index'])->name('user.view');
                 Route::get('game/{id}', [HomeController::class, 'viewGame'])->name('user.view-game');
                 Route::get('game/{id}/get-signal', [HomeController::class, 'getGameSignal'])->name('user.get-game-signal');

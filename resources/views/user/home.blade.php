@@ -89,7 +89,7 @@
                         </div>
                         <div class="w-100">
                             <button class="btn btn-primary text-uppercase fw-bolder float-end"
-                            onclick="window.location='{{$current_company->user_tutorial_link}}'">Assista Agora</button>
+                            onclick="window.open('{{$current_company->user_tutorial_link}}', '_blank');">Assista Agora</button>
                         </div>
                     </div>
                 </div>
