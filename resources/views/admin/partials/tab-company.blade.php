@@ -92,6 +92,14 @@
                                required>
                     </label>
                     @error('plan_checkout_link')<span style="color: darkred">{{ $message }}</span>@enderror
+                    <label for="user_tutorial_link"
+                           class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
+                        <span class="w-100">link do tutorial do usuário:</span>
+                        <input type="text" id="user_tutorial_link" name="user_tutorial_link"
+                               class="form-control-custom w-100" value="{{ $company->user_tutorial_link ?? '' }}"
+                               required>
+                    </label>
+                    @error('user_tutorial_link')<span style="color: darkred">{{ $message }}</span>@enderror
                 </div>
                 <div class="text-end mt-3">
                     <button type="submit" class="btn btn-primary btn-sm">SALVAR</button>

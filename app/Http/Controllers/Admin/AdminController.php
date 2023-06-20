@@ -180,6 +180,7 @@ class AdminController extends Controller
             'primary_color' => 'required',
             'secondary_color' => 'required',
             'tertiary_color' => 'required',
+            'user_tutorial_link' => '',
         ]);
 
         $company = $request->current_company;
@@ -204,6 +205,7 @@ class AdminController extends Controller
         $company->buttons_color = $request->input('buttons_color');
         $company->notices_color = $request->input('notices_color');
         $company->plan_checkout_link = $request->input('plan_checkout_link');
+        $company->user_tutorial_link = $request->input('user_tutorial_link');
 
         $company->save();
 

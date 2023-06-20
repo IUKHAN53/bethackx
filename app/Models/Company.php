@@ -24,6 +24,7 @@ class Company extends Model
         'home_banner',
         'home_banner_ref_link',
         'admin_tutorial_link',
+        'user_tutorial_link',
         'is_active',
         'admin_id',
         'is_default',
