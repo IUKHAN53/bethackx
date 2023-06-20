@@ -11,7 +11,7 @@ class IsAdmin
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user() &&  Auth::user()->is_admin == 1) {
+        if (Auth::user() &&  Auth::user()->is_admin == 1 && request()->current_company->id == Auth::user()->company_id) {
             return $next($request);
         }
         return redirect('home');

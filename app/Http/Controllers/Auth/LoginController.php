@@ -23,6 +23,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+
     public function showLoginForm()
     {
         return view('auth.login')->with(['settings' => (new \App\Models\GlobalSettings)->getSettings()]);
@@ -47,15 +48,12 @@ class LoginController extends Controller
             $this->credentials($request), $request->boolean('remember')
         );
     }
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials) && Auth::user()->isAdmin() && Auth::user()->company_id && Auth::user()->companyScope()) {
-            return redirect()->route('admin.view',$request->current_company->slug);
-        }
-
-        if (Auth::attempt($credentials) && Auth::user()->company_id && Auth::user()->companyScope()) {
+        if (Auth::attempt($credentials) && Auth::user()->company_id && Auth::user()->company_id == $request->current_company->id) {
             return redirect()->route('home', $request->current_company->slug);
         }
 
