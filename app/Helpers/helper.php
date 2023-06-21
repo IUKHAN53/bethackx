@@ -67,7 +67,7 @@ if (!function_exists('setEnvValue')) {
 
 function createEnvFileFromDefault($company): bool
 {
-    $defaultEnvFile = base_path('.env');
+    $defaultEnvFile = base_path('.env.company');
     $targetEnvFile = base_path('envs/.env.' . $company->slug);
 
     if (File::exists($defaultEnvFile) && !File::exists($targetEnvFile)) {

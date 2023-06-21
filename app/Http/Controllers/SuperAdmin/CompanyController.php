@@ -150,9 +150,9 @@ class CompanyController extends Controller
 
         // Validate the form input
         $validatedData = $request->validate([
-            'name' => 'nullable|required|string|max:255',
+            'name' => 'required|string|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'favicon' => 'image|mimes:jpeg,png,jpg,gif',
+            'favicon' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'primary_color' => 'nullable|string|max:255',
             'secondary_color' => 'nullable|string|max:255',
             'tertiary_color' => 'nullable|string|max:255',
@@ -196,8 +196,7 @@ class CompanyController extends Controller
             $n_admin->is_admin = 1;
             $n_admin->save();
         }
-
-        if ($request->hasFile('logo') && Storage::exists($company->logo)) {
+        if ($request->logo && $company->logo != null && Storage::exists($company->logo)) {
             $linkPath = Storage::path($company->logo);
             if (file_exists($linkPath)) {
                 unlink($linkPath);
@@ -205,7 +204,7 @@ class CompanyController extends Controller
             Storage::delete($company->logo);
             $company->logo = null;
         }
-        if ($request->hasFile('favicon') && Storage::exists($company->favicon)) {
+        if ($request->favicon && $company->favicon!=null && Storage::exists($company->favicon)) {
             $linkPath = Storage::path($company->favicon);
             if (file_exists($linkPath)) {
                 unlink($linkPath);
@@ -213,7 +212,7 @@ class CompanyController extends Controller
             Storage::delete($company->favicon);
             $company->favicon = null;
         }
-        if ($request->hasFile('home_banner') && $company->home_banner != null && Storage::exists($company->home_banner)) {
+        if ($request->home_banner && $company->home_banner != null && Storage::exists($company->home_banner)) {
             $linkPath = Storage::path($company->home_banner);
             if (file_exists($linkPath)) {
                 unlink($linkPath);
@@ -224,21 +223,21 @@ class CompanyController extends Controller
         $company->save();
 
         // Handle logo file upload
-        if ($request->hasFile('logo')) {
+        if ($request->logo) {
             $logo = $request->file('logo');
             $logoPath = $logo->storeAs('public', 'company-' . $company->id . '-logo-' . time() . '.' . $logo->getClientOriginalExtension());
             $company->logo = $logoPath;
         }
 
         // Handle favicon file upload
-        if ($request->hasFile('favicon')) {
+        if ($request->favicon) {
             $favicon = $request->file('favicon');
             $faviconPath = $favicon->storeAs('public', 'company-' . $company->id . '-favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
             $company->favicon = $faviconPath;
         }
 
         // Handle home banner file upload
-        if ($request->hasFile('home_banner')) {
+        if ($request->home_banner) {
             $homeBanner = $request->file('home_banner');
             $homeBannerPath = $homeBanner->storeAs('public', 'company-' . $company->id . '-home-banner-' . time() . '.' . $homeBanner->getClientOriginalExtension());
             $company->home_banner = $homeBannerPath;

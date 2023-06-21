@@ -13,7 +13,8 @@
         "silviolleite/laravelpwa": "^2.0",
         "symfony/dotenv": "^6.3",
         "symfony/filesystem": "^6.3",
-        "vlucas/phpdotenv": "5.5.*"
+        "vlucas/phpdotenv": "5.5.*",
+      "ext-http": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
