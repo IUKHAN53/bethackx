@@ -3,6 +3,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use App\Models\Company;
+use Dotenv\Dotenv;
 
 class VerifyCompanySlug
 {
@@ -10,11 +11,21 @@ class VerifyCompanySlug
     {
         $companySlug = $request->route('company');
         $company = Company::where('slug', $companySlug)->first();
+
         if (!$company) {
-            $company_slug = Company::getDefaultOrFirst()->slug;
-            return redirect()->route('welcome', ['company' => $company_slug]);
+            $companySlug = Company::getDefaultOrFirst()->slug;
+            $request->route()->setParameter('company', $companySlug);
+            $company = Company::where('slug', $companySlug)->first();
+        }
+
+        if(createEnvFileFromDefault($company)){
+            $environmentFile = 'envs/.env.' . $company->slug;
+            $dotenv = Dotenv::createImmutable(base_path(), $environmentFile);
+            $dotenv->load();
         }
         $request->merge(['current_company' => $company]);
+
         return $next($request);
     }
+
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Company;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\Dotenv\Dotenv;
 use Illuminate\Support\Facades\Storage;
 
@@ -62,4 +63,39 @@ if (!function_exists('setEnvValue')) {
         $_ENV[$key] = $value;
         $_SERVER[$key] = $value;
     }
+}
+
+function createEnvFileFromDefault($company): bool
+{
+    $defaultEnvFile = base_path('.env');
+    $targetEnvFile = base_path('envs/.env.' . $company->slug);
+
+    if (File::exists($defaultEnvFile) && !File::exists($targetEnvFile)) {
+        File::copy($defaultEnvFile, $targetEnvFile);
+    }
+
+    if (File::exists($targetEnvFile)) {
+        $envContents = file_get_contents($targetEnvFile);
+
+        $replacements = [
+            'PWA_SHORTCUT_NAME' => $company->slug,
+            'PWA_HOME_URL' => url('/' . $company->slug),
+            'FAVICON_URL' => $company->favicon,
+            'ICON_URL' => $company->logo,
+            'PRIMARY_COLOR' => $company->primary_color,
+            'SECONDARY_COLOR' => $company->secondary_color,
+        ];
+
+        foreach ($replacements as $key => $value) {
+            $pattern = '/^' . preg_quote($key, '/') . '.*/m';
+            $replacement = $key . '=' . $value;
+            $envContents = preg_replace($pattern, $replacement, $envContents);
+        }
+
+        file_put_contents($targetEnvFile, $envContents);
+
+        return true;
+    }
+
+    return false;
 }
