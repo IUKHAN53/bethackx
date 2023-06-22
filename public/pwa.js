@@ -61,6 +61,7 @@ fetch(url, {
                             const manifestTag = document.createElement('link');
                             manifestTag.setAttribute('rel', 'manifest');
                             manifestTag.setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(manifest)], {type: 'application/json'})));
+                            console.log(manifestTag)
                             document.body.append(manifestTag);
                             // document.querySelector('link[rel="manifest"]').setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: 'application/json' })));
                             // console.log('Service worker registered successfully');
