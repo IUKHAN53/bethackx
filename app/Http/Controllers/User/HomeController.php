@@ -71,8 +71,7 @@ class HomeController extends Controller
     {
         $validator = Validator::make(['email' => $email], [
             'email' => 'required|email|unique:users,email',
-        ]);
-        $validator->setMessages([
+        ], [
             'email.required' => 'O campo de e-mail é obrigatório.',
             'email.email' => 'Por favor, insira um endereço de e-mail válido.',
             'email.unique' => 'O endereço de e-mail já está sendo utilizado por outro usuário.',
@@ -97,8 +96,7 @@ class HomeController extends Controller
     {
         $validator = Validator::make(['email' => $email], [
             'email' => 'required|email|unique:users,email',
-        ]);
-        $validator->setMessages([
+        ], [
             'email.required' => 'O campo de e-mail é obrigatório.',
             'email.email' => 'Por favor, insira um endereço de e-mail válido.',
             'email.unique' => 'O endereço de e-mail já está sendo utilizado por outro usuário.',
