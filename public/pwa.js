@@ -54,18 +54,23 @@ fetch(url, {
             });
 
             // Register the service worker based on the configuration
-            navigator.serviceWorker.register(`/serviceworker.js`)
-                .then(() => {
-                    const manifestTag = document.createElement('link');
-                    manifestTag.setAttribute('rel', 'manifest');
-                    manifestTag.setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(manifest)], {type: 'application/json'})));
-                    document.body.append(manifestTag);
-                    // document.querySelector('link[rel="manifest"]').setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: 'application/json' })));
-                    // console.log('Service worker registered successfully');
-                })
-                .catch((error) => {
-                    console.error('Service worker registration failed:', error);
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register(`/serviceworker.js`)
+                        .then(() => {
+                            const manifestTag = document.createElement('link');
+                            manifestTag.setAttribute('rel', 'manifest');
+                            manifestTag.setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(manifest)], {type: 'application/json'})));
+                            document.body.append(manifestTag);
+                            // document.querySelector('link[rel="manifest"]').setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: 'application/json' })));
+                            // console.log('Service worker registered successfully');
+                        })
+                        .catch((error) => {
+                            console.error('Service worker registration failed:', error);
+                        });
                 });
+            }
+
         } else {
             console.warn(`No PWA configuration found for path: ${currentPath}`);
         }
