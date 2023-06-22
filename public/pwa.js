@@ -54,7 +54,7 @@ fetch(url, {
             });
 
             // Register the service worker based on the configuration
-            navigator.serviceWorker.register(`/service-worker-${data.slug}.js`)
+            navigator.serviceWorker.register(`/serviceworker.js`)
                 .then(() => {
                     const manifestTag = document.createElement('link');
                     manifestTag.setAttribute('rel', 'manifest');
