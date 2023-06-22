@@ -9,6 +9,7 @@ use App\Models\Signal;
 use App\Models\Games;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -68,6 +69,18 @@ class HomeController extends Controller
 
     public function createFreeUser(Request $request, $company, $email)
     {
+        $validator = Validator::make(['email' => $email], [
+            'email' => 'required|email|unique:users,email',
+        ]);
+        $validator->setMessages([
+            'email.required' => 'O campo de e-mail é obrigatório.',
+            'email.email' => 'Por favor, insira um endereço de e-mail válido.',
+            'email.unique' => 'O endereço de e-mail já está sendo utilizado por outro usuário.',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->route('user.login', $company)->withErrors($validator)->withInput();
+        }
+
         $company = Company::where('slug', $company)->first();
         if ($company) {
             $company->users()->create([
@@ -82,6 +95,18 @@ class HomeController extends Controller
 
     public function createPremiumUser(Request $request, $company, $email)
     {
+        $validator = Validator::make(['email' => $email], [
+            'email' => 'required|email|unique:users,email',
+        ]);
+        $validator->setMessages([
+            'email.required' => 'O campo de e-mail é obrigatório.',
+            'email.email' => 'Por favor, insira um endereço de e-mail válido.',
+            'email.unique' => 'O endereço de e-mail já está sendo utilizado por outro usuário.',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->route('user.login', $company)->withErrors($validator)->withInput();
+        }
+
         $company = Company::where('slug', $company)->first();
         if ($company) {
             $user = $company->users()->create([
@@ -100,6 +125,7 @@ class HomeController extends Controller
 
     public function getCompanyDetail($slug): \Illuminate\Http\JsonResponse
     {
+
         $company = Company::where('slug', $slug)->first();
         $data = [
             'name' => $company->name,
