@@ -33,6 +33,7 @@
         const url = '{{route('getCompanyDetail', $current_company->slug)}}'
     </script>
     <script src="{{asset('pwa.js')}}" type="module"></script>
+    <link rel="manifest">
     <!-- PWA elements -->
 
 </head>

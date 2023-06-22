@@ -58,13 +58,9 @@ fetch(url, {
                 window.addEventListener('load', () => {
                     navigator.serviceWorker.register(`/serviceworker.js`)
                         .then(() => {
-                            const manifestTag = document.createElement('link');
-                            manifestTag.setAttribute('rel', 'manifest');
-                            manifestTag.setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(manifest)], {type: 'application/json'})));
-                            console.log(manifestTag)
-                            document.body.append(manifestTag);
-                            // document.querySelector('link[rel="manifest"]').setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: 'application/json' })));
-                            // console.log('Service worker registered successfully');
+                            console.log('Service worker registered successfully');
+                            // Dynamically set the generated manifest
+                            document.querySelector('link[rel="manifest"]').setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: 'application/json' })));
                         })
                         .catch((error) => {
                             console.error('Service worker registration failed:', error);
