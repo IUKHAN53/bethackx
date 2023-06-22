@@ -15,9 +15,7 @@ Route::get('/run-config-commands', function () {
     return redirect('/');
 });
 
-Route::get('/test', function () {
-    return view('test');
-});
+Route::get('getCompanyDetail/{slug}', [HomeController::class, 'getCompanyDetail'])->name('getCompanyDetail');
 
 Route::group(['prefix' => 'super-admin', 'as' => 'super-admin.'], function () {
     Route::view('login', 'superadmin.login');

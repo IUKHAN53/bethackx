@@ -13,7 +13,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['createFreeUser']);
+        $this->middleware('auth')->except(['createFreeUser', 'getCompanyDetail', 'createPremiumUser']);
     }
 
     public function index()
@@ -66,26 +66,46 @@ class HomeController extends Controller
 
     public function createFreeUser(Request $request, $company, $email)
     {
-        $request->current_company->users()->create([
-            'name' => 'free user',
-            'email' => $email,
-            'password' => bcrypt('12345678'),
-            'is_admin' => 0,
-        ]);
-        return redirect()->route('user.login', $company);
-    }
-    public function createPremiumUser(Request $request, $company, $email)
-    {
-        $user = $request->current_company->users()->create([
-            'name' => 'free user',
-            'email' => $email,
-            'password' => bcrypt('12345678'),
-            'is_admin' => 0,
-        ]);
-        $premiumPlan = Plan::where('name', Plan::PREMIUM_PLAN_NAME)->companyScope()->first();
-        if ($premiumPlan) {
-            $user->subscribePlan($premiumPlan->id);
+        $company = Company::where('slug', $company)->first();
+        if ($company) {
+            $company->users()->create([
+                'name' => 'free user',
+                'email' => $email,
+                'password' => bcrypt('12345678'),
+                'is_admin' => 0,
+            ]);
         }
         return redirect()->route('user.login', $company);
+    }
+
+    public function createPremiumUser(Request $request, $company, $email)
+    {
+        $company = Company::where('slug', $company)->first();
+        if ($company) {
+            $user = $company->users()->create([
+                'name' => 'premium user',
+                'email' => $email,
+                'password' => bcrypt('12345678'),
+                'is_admin' => 0,
+            ]);
+            $premiumPlan = Plan::where('name', Plan::PREMIUM_PLAN_NAME)->where('company_id', $company->id)->first();
+            if ($premiumPlan) {
+                $user->subscribePlan($premiumPlan->id);
+            }
+        }
+        return redirect()->route('user.login', $company);
+    }
+
+    public function getCompanyDetail($slug): \Illuminate\Http\JsonResponse
+    {
+        $company = Company::where('slug', $slug)->first();
+        $data = [
+            'name' => $company->name,
+            'logo' => $company->logo,
+            'slug' => $company->slug,
+            'favicon' => $company->favicon,
+            'start_url' => url('/' . $company->slug),
+        ];
+        return response()->json($data);
     }
 }
