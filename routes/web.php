@@ -7,6 +7,8 @@ use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::get('/run-config-commands', function () {
     Artisan::call('storage:link');
     Artisan::call('view:cache');
@@ -37,6 +39,7 @@ Route::get('/offline', function () {
 });
 Route::group(['prefix' => '{company}'], function () {
     Route::group(['middleware' => 'verifyCompanySlug'], function () {
+        Route::get('/manifest.json', [HomeController::class, 'manifest'])->name('manifest');
         Route::get('/create-free-user/{email}', [HomeController::class, 'createFreeUser'])->name('create-free-user');
         Route::get('/create-premium-user/{email}', [HomeController::class, 'createPremiumUser'])->name('create-premium-user');
         Route::view('/', 'welcome')->name('welcome');

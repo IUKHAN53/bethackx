@@ -29,13 +29,7 @@
     </style>
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('img/icon/192x192.png')}}">
     @vite(['resources/sass/app.scss', 'resources/css/splide.min.css','resources/css/style.css', 'resources/js/app.js'])
-    <script>
-        const url = '{{route('getCompanyDetail', $current_company->slug)}}'
-    </script>
-    <script src="{{asset('pwa.js')}}" type="module"></script>
-    <link rel="manifest">
-    <!-- PWA elements -->
-
+    @laravelPWA
 </head>
 
 <body class="bg-white dark-mode-active">

@@ -1,52 +1,45 @@
-// service-worker.js
-
-// Cache name for your PWA assets
-const cacheName = 'my-pwa-cache-v1';
-
-// Files to be cached
-const filesToCache = [
-    '/',
-    '/index.html',
-    '/styles.css',
-    '/script.js',
-    '/image.jpg',
-    // Add more files to cache as needed
+var staticCacheName = "pwa-v" + new Date().getTime();
+var filesToCache = [
+    '/offline',
+    '/css/app.css',
+    '/js/app.js',
+    '/img/home_logo.png',
 ];
 
-// Install event: Add files to cache
-self.addEventListener('install', event => {
+// Cache on install
+self.addEventListener("install", event => {
+    this.skipWaiting();
     event.waitUntil(
-        caches.open(cacheName)
-            .then(cache => cache.addAll(filesToCache))
-            .then(() => self.skipWaiting())
-    );
+        caches.open(staticCacheName)
+            .then(cache => {
+                return cache.addAll(filesToCache);
+            })
+    )
 });
 
-// Activate event: Clear old caches
+// Clear cache on activate
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(
-                cacheNames.map(name => {
-                    if (name !== cacheName) {
-                        return caches.delete(name);
-                    }
-                })
+                cacheNames
+                    .filter(cacheName => (cacheName.startsWith("pwa-")))
+                    .filter(cacheName => (cacheName !== staticCacheName))
+                    .map(cacheName => caches.delete(cacheName))
             );
         })
     );
-    self.clients.claim();
 });
 
-// Fetch event: Serve cached files or fetch from network
-self.addEventListener('fetch', event => {
+// Serve from Cache
+self.addEventListener("fetch", event => {
     event.respondWith(
         caches.match(event.request)
             .then(response => {
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request);
+                return response || fetch(event.request);
             })
-    );
+            .catch(() => {
+                return caches.match('offline');
+            })
+    )
 });

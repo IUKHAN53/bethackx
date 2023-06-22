@@ -8,12 +8,13 @@ use App\Models\Plan;
 use App\Models\Signal;
 use App\Models\Games;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['createFreeUser', 'getCompanyDetail', 'createPremiumUser']);
+        $this->middleware('auth')->except(['createFreeUser', 'createPremiumUser', 'manifest']);
     }
 
     public function index()
@@ -107,5 +108,17 @@ class HomeController extends Controller
             'start_url' => url('/' . $company->slug),
         ];
         return response()->json($data);
+    }
+
+    public function manifest($company)
+    {
+        $company = Company::query()->where('slug', $company)->first();
+        $template = file_get_contents(base_path('manifest/manifest.json'));
+        $manifest = str_replace(
+            ['{{shortName}}','{{start_url}}', '{{logo}}'],
+            [$company->slug, url('/').'/'.$company->slug, Storage::url($company->logo)],
+            $template
+        );
+        return response($manifest)->header('Content-Type', 'application/json');
     }
 }
