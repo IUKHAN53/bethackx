@@ -13,8 +13,10 @@
     @if ($current_company && $current_company->is_default==0 )
         @if ($current_company->favicon)
             <link rel="icon" type="image/png" href="{{Storage::url($current_company->favicon)}}" sizes="32x32">
+            <link rel="apple-touch-icon" sizes="180x180" href="{{Storage::url($current_company->favicon)}}">
         @else
             <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" sizes="32x32">
+            <link rel="apple-touch-icon" sizes="180x180" href="{{asset('img/icon/192x192.png')}}">
         @endif
     @else
         <link rel="icon" type="image/png" href="{{asset('img/favicon.png')}}" sizes="32x32">
@@ -27,7 +29,6 @@
             --button-color: {{ $current_company->buttons_color }}   !important;
         }
     </style>
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('img/icon/192x192.png')}}">
     @vite(['resources/sass/app.scss', 'resources/css/splide.min.css','resources/css/style.css', 'resources/js/app.js'])
     @laravelPWA
 </head>

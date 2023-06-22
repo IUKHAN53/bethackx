@@ -116,7 +116,7 @@ class HomeController extends Controller
         $template = file_get_contents(base_path('manifest/manifest.json'));
         $manifest = str_replace(
             ['{{shortName}}','{{start_url}}', '{{logo}}'],
-            [$company->slug, url('/').'/'.$company->slug, Storage::url($company->logo)],
+            [$company->slug, url('/').'/'.$company->slug, Storage::url($company->favicon)],
             $template
         );
         return response($manifest)->header('Content-Type', 'application/json');
