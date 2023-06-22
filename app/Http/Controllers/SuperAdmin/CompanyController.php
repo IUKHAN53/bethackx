@@ -83,22 +83,22 @@ class CompanyController extends Controller
         User::query()->where('id', $request->input('admin_id'))->update(['company_id' => $company->id, 'is_admin' => 1]);
 
         // Upload logo image
-        if ($request->file('logo')) {
+        if ($request->logo) {
             $logo = $request->file('logo');
             $logoPath = $logo->storeAs('public', 'company-' . $company->id . '-logo-' . time() . '.' . $logo->getClientOriginalExtension());
             $company->logo = $logoPath;
         }
-        if ($request->file('favicon')) {
+        if ($request->favicon) {
             // Upload favicon image
             $favicon = $request->file('favicon');
             $faviconPath = $favicon->storeAs('public', 'company-' . $company->id . '-favicon-' . time() . '.' . $favicon->getClientOriginalExtension());
+            $company->favicon = $faviconPath;
         }
         // Upload home banner image
         $homeBanner = $request->file('home_banner');
         if ($homeBanner) {
             $homeBannerPath = $homeBanner->storeAs('public', 'company-' . $company->id . '-home-banner-' . time() . '.' . $homeBanner->getClientOriginalExtension());
             $company->home_banner = $homeBannerPath;
-            $company->favicon = $faviconPath;
         }
 
         // Update the logo and favicon paths in the company record

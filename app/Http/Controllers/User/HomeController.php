@@ -9,6 +9,7 @@ use App\Models\Signal;
 use App\Models\Games;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -116,7 +117,7 @@ class HomeController extends Controller
         $template = file_get_contents(base_path('manifest/manifest.json'));
         $manifest = str_replace(
             ['{{shortName}}','{{start_url}}', '{{logo}}'],
-            [$company->slug, url('/').'/'.$company->slug, Storage::url($company->favicon)],
+            [Str::title(str_replace('-', ' ', $company->slug)), url('/').'/'.$company->slug, Storage::url($company->favicon)],
             $template
         );
         return response($manifest)->header('Content-Type', 'application/json');
