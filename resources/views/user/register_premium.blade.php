@@ -38,7 +38,7 @@
                         <input type="email"
                                class="form-control login-input-control @error('email') is-invalid @enderror" id="email"
                                name="email"
-                               placeholder="Nome">
+                               placeholder="E-mail">
                         <i class="clear-input">
                             <ion-icon name="close-circle"></ion-icon>
                         </i>
