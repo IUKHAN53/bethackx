@@ -22,7 +22,7 @@
                         <input type="text"
                                class="form-control login-input-control @error('name') is-invalid @enderror" id="name"
                                name="name"
-                               placeholder="E-mail">
+                               placeholder="Nome">
                         <i class="clear-input">
                             <ion-icon name="close-circle"></ion-icon>
                         </i>
