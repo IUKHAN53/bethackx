@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/run-config-commands', function () {
-    Artisan::call('storage:link');
     Artisan::call('view:cache');
     Artisan::call('route:cache');
     Artisan::call('config:cache');
@@ -67,8 +66,13 @@ Route::group(['prefix' => '{company}'], function () {
             });
         });
         Route::group(['prefix' => 'user'], function () {
+            Route::post('user-free-register', function (){dd('buzzzz');})->name('register_free');
+            Route::view('free-register', 'user.register_free');
+            Route::view('premium-register', 'user.register_premium');
             Route::view('login', 'user.login');
             Route::post('login', [UserController::class, 'login'])->name('user.login');
+//            Route::post('user-free-register', [UserController::class, 'registerFree'])->name('register_free');
+            Route::post('user-premium-register', [UserController::class, 'registerPremium'])->name('register_premium');
             Route::group(['middleware' => ['auth']], function () {
                 Route::get('home', [HomeController::class, 'index'])->name('home');
                 Route::get('user-view', [HomeController::class, 'index'])->name('user.view');

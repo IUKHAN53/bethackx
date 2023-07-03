@@ -14,14 +14,29 @@ use Illuminate\Support\Str;
 
 class CompanyController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // Retrieve all companies
-        $companies = Company::all();
+        $companiesQuery = Company::query();
 
-        // Return the companies index view with the retrieved companies
+        // Apply search filter if a search term is provided
+        $search = $request->input('search');
+        if ($search) {
+            $companiesQuery->where('name', 'like', '%' . $search . '%');
+        }
+
+        // Paginate the results
+        $companies = $companiesQuery->paginate(20);
+
+        // Append the search term to the pagination links
+        if ($search) {
+            $companies->appends(['search' => $search]);
+        }
+
+        // Return the companies index view with the paginated companies
         return view('superadmin.companies.index', compact('companies'));
     }
+
 
     public function create()
     {

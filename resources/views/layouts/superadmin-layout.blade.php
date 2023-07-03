@@ -73,6 +73,50 @@
             width: 100%;
             border-collapse: collapse;
         }
+
+        .admin-pagination{
+            margin: 15px;
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+
+        .admin-pagination .page-item {
+            margin: 0 2px;
+        }
+
+        .admin-pagination .page-link {
+            color: #000;
+            text-decoration: none;
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+
+        .admin-pagination .page-item.active .page-link {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        .admin-pagination .page-item.disabled .page-link {
+            color: #999;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+        .admin-pagination .page-item:first-child .page-link {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .admin-pagination .page-item:last-child .page-link {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+
+
     </style>
     @vite(['resources/sass/app.scss','resources/css/splide.min.css','resources/css/style.css', 'resources/js/app.js'])
 </head>

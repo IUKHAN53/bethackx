@@ -17,14 +17,7 @@ class VerifyCompanySlug
             $request->route()->setParameter('company', $companySlug);
             $company = Company::where('slug', $companySlug)->first();
         }
-//
-//        if(createEnvFileFromDefault($company)){
-//            $environmentFile = 'envs/.env.' . $company->slug;
-//            $dotenv = Dotenv::createImmutable(base_path(), $environmentFile);
-//            $dotenv->load();
-//        }
         $request->merge(['current_company' => $company]);
-
         return $next($request);
     }
 

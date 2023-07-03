@@ -9,9 +9,23 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::query()->where('id', '!=', auth()->id())->get();
+        $query = User::query()->where('id', '!=', auth()->id());
+
+        // Perform search if a search term is provided
+        $search = $request->input('search');
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%");
+            });
+        }
+        $users = $query->paginate(20);
+        // Append the search term to the pagination links
+        if ($search) {
+            $users->appends(['search' => $search]);
+        }
         return view('superadmin.users.index', compact('users'));
     }
 
