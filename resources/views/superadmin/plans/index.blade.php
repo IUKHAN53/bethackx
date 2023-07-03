@@ -1,7 +1,7 @@
 @extends('layouts.superadmin-layout')
 
 @section('content')
-    <h2 style="padding: 10px; margin-bottom: 20px;color: #f8f9fa; background-color: #333;">Lista de usuários</h2>
+    <h2 style="padding: 10px; margin-bottom: 20px;color: #f8f9fa; background-color: #333;font-size: 15px;">🟢 Lista de Planos (Não Alterar)</h2>
     <div class="text-right mb-2 float-end">
         <a class="btn btn-primary" href="{{ route('super-admin.plans.create') }}"><i class="fas fa-plus"></i> Crie um novo</a>
     </div>

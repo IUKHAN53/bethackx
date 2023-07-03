@@ -1,7 +1,7 @@
 @extends('layouts.superadmin-layout')
 
 @section('content')
-    <h2 style="padding: 10px; margin-bottom: 20px;color: #f8f9fa; background-color: #333;">Lista de Jogos</h2>
+    <h2 style="padding: 10px; margin-bottom: 20px;color: #f8f9fa; background-color: #333;font-size: 15px;">🟢 Lista de Jogos ativos </h2>
     <div class="text-right mb-2 float-end">
         <a class="btn btn-primary" href="{{ route('super-admin.games.create') }}"><i class="fas fa-plus"></i> Crie um novo</a>
     </div>
@@ -12,12 +12,10 @@
             <th>Nome</th>
             <th>Texto do Jogo</th>
             <th>Tipo do Jogo</th>
-            <th>Descrição</th>
             <th>Link do IFrame</th>
             <th>Imagem</th>
             <th>Banner</th>
-            <th>Status</th>
-            <th>Empresa</th>
+
             <th>Ações</th>
         </tr>
         </thead>
@@ -28,12 +26,10 @@
                 <td>{{ $game->name }}</td>
                 <td>{{ $game->game_text }}</td>
                 <td>{{ $game->game_type }}</td>
-                <td>{{ $game->description }}</td>
                 <td>{{ $game->iframe_link }}</td>
                 <td><img src="{{ $game->is_default ? asset($game->image) : Storage::url($game->image)}}" alt="image" width="50px" height="50px"></td>
                 <td><img src="{{ $game->is_default ? asset($game->banner) : Storage::url($game->banner) }}" alt="banner" width="100px" height="50px"></td>
-                <td>{{ $game->status ? 'Ativo' : 'Inativo' }}</td>
-                <td>{{ $game->company->name ?? ''}}</td>
+               
                 <td>
                     <div class="btn-group" role="group">
                         <a href="{{ route('super-admin.games.show', $game->id) }}"

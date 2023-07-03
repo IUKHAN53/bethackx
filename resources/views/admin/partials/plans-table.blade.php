@@ -9,9 +9,7 @@
                    data-bs-target="#add_games_to_plan">
                     <ion-icon name="game-controller-outline" style="color: #b2b2b2"></ion-icon>
                 </a>
-                <a href="#" onclick="deletePlan('{{$plan->id}}')">
-                    <ion-icon name="trash" style="color: #b2b2b2"></ion-icon>
-                </a>
+                
             </div>
         </div>
     </div>

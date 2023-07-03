@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#000000">
     <title>Welcome To {{$current_company->name}}</title>
-    <meta name="description" content="Irfan's PWA design">
+    <meta name="description" content="BetHack PWA design">
     <meta name="keywords" content="bootstrap 5, mobile pwa">
     @if ($current_company && $current_company->is_default==0 )
         @if ($current_company->favicon)
@@ -50,7 +50,7 @@
             </div>
             <div class="section mt-1 text-center">
                 <h4 class="text-white fw-bolder">Bem-Vindo a revolução <br> do hack de sinais.</h4>
-                <h4 class="fw-bolder" style="color: #685fc6">Inimigo nº 1 dos Cassinos!</h4>
+                <h4 class="fw-bolder" style="color: #890707">Inimigo nº 1 dos Cassinos!</h4>
             </div>
             <div class="section mt-1 mb-5 d-flex justify-content-center align-items-center">
                 <form class="w-100">

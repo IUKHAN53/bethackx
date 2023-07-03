@@ -49,7 +49,7 @@
             @if ($current_company->logo)
                 <a href="#" class="headerButton toggle-searchbox gap-2">
                     <img src="{{Storage::url($current_company->logo)}}" alt=""
-                         style="max-width: 120px; max-height: 50px">
+                         style="max-width: 150px; max-height: 50px">
                 </a>
             @else
                 <a href="#" class="headerButton toggle-searchbox gap-2">

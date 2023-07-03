@@ -1,8 +1,7 @@
 @extends('layouts.superadmin-layout')
 
 @section('content')
-    <h2 style="padding: 10px; margin-bottom: 20px;color: #f8f9fa; background-color: #333;">Lista de usuários</h2>
-
+    <h2 style="padding: 10px; margin-bottom: 20px;color: #f8f9fa; background-color: #333;font-size: 14px;">🟢 Lista  usuários</h2>
     <div class="d-flex justify-content-between  m-2">
         <div>
             <form action="{{ route('super-admin.users.index') }}" method="GET" class="d-flex">

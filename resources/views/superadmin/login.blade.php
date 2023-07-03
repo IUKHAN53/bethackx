@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BetHackX - Superadministrador</title>
+    <title>BetHackX - Super Administrador</title>
     <style>
         body {
             background-color: #f8f9fa;
@@ -61,7 +61,7 @@
     <div class="logo">
         <img src="{{asset('img/home_logo.png')}}" alt="Logo">
     </div>
-    <h2 class="text-center">Login de Superadministrador</h2>
+    <h2 class="text-center">BETHACKX PWA ADMIN</h2>
     <form method="POST" action="{{route('super-admin.login')}}">
         @csrf
         <div class="form-group">

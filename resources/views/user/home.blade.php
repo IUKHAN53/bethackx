@@ -39,8 +39,8 @@
             alt="" class="img-fluid">
     </div>
     <div class="d-flex justify-content-center">
-        <div class="header-large-title bg-primary text-center" style="width: fit-content; border-radius: 20px">
-            <span style="font-size: 14px;">Clique abaixo no jogo preferido para abrir os sinais</span>
+        <div class="header-large-title bg-primary text-center" style="width: fit-content; border-radius: 6px;margin-top: 16px;">
+            <span style="font-size: 14px;">Escolha o Jogo para gerar Sinais</span>
         </div>
     </div>
     <div class="section full mt-3">

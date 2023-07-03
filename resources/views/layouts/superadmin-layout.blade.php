@@ -129,22 +129,22 @@
     <h3>&nbsp;&nbsp;&nbsp;Super Admin Panel</h3>
     <ul class="nav flex-column">
         <li class="nav-item {{ request()->routeIs('super-admin.users.*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{route('super-admin.users.index')}}">Usuários</a>
+            <a class="nav-link" href="{{route('super-admin.users.index')}}">👤 Usuários</a>
         </li>
         <li class="nav-item {{ request()->routeIs('super-admin.companies.*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{route('super-admin.companies.index')}}">Afiliados</a>
+            <a class="nav-link" href="{{route('super-admin.companies.index')}}">📱 Apps</a>
         </li>
         <li class="nav-item {{ request()->routeIs('super-admin.games.*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{route('super-admin.games.index')}}">Jogos</a>
+            <a class="nav-link" href="{{route('super-admin.games.index')}}">🎮 Jogos</a>
         </li>
         <li class="nav-item {{ request()->routeIs('super-admin.plans.*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{route('super-admin.plans.index')}}">Planos</a>
+            <a class="nav-link" href="{{route('super-admin.plans.index')}}">🚫 Planos</a>
         </li>
         <li class="nav-item {{ request()->routeIs('super-admin.subscriptions.*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{route('super-admin.subscriptions.index')}}">Assinaturas</a>
+            <a class="nav-link" href="{{route('super-admin.subscriptions.index')}}">🚫 Assinaturas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)" onclick="$('#logout_form').submit()">Sair</a>
+            <a class="nav-link" href="javascript:void(0)" onclick="$('#logout_form').submit()">🏃 ️Sair</a>
         </li>
     </ul>
 </div>
