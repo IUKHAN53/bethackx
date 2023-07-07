@@ -23,7 +23,11 @@
                             <label for="name">Nome:</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
-
+                        <label for="slug" class="form-label">App URL</label>
+                        <div class="input-group mb-3" style="background-color: #e9ecef !important;">
+                            <span class="input-group-text">{{url('/')}}/</span>
+                            <input type="text" class="form-control" id="slug" name="slug" aria-describedby="basic-addon3" value="{{ old('slug') }}">
+                        </div>
                         <div class="form-group">
                             <label for="logo">Logo:</label>
                             <input type="file" class="form-control" id="logo" name="logo" accept="image/*"

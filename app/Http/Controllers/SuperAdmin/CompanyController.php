@@ -64,6 +64,7 @@ class CompanyController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
+            'slug' => ['required', 'alpha_dash', 'max:255', Rule::unique('companies')],
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'favicon' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'primary_color' => 'required|string|max:255',
@@ -81,7 +82,7 @@ class CompanyController extends Controller
         // Create a new company
         $company = new Company;
         $company->name = $request->input('name');
-        $company->slug = Str::slug($request->input('name'), '-');
+        $company->slug = $request->input('slug');
         $company->primary_color = $request->input('primary_color');
         $company->secondary_color = $request->input('secondary_color');
         $company->tertiary_color = $request->input('tertiary_color');
