@@ -18,6 +18,12 @@
                                required>
                     </label>
                     @error('company_name')<span style="color: darkred">{{ $message }}</span>@enderror
+                    <label for="company_slug" class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">
+                        <span class="w-100">Slug da Empresa:</span>
+                        <input type="text" id="company_slug" name="company_slug" class="form-control-custom w-100"
+                               value="{{ $company->slug ?? '' }}" required>
+                    </label>
+                    @error('company_slug')<span style="color: darkred">{{ $message }}</span>@enderror
 
                     <label for="company_logo"
                            class="form-label-custom d-flex justify-content-start align-items-center ps-2 rounded">

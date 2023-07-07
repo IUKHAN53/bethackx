@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class CompanyController extends Controller
 {
@@ -166,6 +167,7 @@ class CompanyController extends Controller
         // Validate the form input
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'slug' => ['required', 'alpha_dash', Rule::unique('companies', 'slug')->ignore($company->id)],
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'favicon' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'primary_color' => 'nullable|string|max:255',
@@ -185,7 +187,7 @@ class CompanyController extends Controller
 
         // Update the company data
         $company->name = $validatedData['name'];
-//        $company->slug = Str::slug($validatedData['name'], '-');
+        $company->slug = $validatedData['slug'];
         $company->primary_color = $validatedData['primary_color'];
         $company->secondary_color = $validatedData['secondary_color'];
         $company->tertiary_color = $validatedData['tertiary_color'];
@@ -219,7 +221,7 @@ class CompanyController extends Controller
             Storage::delete($company->logo);
             $company->logo = null;
         }
-        if ($request->favicon && $company->favicon!=null && Storage::exists($company->favicon)) {
+        if ($request->favicon && $company->favicon != null && Storage::exists($company->favicon)) {
             $linkPath = Storage::path($company->favicon);
             if (file_exists($linkPath)) {
                 unlink($linkPath);

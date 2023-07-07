@@ -7,7 +7,6 @@
               enctype="multipart/form-data">
             @csrf
             @method('PUT')
-
             <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
                 <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $company->name) }}">
@@ -15,6 +14,14 @@
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
+            <label for="slug" class="form-label">App URL</label>
+            <div class="input-group mb-3" style="background-color: #e9ecef !important;">
+                <span class="input-group-text">{{url('/')}}/</span>
+                <input type="text" class="form-control" id="slug" name="slug" aria-describedby="basic-addon3" value="{{ old('slug', $company->slug) }}">
+            </div>
+            @error('slug')
+            <span class="text-danger">{{ $message }}</span>
+            @enderror
 
             <div class="mb-3">
                 <label for="logo" class="form-label">Logo</label>
@@ -105,7 +112,8 @@
                 <select name="admin_id" id="admin_id" class="form-control" required>
                     <option value="">Selecione um usuário existente</option>
                     @foreach($admins as $admin)
-                        <option value="{{ $admin->id }}" {{ old('admin_id', $company->admin_id) == $admin->id ? 'selected' : '' }}>
+                        <option
+                            value="{{ $admin->id }}" {{ old('admin_id', $company->admin_id) == $admin->id ? 'selected' : '' }}>
                             {{ $admin->name . ' ('. $admin->email .')' }}
                         </option>
                     @endforeach
@@ -197,10 +205,11 @@
 
             reader.readAsDataURL(input.files[0]);
         }
-            $('#admin_id').select2({
-                placeholder: 'Selecione um usuário existente',
-                allowClear: true,
-                width: '100%'
-            });
+
+        $('#admin_id').select2({
+            placeholder: 'Selecione um usuário existente',
+            allowClear: true,
+            width: '100%'
+        });
     </script>
 @endsection

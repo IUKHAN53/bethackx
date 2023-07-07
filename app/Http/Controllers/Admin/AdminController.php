@@ -11,6 +11,7 @@ use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -168,8 +169,12 @@ class AdminController extends Controller
 
     public function updateCompany(Request $request)
     {
+        $company = $request->current_company;
+        $p_slug = $company->slug;
+
         $request->validate([
             'company_name' => 'required',
+            'company_slug' => ['required', 'alpha_dash', Rule::unique('companies', 'slug')->ignore($company->id)],
             'company_logo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'favicon' => 'image|mimes:jpeg,png,jpg,gif,ico|max:2048',
             'primary_color' => 'required',
@@ -177,8 +182,6 @@ class AdminController extends Controller
             'tertiary_color' => 'required',
             'user_tutorial_link' => '',
         ]);
-
-        $company = $request->current_company;
 
         $company->name = $request->input('company_name');
 
@@ -201,8 +204,12 @@ class AdminController extends Controller
         $company->notices_color = $request->input('notices_color');
         $company->plan_checkout_link = $request->input('plan_checkout_link');
         $company->user_tutorial_link = $request->input('user_tutorial_link');
-
         $company->save();
+        if($p_slug != $request->input('company_slug')){
+            $company->slug = $request->input('company_slug');
+            $company->save();
+            return redirect(route('admin.view',$company->slug))->with('success', 'Company details updated successfully.');
+        }
 
         return redirect()->back()->with('success', 'Company details updated successfully.');
     }
