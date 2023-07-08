@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class HomeController extends Controller
 {
@@ -69,8 +70,11 @@ class HomeController extends Controller
 
     public function createFreeUser(Request $request, $company, $email)
     {
+        $company = Company::where('slug', $company)->first();
         $validator = Validator::make(['email' => $email], [
-            'email' => 'required|email|unique:users,email',
+            'email' => ['required', 'email', Rule::unique('users')->where(function ($query) use ($company) {
+                return $query->where('company_id', $company->id);
+            })],
         ], [
             'email.required' => 'O campo de e-mail é obrigatório.',
             'email.email' => 'Por favor, insira um endereço de e-mail válido.',
@@ -80,7 +84,6 @@ class HomeController extends Controller
             return redirect()->route('user.login', $company)->withErrors($validator)->withInput();
         }
 
-        $company = Company::where('slug', $company)->first();
         if ($company) {
             $company->users()->create([
                 'name' => 'free user',
@@ -94,18 +97,20 @@ class HomeController extends Controller
 
     public function createPremiumUser(Request $request, $company, $email)
     {
+        $company = Company::where('slug', $company)->first();
         $validator = Validator::make(['email' => $email], [
-            'email' => 'required|email|unique:users,email',
+            'email' => ['required', 'email', Rule::unique('users')->where(function ($query) use ($company) {
+                return $query->where('company_id', $company->id);
+            })],
         ], [
             'email.required' => 'O campo de e-mail é obrigatório.',
-            'email.email' => 'Por favor, insira um endereço de e-mail válido.',
             'email.unique' => 'O endereço de e-mail já está sendo utilizado por outro usuário.',
+            'email.email' => 'Por favor, insira um endereço de e-mail válido.',
         ]);
         if ($validator->fails()) {
             return redirect()->route('user.login', $company)->withErrors($validator)->withInput();
         }
 
-        $company = Company::where('slug', $company)->first();
         if ($company) {
             $user = $company->users()->create([
                 'name' => 'premium user',
@@ -140,8 +145,8 @@ class HomeController extends Controller
         $company = Company::query()->where('slug', $company)->first();
         $template = file_get_contents(base_path('manifest/manifest.json'));
         $manifest = str_replace(
-            ['{{shortName}}','{{start_url}}', '{{logo}}'],
-            [Str::title(str_replace('-', ' ', $company->slug)), url('/').'/'.$company->slug, Storage::url($company->favicon)],
+            ['{{shortName}}', '{{start_url}}', '{{logo}}'],
+            [Str::title(str_replace('-', ' ', $company->slug)), url('/') . '/' . $company->slug, Storage::url($company->favicon)],
             $template
         );
         return response($manifest)->header('Content-Type', 'application/json');

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -43,16 +44,18 @@ class UserController extends Controller
 
     public function registerFree(Request $request, $company)
     {
+        $company = Company::where('slug', $company)->first();
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
+            'email' => ['required', 'email', Rule::unique('users')->where(function ($query) use ($company) {
+                return $query->where('company_id', $company->id);
+            })],
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        $company = Company::where('slug', $company)->first();
         if ($company) {
             $company->users()->create([
                 'name' => $request->name,
@@ -67,16 +70,18 @@ class UserController extends Controller
 
     public function registerPremium(Request $request, $company)
     {
+        $company = Company::where('slug', $company)->first();
         $validator = Validator::make($request->all(), [
+            'email' => ['required', 'email', Rule::unique('users')->where(function ($query) use ($company) {
+                return $query->where('company_id', $company->id);
+            })],
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        $company = Company::where('slug', $company)->first();
         if ($company) {
             $user = $company->users()->create([
                 'name' => $request->name,
